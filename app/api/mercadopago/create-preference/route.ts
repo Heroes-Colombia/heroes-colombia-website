@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server"
+import { getBaseUrl } from "@/lib/get-base-url"
 
 // Mercado Pago SDK would be imported here
 // import { MercadoPagoConfig, Preference } from 'mercadopago'
@@ -7,6 +8,8 @@ export async function POST(request: Request) {
   try {
     const body = await request.json()
     const { title, description, price, quantity, planType, billingPeriod } = body
+
+    const baseUrl = getBaseUrl()
 
     // TODO: Initialize Mercado Pago with your credentials
     // const client = new MercadoPagoConfig({ accessToken: process.env.MERCADOPAGO_ACCESS_TOKEN! })
@@ -24,12 +27,12 @@ export async function POST(request: Request) {
         },
       ],
       back_urls: {
-        success: `${process.env.NEXT_PUBLIC_BASE_URL}/payment/success?plan=${planType}&period=${billingPeriod}`,
-        failure: `${process.env.NEXT_PUBLIC_BASE_URL}/payment/failure`,
-        pending: `${process.env.NEXT_PUBLIC_BASE_URL}/payment/pending`,
+        success: `${baseUrl}/payment/success?plan=${planType}&period=${billingPeriod}`,
+        failure: `${baseUrl}/payment/failure`,
+        pending: `${baseUrl}/payment/pending`,
       },
       auto_return: "approved",
-      notification_url: `${process.env.NEXT_PUBLIC_BASE_URL}/api/mercadopago/webhook`,
+      notification_url: `${baseUrl}/api/mercadopago/webhook`,
       metadata: {
         plan_type: planType,
         billing_period: billingPeriod,
