@@ -1,3 +1,5 @@
+"use client"
+
 import { SiteHeader } from "@/components/site-header"
 import { SiteFooter } from "@/components/site-footer"
 import { CountdownTimer } from "@/components/countdown-timer"
@@ -26,8 +28,44 @@ import {
   Calendar,
 } from "lucide-react"
 import Link from "next/link"
+import { createMercadoPagoCheckout } from "@/lib/mercadopago"
+import { useState } from "react"
 
 export default function BusinessPage() {
+  const [isAnnual, setIsAnnual] = useState(true)
+  const [isProcessing, setIsProcessing] = useState(false)
+
+  const handlePurchase = async (planType: "basico" | "pro", billingPeriod: "monthly" | "annual") => {
+    setIsProcessing(true)
+    try {
+      const prices = {
+        basico: { monthly: 60000, annual: 650000 },
+        pro: { monthly: 230000, annual: 2500000 },
+      }
+
+      const price = prices[planType][billingPeriod]
+      const title = `Plan ${planType === "basico" ? "Básico" : "Pro"} - ${billingPeriod === "monthly" ? "Mensual" : "Anual"}`
+      const description = `Suscripción ${billingPeriod === "monthly" ? "mensual" : "anual"} al plan ${planType === "basico" ? "Básico" : "Pro"} de Héroes Colombia`
+
+      const checkoutUrl = await createMercadoPagoCheckout({
+        title,
+        description,
+        price,
+        quantity: 1,
+        planType,
+        billingPeriod,
+      })
+
+      // Redirect to Mercado Pago checkout
+      window.location.href = checkoutUrl
+    } catch (error) {
+      console.error("[v0] Error creating checkout:", error)
+      alert("Hubo un error al procesar tu compra. Por favor intenta de nuevo.")
+    } finally {
+      setIsProcessing(false)
+    }
+  }
+
   return (
     <div className="flex min-h-screen flex-col">
       <SiteHeader variant="business" />
@@ -49,8 +87,8 @@ export default function BusinessPage() {
                 Aumenta Tus Ventas Hasta 3.5x con <span className="text-primary">Héroes Colombia</span>
               </h1>
               <p className="text-lg md:text-xl text-muted-foreground text-balance mb-8 max-w-2xl mx-auto leading-relaxed">
-                Accede a 380,000 clientes leales con alto poder adquisitivo. Negocios como el tuyo ya reportan aumentos
-                del 250% en ventas al ofrecer beneficios exclusivos a militares.
+                Accede a 380,000 clientes leales con alto poder adquisitivo. Negocios físicos y en línea pueden aumentar
+                sus ventas hasta 250% al ofrecer beneficios exclusivos a militares.
               </p>
 
               <div className="mb-10">
@@ -111,7 +149,7 @@ export default function BusinessPage() {
               <AnimatedStat value="380" label="Clientes Potenciales" suffix="K+" />
               <AnimatedStat value="85" label="Tasa de Retención Esperada" suffix="%" />
               <AnimatedStat value="3.5" label="ROI Proyectado Primer Año" suffix="x" />
-              <AnimatedStat value="500" label="Negocios en el Lanzamiento" suffix="+" />
+              <AnimatedStat value="100" label="Cupos Disponibles Lanzamiento" suffix="" />
             </div>
           </div>
         </section>
@@ -176,9 +214,10 @@ export default function BusinessPage() {
                   <div className="rounded-full bg-primary/10 w-12 h-12 flex items-center justify-center mb-4">
                     <Smartphone className="h-6 w-6 text-primary" />
                   </div>
-                  <h3 className="font-semibold text-lg mb-2">Listo en 5 Minutos</h3>
+                  <h3 className="font-semibold text-lg mb-2">Negocios Físicos y En Línea</h3>
                   <p className="text-sm text-muted-foreground leading-relaxed">
-                    Sin hardware, sin capacitación compleja. Crea tu perfil y publica tu primera promoción hoy mismo.
+                    No necesitas una tienda física. E-commerce, servicios digitales y negocios tradicionales pueden
+                    participar y crecer.
                   </p>
                 </CardContent>
               </Card>
@@ -200,9 +239,10 @@ export default function BusinessPage() {
                   <div className="rounded-full bg-primary/10 w-12 h-12 flex items-center justify-center mb-4">
                     <Zap className="h-6 w-6 text-primary" />
                   </div>
-                  <h3 className="font-semibold text-lg mb-2">Soporte Experto</h3>
+                  <h3 className="font-semibold text-lg mb-2">Soporte Dedicado</h3>
                   <p className="text-sm text-muted-foreground leading-relaxed">
-                    Equipo dedicado que te ayuda a optimizar campañas y maximizar resultados desde el día uno.
+                    Recursos completos de ayuda, documentación detallada y soporte por email para optimizar tus
+                    campañas.
                   </p>
                 </CardContent>
               </Card>
@@ -219,9 +259,25 @@ export default function BusinessPage() {
               <p className="text-lg text-muted-foreground text-balance max-w-2xl mx-auto">
                 Comienza gratis y escala cuando veas resultados. Sin sorpresas.
               </p>
+              <div className="flex items-center justify-center gap-3 mt-6">
+                <span className={`text-sm ${!isAnnual ? "font-medium" : "text-muted-foreground"}`}>Mensual</span>
+                <label className="relative inline-flex items-center cursor-pointer">
+                  <input
+                    type="checkbox"
+                    className="sr-only peer pricing-toggle"
+                    checked={isAnnual}
+                    onChange={(e) => setIsAnnual(e.target.checked)}
+                  />
+                  <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-primary/20 rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+                </label>
+                <span className={`text-sm ${isAnnual ? "font-medium" : "text-muted-foreground"}`}>
+                  Anual <span className="text-primary">(Ahorra hasta 15%)</span>
+                </span>
+              </div>
             </div>
 
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
+              {/* Gratis Plan */}
               <Card className="hover:shadow-lg transition-shadow">
                 <CardHeader>
                   <CardTitle className="text-2xl">Gratis</CardTitle>
@@ -229,21 +285,21 @@ export default function BusinessPage() {
                     <span className="text-4xl font-bold">$0</span>
                     <span className="text-muted-foreground">/mes</span>
                   </div>
-                  <p className="text-sm text-muted-foreground mt-2">Perfecto para probar la plataforma</p>
+                  <p className="text-sm text-muted-foreground mt-2">+ $10,000 por promoción publicada</p>
                 </CardHeader>
                 <CardContent>
                   <ul className="space-y-3 mb-6">
                     <li className="flex items-start gap-2">
                       <CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
-                      <span className="text-sm">1 promoción activa</span>
+                      <span className="text-sm">1 ubicación</span>
                     </li>
                     <li className="flex items-start gap-2">
                       <CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
-                      <span className="text-sm">Perfil básico</span>
+                      <span className="text-sm">1 promoción activa (30 días)</span>
                     </li>
                     <li className="flex items-start gap-2">
                       <CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
-                      <span className="text-sm">Estadísticas básicas</span>
+                      <span className="text-sm">Analítica básica</span>
                     </li>
                     <li className="flex items-start gap-2">
                       <CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
@@ -258,12 +314,23 @@ export default function BusinessPage() {
                 </CardContent>
               </Card>
 
+              {/* Básico Plan */}
               <Card className="hover:shadow-lg transition-shadow">
                 <CardHeader>
                   <CardTitle className="text-2xl">Básico</CardTitle>
                   <div className="mt-4">
-                    <span className="text-4xl font-bold">$49</span>
-                    <span className="text-muted-foreground">/mes</span>
+                    {!isAnnual ? (
+                      <>
+                        <span className="text-4xl font-bold">$60,000</span>
+                        <span className="text-muted-foreground">/mes</span>
+                      </>
+                    ) : (
+                      <>
+                        <span className="text-4xl font-bold">$650,000</span>
+                        <span className="text-muted-foreground">/año</span>
+                        <div className="text-sm text-primary font-medium mt-1">Ahorra $70,000</div>
+                      </>
+                    )}
                   </div>
                   <p className="text-sm text-muted-foreground mt-2">Para negocios en crecimiento</p>
                 </CardHeader>
@@ -271,27 +338,36 @@ export default function BusinessPage() {
                   <ul className="space-y-3 mb-6">
                     <li className="flex items-start gap-2">
                       <CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
-                      <span className="text-sm">5 promociones activas</span>
+                      <span className="text-sm">1 ubicación</span>
                     </li>
                     <li className="flex items-start gap-2">
                       <CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
-                      <span className="text-sm">Perfil destacado</span>
+                      <span className="text-sm">Hasta 3 promociones/mes</span>
                     </li>
                     <li className="flex items-start gap-2">
                       <CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
-                      <span className="text-sm">Analytics avanzados</span>
+                      <span className="text-sm">Analítica completa</span>
                     </li>
                     <li className="flex items-start gap-2">
                       <CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
-                      <span className="text-sm">Soporte prioritario</span>
+                      <span className="text-sm">Perfil estándar</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
+                      <span className="text-sm">Soporte por email</span>
                     </li>
                   </ul>
-                  <Button className="w-full" asChild>
-                    <Link href="/solicitar-demo">Solicitar Demo</Link>
+                  <Button
+                    className="w-full"
+                    onClick={() => handlePurchase("basico", isAnnual ? "annual" : "monthly")}
+                    disabled={isProcessing}
+                  >
+                    {isProcessing ? "Procesando..." : "Comprar Ahora"}
                   </Button>
                 </CardContent>
               </Card>
 
+              {/* Pro Plan */}
               <Card className="border-2 border-primary relative hover:shadow-xl transition-shadow">
                 <div className="absolute -top-3 left-1/2 -translate-x-1/2">
                   <span className="bg-primary text-primary-foreground text-xs font-semibold px-3 py-1 rounded-full shadow-lg">
@@ -301,8 +377,18 @@ export default function BusinessPage() {
                 <CardHeader>
                   <CardTitle className="text-2xl">Pro</CardTitle>
                   <div className="mt-4">
-                    <span className="text-4xl font-bold">$149</span>
-                    <span className="text-muted-foreground">/mes</span>
+                    {!isAnnual ? (
+                      <>
+                        <span className="text-4xl font-bold">$230,000</span>
+                        <span className="text-muted-foreground">/mes</span>
+                      </>
+                    ) : (
+                      <>
+                        <span className="text-4xl font-bold">$2,500,000</span>
+                        <span className="text-muted-foreground">/año</span>
+                        <div className="text-sm text-primary font-medium mt-1">Ahorra $260,000</div>
+                      </>
+                    )}
                   </div>
                   <p className="text-sm text-muted-foreground mt-2">Máximo crecimiento y visibilidad</p>
                 </CardHeader>
@@ -310,36 +396,49 @@ export default function BusinessPage() {
                   <ul className="space-y-3 mb-6">
                     <li className="flex items-start gap-2">
                       <CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
+                      <span className="text-sm">Hasta 5 ubicaciones</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
                       <span className="text-sm">Promociones ilimitadas</span>
                     </li>
                     <li className="flex items-start gap-2">
                       <CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
-                      <span className="text-sm">Perfil premium destacado</span>
+                      <span className="text-sm">Analítica avanzada + demografía</span>
                     </li>
                     <li className="flex items-start gap-2">
                       <CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
-                      <span className="text-sm">Campañas segmentadas</span>
+                      <span className="text-sm">Sección destacada en app</span>
                     </li>
                     <li className="flex items-start gap-2">
                       <CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
-                      <span className="text-sm">API access</span>
+                      <span className="text-sm">Equipo (dueño, gerente, staff)</span>
                     </li>
                     <li className="flex items-start gap-2">
                       <CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
-                      <span className="text-sm">Soporte 24/7</span>
+                      <span className="text-sm">Soporte email + chat</span>
                     </li>
                   </ul>
-                  <Button className="w-full shadow-lg" asChild>
-                    <Link href="/solicitar-demo">Solicitar Demo</Link>
+                  <Button
+                    className="w-full shadow-lg"
+                    onClick={() => handlePurchase("pro", isAnnual ? "annual" : "monthly")}
+                    disabled={isProcessing}
+                  >
+                    {isProcessing ? "Procesando..." : "Comprar Ahora"}
                   </Button>
                 </CardContent>
               </Card>
 
+              {/* Enterprise Plan */}
               <Card className="hover:shadow-lg transition-shadow">
                 <CardHeader>
                   <CardTitle className="text-2xl">Enterprise</CardTitle>
                   <div className="mt-4">
-                    <span className="text-4xl font-bold">Custom</span>
+                    <div>
+                      <span className="text-3xl font-bold">Desde $700,000</span>
+                      <span className="text-muted-foreground">/mes</span>
+                    </div>
+                    <div className="text-sm text-muted-foreground mt-1">Precio personalizado</div>
                   </div>
                   <p className="text-sm text-muted-foreground mt-2">Para cadenas y franquicias</p>
                 </CardHeader>
@@ -347,23 +446,27 @@ export default function BusinessPage() {
                   <ul className="space-y-3 mb-6">
                     <li className="flex items-start gap-2">
                       <CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
-                      <span className="text-sm">Todo en Pro</span>
+                      <span className="text-sm">Ubicaciones ilimitadas</span>
                     </li>
                     <li className="flex items-start gap-2">
                       <CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
-                      <span className="text-sm">Múltiples ubicaciones</span>
+                      <span className="text-sm">Promociones ilimitadas</span>
                     </li>
                     <li className="flex items-start gap-2">
                       <CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
-                      <span className="text-sm">Account manager dedicado</span>
+                      <span className="text-sm">Analítica Pro + A/B testing</span>
                     </li>
                     <li className="flex items-start gap-2">
                       <CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
-                      <span className="text-sm">Integraciones personalizadas</span>
+                      <span className="text-sm">Sección destacada premium</span>
                     </li>
                     <li className="flex items-start gap-2">
                       <CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
-                      <span className="text-sm">SLA garantizado</span>
+                      <span className="text-sm">Manager dedicado + API</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
+                      <span className="text-sm">Soporte dedicado + SLA</span>
                     </li>
                   </ul>
                   <Button className="w-full bg-transparent" variant="outline" asChild>
@@ -480,7 +583,7 @@ export default function BusinessPage() {
                 </Button>
               </div>
               <p className="text-sm text-primary-foreground/80">
-                Más de 200 negocios ya se registraron para el lanzamiento
+                Más de 50 negocios ya se registraron para el lanzamiento
               </p>
             </div>
           </div>

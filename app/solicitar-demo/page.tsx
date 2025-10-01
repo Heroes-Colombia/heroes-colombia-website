@@ -14,10 +14,12 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Textarea } from "@/components/ui/textarea"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Calendar, CheckCircle2, Building2, Users, TrendingUp, Shield } from "lucide-react"
+import { addContactToSystemeIO } from "@/lib/systeme-io"
 
 export default function SolicitarDemoPage() {
   const [submitted, setSubmitted] = useState(false)
   const [captchaVerified, setCaptchaVerified] = useState(false)
+  const [isSubmitting, setIsSubmitting] = useState(false)
   const [formData, setFormData] = useState({
     businessName: "",
     category: "",
@@ -28,7 +30,7 @@ export default function SolicitarDemoPage() {
     message: "",
   })
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
 
     if (!captchaVerified) {
@@ -36,8 +38,32 @@ export default function SolicitarDemoPage() {
       return
     }
 
-    console.log("[v0] Demo request submitted:", formData)
-    setSubmitted(true)
+    setIsSubmitting(true)
+
+    try {
+      const [firstName, ...lastNameParts] = formData.contactName.split(" ")
+      await addContactToSystemeIO({
+        email: formData.email,
+        firstName,
+        lastName: lastNameParts.join(" "),
+        phone: formData.phone,
+        tags: ["demo-request", "business", "lead"],
+        customFields: {
+          business_name: formData.businessName,
+          category: formData.category,
+          monthly_revenue: formData.monthlyRevenue,
+          message: formData.message,
+          source: "demo-form",
+        },
+      })
+
+      console.log("[v0] Demo request submitted to systeme.io:", formData)
+      setSubmitted(true)
+    } catch (error) {
+      console.error("[v0] Error submitting demo request:", error)
+      alert("Hubo un error al enviar tu solicitud. Por favor intenta de nuevo.")
+      setIsSubmitting(false)
+    }
   }
 
   if (submitted) {
@@ -144,6 +170,7 @@ export default function SolicitarDemoPage() {
                     <Select
                       value={formData.category}
                       onValueChange={(value) => setFormData({ ...formData, category: value })}
+                      required
                     >
                       <SelectTrigger>
                         <SelectValue placeholder="Selecciona una categoría" />
@@ -249,9 +276,9 @@ export default function SolicitarDemoPage() {
                   </div>
                 </div>
 
-                <Button type="submit" size="lg" className="w-full" disabled={!captchaVerified}>
+                <Button type="submit" size="lg" className="w-full" disabled={!captchaVerified || isSubmitting}>
                   <Calendar className="mr-2 h-5 w-5" />
-                  Solicitar Demo Personalizada
+                  {isSubmitting ? "Enviando..." : "Solicitar Demo Personalizada"}
                 </Button>
 
                 <p className="text-sm text-muted-foreground text-center">

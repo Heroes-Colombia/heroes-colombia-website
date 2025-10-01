@@ -13,7 +13,7 @@ const userFAQs: FAQItem[] = [
   {
     question: "¿Cómo verifico mi identidad militar?",
     answer:
-      "El proceso es simple y seguro. Solo necesitas tu cédula militar o carnet institucional. Nuestro sistema verifica tu información en menos de 24 horas y tus datos están completamente protegidos.",
+      "El proceso es simple y seguro. Solo necesitas tu cédula militar o carnet institucional. Nuestro sistema verifica tu información inmediatamente y tus datos están completamente protegidos.",
   },
   {
     question: "¿Tiene algún costo la app?",

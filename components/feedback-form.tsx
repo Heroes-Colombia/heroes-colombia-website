@@ -10,6 +10,7 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Checkbox } from "@/components/ui/checkbox"
 import { MessageSquare, Send, Shield } from "lucide-react"
+import { addContactToSystemeIO } from "@/lib/systeme-io"
 
 interface FeedbackFormProps {
   variant: "user" | "business"
@@ -18,13 +19,14 @@ interface FeedbackFormProps {
 export function FeedbackForm({ variant }: FeedbackFormProps) {
   const [submitted, setSubmitted] = useState(false)
   const [captchaVerified, setCaptchaVerified] = useState(false)
+  const [isSubmitting, setIsSubmitting] = useState(false)
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     message: "",
   })
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
 
     if (!captchaVerified) {
@@ -32,9 +34,30 @@ export function FeedbackForm({ variant }: FeedbackFormProps) {
       return
     }
 
-    console.log("[v0] Feedback submitted:", formData)
-    setSubmitted(true)
-    setTimeout(() => setSubmitted(false), 3000)
+    setIsSubmitting(true)
+
+    try {
+      const [firstName, ...lastNameParts] = formData.name.split(" ")
+      await addContactToSystemeIO({
+        email: formData.email,
+        firstName,
+        lastName: lastNameParts.join(" "),
+        tags: [variant === "user" ? "feedback-user" : "feedback-business", "lead"],
+        customFields: {
+          message: formData.message,
+          source: "feedback-form",
+        },
+      })
+
+      console.log("[v0] Feedback submitted to systeme.io:", formData)
+      setSubmitted(true)
+      setTimeout(() => setSubmitted(false), 3000)
+    } catch (error) {
+      console.error("[v0] Error submitting feedback:", error)
+      alert("Hubo un error al enviar tu mensaje. Por favor intenta de nuevo.")
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   const title = variant === "user" ? "Tu Opinión Importa" : "Propón una Alianza"
@@ -122,9 +145,9 @@ export function FeedbackForm({ variant }: FeedbackFormProps) {
               </div>
             </div>
 
-            <Button type="submit" className="w-full" disabled={!captchaVerified}>
+            <Button type="submit" className="w-full" disabled={!captchaVerified || isSubmitting}>
               <Send className="mr-2 h-4 w-4" />
-              Enviar Mensaje
+              {isSubmitting ? "Enviando..." : "Enviar Mensaje"}
             </Button>
           </form>
         )}

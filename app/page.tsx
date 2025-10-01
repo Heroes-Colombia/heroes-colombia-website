@@ -48,7 +48,7 @@ export default function HomePage() {
                 <CountdownTimer />
               </div>
 
-              <div id="descargar" className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-6">
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-6">
                 <Link
                   href="https://apps.apple.com/au/app/h%C3%A9roes-colombia/id6743999048"
                   target="_blank"
@@ -137,25 +137,29 @@ export default function HomePage() {
               </h2>
               <p className="text-lg text-primary-foreground/90 text-balance mb-8 leading-relaxed">
                 En Héroes Colombia reconocemos y celebramos las fechas más importantes para la comunidad militar.
-                Promociones especiales en el Día del Ejército, Día de la Armada, Día de la Fuerza Aérea, Día de la
-                Policía, y todas las fechas que honran tu servicio y el de tu familia.
+                Promociones especiales en el Día del Ejército, Día de la Armada, Día de la Fuerza Aeroespacial, Día de
+                la Policía, Día de la Independencia, y todas las fechas que honran tu servicio y el de tu familia.
               </p>
-              <div className="grid md:grid-cols-4 gap-6 mt-12">
+              <div className="grid md:grid-cols-5 gap-4 mt-12">
                 <div className="bg-primary-foreground/10 backdrop-blur-sm rounded-xl p-6">
-                  <div className="text-3xl font-bold mb-2">7 Nov</div>
-                  <div className="text-sm">Día del Ejército</div>
-                </div>
-                <div className="bg-primary-foreground/10 backdrop-blur-sm rounded-xl p-6">
-                  <div className="text-3xl font-bold mb-2">24 Jul</div>
-                  <div className="text-sm">Día de la Armada</div>
+                  <div className="text-3xl font-bold mb-2">20 Jul</div>
+                  <div className="text-sm">Día de la Independencia</div>
                 </div>
                 <div className="bg-primary-foreground/10 backdrop-blur-sm rounded-xl p-6">
                   <div className="text-3xl font-bold mb-2">7 Ago</div>
-                  <div className="text-sm">Día de la Fuerza Aérea</div>
+                  <div className="text-sm">Batalla de Boyacá</div>
+                </div>
+                <div className="bg-primary-foreground/10 backdrop-blur-sm rounded-xl p-6">
+                  <div className="text-3xl font-bold mb-2">7 Ago</div>
+                  <div className="text-sm">Día de la Fuerza Aeroespacial</div>
                 </div>
                 <div className="bg-primary-foreground/10 backdrop-blur-sm rounded-xl p-6">
                   <div className="text-3xl font-bold mb-2">2 Nov</div>
                   <div className="text-sm">Día de la Policía</div>
+                </div>
+                <div className="bg-primary-foreground/10 backdrop-blur-sm rounded-xl p-6">
+                  <div className="text-3xl font-bold mb-2">7 Nov</div>
+                  <div className="text-sm">Día del Ejército</div>
                 </div>
               </div>
             </div>
@@ -192,9 +196,10 @@ export default function HomePage() {
                   <div className="rounded-full bg-primary/10 w-12 h-12 flex items-center justify-center mb-4">
                     <MapPin className="h-6 w-6 text-primary" />
                   </div>
-                  <h3 className="font-semibold text-lg mb-2">Encuentra Ofertas Cerca de Ti</h3>
+                  <h3 className="font-semibold text-lg mb-2">Negocios Físicos y En Línea</h3>
                   <p className="text-sm text-muted-foreground leading-relaxed">
-                    Mapa interactivo que te muestra los mejores descuentos en negocios cercanos a tu ubicación actual.
+                    Descuentos en tiendas locales y e-commerce. Compra en línea o visita negocios cercanos con tu mapa
+                    interactivo.
                   </p>
                 </CardContent>
               </Card>
@@ -360,7 +365,7 @@ export default function HomePage() {
 
         <section className="py-20 md:py-32 bg-gradient-to-br from-primary via-primary to-accent text-primary-foreground">
           <div className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="max-w-3xl mx-auto text-center">
+            <div id="descargar" className="max-w-3xl mx-auto text-center">
               <BadgeCheck className="h-16 w-16 mx-auto mb-6 animate-float" />
               <h2 className="text-3xl md:text-5xl font-bold text-balance mb-6">
                 Descarga la App y Comienza a Ahorrar Hoy
@@ -369,7 +374,7 @@ export default function HomePage() {
                 Sin costo para empezar, sin compromiso, sin tarjeta de crédito. Solo beneficios exclusivos diseñados
                 para reconocer tu servicio. Únete ahora y sé de los primeros en acceder a las mejores promociones.
               </p>
-              <div id="descargar" className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-6">
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-6">
                 <Link
                   href="https://apps.apple.com/au/app/h%C3%A9roes-colombia/id6743999048"
                   target="_blank"

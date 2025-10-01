@@ -8,11 +8,14 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Gift, X } from "lucide-react"
+import { addContactToSystemeIO } from "@/lib/systeme-io"
 
 export function ExitIntentPopup() {
   const [isOpen, setIsOpen] = useState(false)
   const [email, setEmail] = useState("")
+  const [name, setName] = useState("")
   const [hasShown, setHasShown] = useState(false)
+  const [isSubmitting, setIsSubmitting] = useState(false)
 
   useEffect(() => {
     // Check if popup was already shown in this session
@@ -35,11 +38,27 @@ export function ExitIntentPopup() {
     return () => document.removeEventListener("mouseleave", handleMouseLeave)
   }, [hasShown])
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    // Handle email submission
-    console.log("[v0] Exit intent email captured:", email)
-    setIsOpen(false)
+    setIsSubmitting(true)
+
+    try {
+      const [firstName, ...lastNameParts] = name.split(" ")
+      await addContactToSystemeIO({
+        email,
+        firstName,
+        lastName: lastNameParts.join(" "),
+        tags: ["exit-intent", "lead"],
+      })
+
+      console.log("[v0] Exit intent email captured and sent to systeme.io:", email)
+      setIsOpen(false)
+    } catch (error) {
+      console.error("[v0] Error submitting to systeme.io:", error)
+      alert("Hubo un error al registrar tu email. Por favor intenta de nuevo.")
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   return (
@@ -63,6 +82,17 @@ export function ExitIntentPopup() {
         </DialogHeader>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="space-y-2">
+            <Label htmlFor="exit-name">Nombre</Label>
+            <Input
+              id="exit-name"
+              type="text"
+              placeholder="Tu nombre"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              required
+            />
+          </div>
+          <div className="space-y-2">
             <Label htmlFor="exit-email">Correo Electrónico</Label>
             <Input
               id="exit-email"
@@ -74,8 +104,8 @@ export function ExitIntentPopup() {
             />
           </div>
           <div className="space-y-2">
-            <Button type="submit" className="w-full" size="lg">
-              Obtener Acceso Exclusivo
+            <Button type="submit" className="w-full" size="lg" disabled={isSubmitting}>
+              {isSubmitting ? "Registrando..." : "Obtener Acceso Exclusivo"}
             </Button>
             <p className="text-xs text-center text-muted-foreground">
               Únete a más de 5,000 personas que ya se registraron
