@@ -1,6 +1,10 @@
 // systeme.io API integration
-const SYSTEME_IO_API_KEY = "tt5b5ifik2qspkuwimgcp8sterm0pa7skg0slvk5u2x9y32gvn9w5l7rc873t828"
+const SYSTEME_IO_API_KEY = process.env.SYSTEME_IO_API_KEY!
 const SYSTEME_IO_API_URL = "https://systeme.io/api/v1"
+
+if (!SYSTEME_IO_API_KEY) {
+  console.warn("[Systeme.io] API key not configured. Set SYSTEME_IO_API_KEY environment variable.")
+}
 
 export interface SystemeIOContact {
   email: string
