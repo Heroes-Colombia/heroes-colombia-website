@@ -2,18 +2,19 @@
 
 import { SiteHeader } from "@/components/site-header"
 import { SiteFooter } from "@/components/site-footer"
-import { CountdownTimer } from "@/components/countdown-timer"
+import { TrialOfferHero } from "@/components/trial-offer-hero"
+import { EarlyBirdBanner } from "@/components/early-bird-banner"
+import { TrialSignupModal, type TrialSignupData } from "@/components/trial-signup-modal"
 import { AnimatedStat } from "@/components/animated-stats"
 import { FeedbackForm } from "@/components/feedback-form"
 import { DashboardShowcase } from "@/components/dashboard-showcase"
 import { ExitIntentPopup } from "@/components/exit-intent-popup"
 import { TrustBadges } from "@/components/trust-badges"
-import { ScarcityBanner } from "@/components/scarcity-banner"
-import { UrgencyBanner } from "@/components/urgency-banner"
-import { GuaranteeBadge } from "@/components/guarantee-badge"
 import { Button } from "@/components/ui/button"
+import { Badge } from "@/components/ui/badge"
 import { FAQSection } from "@/components/faq-section"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { getCurrentPricing, formatPriceSimple, isEarlyBirdActive, getEarlyBirdDiscount } from "@/lib/pricing-config"
 import {
   TrendingUp,
   Users,
@@ -28,19 +29,47 @@ import {
   Calendar,
 } from "lucide-react"
 import Link from "next/link"
-import { createMercadoPagoCheckout } from "@/lib/mercadopago"
 import { useState } from "react"
 
 export default function BusinessPage() {
   const [isAnnual, setIsAnnual] = useState(true)
+  const [showSignupModal, setShowSignupModal] = useState(false)
   const [isProcessing, setIsProcessing] = useState(false)
+  const pricing = getCurrentPricing()
+  const showEarlyBird = isEarlyBirdActive()
+
+  const handleStartTrial = () => {
+    setShowSignupModal(true)
+  }
+
+  const handleSignupSubmit = async (data: TrialSignupData) => {
+    try {
+      const response = await fetch("/api/mercadopago/create-trial", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      })
+
+      if (!response.ok) {
+        throw new Error("Error al crear el checkout")
+      }
+
+      const result = await response.json()
+
+      // Redirect to MercadoPago checkout
+      window.location.href = result.checkoutUrl
+    } catch (error) {
+      console.error("[Trial] Error:", error)
+      throw error // Re-throw to let modal handle it
+    }
+  }
 
   const handlePurchase = async (planType: "basico" | "pro", billingPeriod: "monthly" | "annual") => {
     setIsProcessing(true)
     try {
       const prices = {
-        basico: { monthly: 60000, annual: 650000 },
-        pro: { monthly: 230000, annual: 2500000 },
+        basico: { monthly: pricing.regularPlans.basico.monthly, annual: pricing.regularPlans.basico.annual },
+        pro: { monthly: pricing.regularPlans.pro.monthly, annual: pricing.regularPlans.pro.annual },
       }
 
       const price = prices[planType][billingPeriod]
@@ -69,75 +98,13 @@ export default function BusinessPage() {
   return (
     <div className="flex min-h-screen flex-col">
       <SiteHeader variant="business" />
+      <TrialSignupModal open={showSignupModal} onOpenChange={setShowSignupModal} onSubmit={handleSignupSubmit} />
+      <EarlyBirdBanner />
       <ExitIntentPopup />
 
       <main className="flex-1">
-        <ScarcityBanner variant="business" />
-        <UrgencyBanner variant="business" />
-
-        <section className="relative overflow-hidden py-20 md:py-32">
-          <div className="absolute inset-0 bg-gradient-to-br from-accent/5 via-background to-primary/5" />
-          <div className="container relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="mx-auto max-w-4xl text-center">
-              <div className="mb-6 inline-flex items-center gap-2 rounded-full bg-accent/10 px-4 py-2 text-sm font-medium text-accent animate-pulse">
-                <TrendingUp className="h-4 w-4" />
-                Lanzamiento Diciembre 2025
-              </div>
-              <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight text-balance mb-6">
-                Aumenta Tus Ventas Hasta 3.5x con <span className="text-primary">Héroes Colombia</span>
-              </h1>
-              <p className="text-lg md:text-xl text-muted-foreground text-balance mb-8 max-w-2xl mx-auto leading-relaxed">
-                Accede a 380,000 clientes leales con alto poder adquisitivo. Negocios físicos y en línea pueden aumentar
-                sus ventas hasta 250% al ofrecer beneficios exclusivos a militares.
-              </p>
-
-              <div className="mb-10">
-                <p className="text-sm font-medium text-muted-foreground mb-4">
-                  Faltan solo días para conectar con miles de clientes nuevos
-                </p>
-                <CountdownTimer />
-              </div>
-
-              <div id="comenzar" className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-6">
-                <Button size="lg" asChild className="w-full sm:w-auto shadow-lg">
-                  <Link href="/solicitar-demo">
-                    <Calendar className="mr-2 h-5 w-5" />
-                    Solicitar Demo Gratis
-                  </Link>
-                </Button>
-                <Button size="lg" variant="outline" asChild className="w-full sm:w-auto bg-transparent">
-                  <Link href="https://v0-heroes-colombia-dashboard.vercel.app/" target="_blank">
-                    Ver Dashboard
-                    <ArrowRight className="ml-2 h-5 w-5" />
-                  </Link>
-                </Button>
-              </div>
-
-              <div className="flex flex-col items-center gap-4 mb-6">
-                <GuaranteeBadge />
-                <div className="inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-2 rounded-full text-sm font-medium">
-                  <Zap className="h-4 w-4" />
-                  Primeros 2 meses GRATIS para socios de lanzamiento
-                </div>
-              </div>
-
-              <div className="flex flex-col sm:flex-row items-center justify-center gap-4 text-sm text-muted-foreground">
-                <div className="flex items-center gap-2">
-                  <CheckCircle2 className="h-4 w-4 text-primary" />
-                  <span>Plan gratuito disponible</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <CheckCircle2 className="h-4 w-4 text-primary" />
-                  <span>Sin compromiso</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <CheckCircle2 className="h-4 w-4 text-primary" />
-                  <span>Cancela cuando quieras</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
+        {/* NEW: Trial Offer Hero Section */}
+        <TrialOfferHero onStartTrial={handleStartTrial} />
 
         <section className="py-16 md:py-20 bg-secondary border-y">
           <div className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -282,10 +249,12 @@ export default function BusinessPage() {
                 <CardHeader>
                   <CardTitle className="text-2xl">Gratis</CardTitle>
                   <div className="mt-4">
-                    <span className="text-4xl font-bold">$0</span>
+                    <span className="text-4xl font-bold">{formatPriceSimple(pricing.regularPlans.gratis.monthly)}</span>
                     <span className="text-muted-foreground">/mes</span>
                   </div>
-                  <p className="text-sm text-muted-foreground mt-2">+ $10,000 por promoción publicada</p>
+                  <p className="text-sm text-muted-foreground mt-2">
+                    + {formatPriceSimple(pricing.regularPlans.gratis.perPromotion)} COP por promoción
+                  </p>
                 </CardHeader>
                 <CardContent>
                   <ul className="space-y-3 mb-6">
@@ -295,7 +264,7 @@ export default function BusinessPage() {
                     </li>
                     <li className="flex items-start gap-2">
                       <CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
-                      <span className="text-sm">1 promoción activa (30 días)</span>
+                      <span className="text-sm">Paga por promoción</span>
                     </li>
                     <li className="flex items-start gap-2">
                       <CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
@@ -318,43 +287,50 @@ export default function BusinessPage() {
               <Card className="hover:shadow-lg transition-shadow">
                 <CardHeader>
                   <CardTitle className="text-2xl">Básico</CardTitle>
+                  {showEarlyBird && (
+                    <Badge variant="secondary" className="mt-2">
+                      🎁 {getEarlyBirdDiscount()}% OFF si seleccionas antes del 15 enero
+                    </Badge>
+                  )}
                   <div className="mt-4">
                     {!isAnnual ? (
                       <>
-                        <span className="text-4xl font-bold">$60,000</span>
+                        <span className="text-4xl font-bold">{formatPriceSimple(pricing.regularPlans.basico.monthly)}</span>
                         <span className="text-muted-foreground">/mes</span>
                       </>
                     ) : (
                       <>
-                        <span className="text-4xl font-bold">$650,000</span>
+                        <span className="text-4xl font-bold">{formatPriceSimple(pricing.regularPlans.basico.annual)}</span>
                         <span className="text-muted-foreground">/año</span>
-                        <div className="text-sm text-primary font-medium mt-1">Ahorra $70,000</div>
+                        <div className="text-sm text-primary font-medium mt-1">
+                          Ahorras {formatPriceSimple(pricing.regularPlans.basico.savings)} COP
+                        </div>
                       </>
                     )}
                   </div>
-                  <p className="text-sm text-muted-foreground mt-2">Para negocios en crecimiento</p>
+                  <p className="text-sm text-muted-foreground mt-2">IVA incluido • Para negocios en crecimiento</p>
                 </CardHeader>
                 <CardContent>
                   <ul className="space-y-3 mb-6">
                     <li className="flex items-start gap-2">
                       <CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
-                      <span className="text-sm">1 ubicación</span>
+                      <span className="text-sm">Hasta 3 ubicaciones</span>
                     </li>
                     <li className="flex items-start gap-2">
                       <CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
-                      <span className="text-sm">Hasta 3 promociones/mes</span>
+                      <span className="text-sm">10 promociones activas</span>
                     </li>
                     <li className="flex items-start gap-2">
                       <CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
-                      <span className="text-sm">Analítica completa</span>
+                      <span className="text-sm">Analítica avanzada</span>
                     </li>
                     <li className="flex items-start gap-2">
                       <CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
-                      <span className="text-sm">Perfil estándar</span>
+                      <span className="text-sm">Soporte prioritario</span>
                     </li>
                     <li className="flex items-start gap-2">
                       <CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
-                      <span className="text-sm">Soporte por email</span>
+                      <span className="text-sm">Gestión de equipo básica</span>
                     </li>
                   </ul>
                   <Button
@@ -376,27 +352,34 @@ export default function BusinessPage() {
                 </div>
                 <CardHeader>
                   <CardTitle className="text-2xl">Pro</CardTitle>
+                  {showEarlyBird && (
+                    <Badge variant="secondary" className="mt-2">
+                      🎁 {getEarlyBirdDiscount()}% OFF si seleccionas antes del 15 enero
+                    </Badge>
+                  )}
                   <div className="mt-4">
                     {!isAnnual ? (
                       <>
-                        <span className="text-4xl font-bold">$230,000</span>
+                        <span className="text-4xl font-bold">{formatPriceSimple(pricing.regularPlans.pro.monthly)}</span>
                         <span className="text-muted-foreground">/mes</span>
                       </>
                     ) : (
                       <>
-                        <span className="text-4xl font-bold">$2,500,000</span>
+                        <span className="text-4xl font-bold">{formatPriceSimple(pricing.regularPlans.pro.annual)}</span>
                         <span className="text-muted-foreground">/año</span>
-                        <div className="text-sm text-primary font-medium mt-1">Ahorra $260,000</div>
+                        <div className="text-sm text-primary font-medium mt-1">
+                          Ahorras {formatPriceSimple(pricing.regularPlans.pro.savings)} COP
+                        </div>
                       </>
                     )}
                   </div>
-                  <p className="text-sm text-muted-foreground mt-2">Máximo crecimiento y visibilidad</p>
+                  <p className="text-sm text-muted-foreground mt-2">IVA incluido • Máximo crecimiento</p>
                 </CardHeader>
                 <CardContent>
                   <ul className="space-y-3 mb-6">
                     <li className="flex items-start gap-2">
                       <CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
-                      <span className="text-sm">Hasta 5 ubicaciones</span>
+                      <span className="text-sm">Hasta 10 ubicaciones</span>
                     </li>
                     <li className="flex items-start gap-2">
                       <CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
@@ -404,19 +387,19 @@ export default function BusinessPage() {
                     </li>
                     <li className="flex items-start gap-2">
                       <CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
-                      <span className="text-sm">Analítica avanzada + demografía</span>
+                      <span className="text-sm">Analytics completos con IA</span>
                     </li>
                     <li className="flex items-start gap-2">
                       <CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
-                      <span className="text-sm">Sección destacada en app</span>
+                      <span className="text-sm">Segmentación de audiencia</span>
                     </li>
                     <li className="flex items-start gap-2">
                       <CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
-                      <span className="text-sm">Equipo (dueño, gerente, staff)</span>
+                      <span className="text-sm">Gestión avanzada de equipo</span>
                     </li>
                     <li className="flex items-start gap-2">
                       <CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
-                      <span className="text-sm">Soporte email + chat</span>
+                      <span className="text-sm">Soporte 24/7</span>
                     </li>
                   </ul>
                   <Button
@@ -433,14 +416,32 @@ export default function BusinessPage() {
               <Card className="hover:shadow-lg transition-shadow">
                 <CardHeader>
                   <CardTitle className="text-2xl">Enterprise</CardTitle>
+                  {showEarlyBird && (
+                    <Badge variant="secondary" className="mt-2">
+                      🎁 {getEarlyBirdDiscount()}% OFF si seleccionas antes del 15 enero
+                    </Badge>
+                  )}
                   <div className="mt-4">
-                    <div>
-                      <span className="text-3xl font-bold">Desde $700,000</span>
-                      <span className="text-muted-foreground">/mes</span>
-                    </div>
-                    <div className="text-sm text-muted-foreground mt-1">Precio personalizado</div>
+                    {!isAnnual ? (
+                      <>
+                        <span className="text-3xl font-bold">Desde</span>
+                        <br />
+                        <span className="text-4xl font-bold">{formatPriceSimple(pricing.regularPlans.enterprise.monthly)}</span>
+                        <span className="text-muted-foreground">/mes</span>
+                      </>
+                    ) : (
+                      <>
+                        <span className="text-3xl font-bold">Desde</span>
+                        <br />
+                        <span className="text-4xl font-bold">{formatPriceSimple(pricing.regularPlans.enterprise.annual)}</span>
+                        <span className="text-muted-foreground">/año</span>
+                        <div className="text-sm text-primary font-medium mt-1">
+                          Ahorras {formatPriceSimple(pricing.regularPlans.enterprise.savings)} COP
+                        </div>
+                      </>
+                    )}
                   </div>
-                  <p className="text-sm text-muted-foreground mt-2">Para cadenas y franquicias</p>
+                  <p className="text-sm text-muted-foreground mt-2">IVA incluido • Precio personalizado para cadenas y franquicias</p>
                 </CardHeader>
                 <CardContent>
                   <ul className="space-y-3 mb-6">
