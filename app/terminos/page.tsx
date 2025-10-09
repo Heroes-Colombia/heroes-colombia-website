@@ -49,7 +49,78 @@ export default function TermsPage() {
                 <li>No revender o transferir beneficios a terceros</li>
               </ul>
 
-              <h2>5. Promociones y Descuentos</h2>
+              <h2>5. Oferta de Prueba para Negocios (Pre-Lanzamiento)</h2>
+              <p>
+                Durante el período de pre-lanzamiento, los negocios pueden acceder a una oferta especial de prueba:
+              </p>
+              <ul>
+                <li>
+                  <strong>Precio:</strong> 7,140 COP (pago único que incluye 6,000 COP + 19% IVA)
+                </li>
+                <li>
+                  <strong>Acceso:</strong> Plan Enterprise completo hasta el 1 de febrero de 2026
+                </li>
+                <li>
+                  <strong>Características incluidas:</strong> Ubicaciones ilimitadas, promociones ilimitadas, analytics con IA, sección destacada premium, manager dedicado y API access
+                </li>
+                <li>
+                  <strong>Sin renovación automática:</strong> Al finalizar el período de prueba, NO se realizarán cargos automáticos
+                </li>
+                <li>
+                  <strong>Selección de plan:</strong> Antes del 1 de febrero de 2026, los negocios deben seleccionar un plan regular (Básico, Pro o Enterprise) para continuar con el servicio
+                </li>
+                <li>
+                  <strong>Incentivo temprano:</strong> Negocios que seleccionen su plan antes del 15 de enero de 2025 recibirán 50% de descuento en el primer mes
+                </li>
+                <li>
+                  <strong>Período de gracia:</strong> Después del 1 de febrero de 2026, los negocios tendrán 7 días de acceso de solo lectura para seleccionar un plan
+                </li>
+                <li>
+                  <strong>Downgrade automático:</strong> Si no se selecciona un plan dentro del período de gracia, la cuenta será transferida automáticamente al Plan Gratuito
+                </li>
+              </ul>
+
+              <h2>6. Planes de Suscripción para Negocios</h2>
+              <p>Después del período de prueba, los negocios pueden elegir entre:</p>
+              <ul>
+                <li>
+                  <strong>Plan Gratuito:</strong> 1 ubicación, 1 promoción activa, pago por promoción adicional (11,900 COP + IVA)
+                </li>
+                <li>
+                  <strong>Plan Básico:</strong> 70,000 COP/mes (IVA incluido) - Hasta 3 ubicaciones, 10 promociones activas
+                </li>
+                <li>
+                  <strong>Plan Pro:</strong> 270,000 COP/mes (IVA incluido) - Hasta 10 ubicaciones, promociones ilimitadas, analytics avanzados
+                </li>
+                <li>
+                  <strong>Plan Enterprise:</strong> Desde 800,000 COP/mes (IVA incluido) - Ubicaciones ilimitadas, todas las funciones premium, precio personalizado
+                </li>
+                <li>
+                  <strong>Planes anuales:</strong> Disponibles con 15% de descuento sobre el precio mensual
+                </li>
+                <li>
+                  <strong>Facturación:</strong> Los planes regulares se facturan mensual o anualmente según la selección
+                </li>
+                <li>
+                  <strong>Cancelación:</strong> Los negocios pueden cancelar su suscripción en cualquier momento, con acceso hasta el final del período pagado
+                </li>
+              </ul>
+
+              <h2>7. Pagos y Reembolsos</h2>
+              <ul>
+                <li>Todos los pagos se procesan a través de MercadoPago</li>
+                <li>Los precios incluyen IVA del 19% según la legislación colombiana</li>
+                <li>
+                  <strong>Reembolsos de prueba:</strong> El pago de la prueba (7,140 COP) NO es reembolsable una vez procesado
+                </li>
+                <li>
+                  <strong>Reembolsos de suscripción:</strong> Los pagos de suscripciones regulares no son reembolsables, pero el servicio continuará hasta el final del período pagado
+                </li>
+                <li>Los precios pueden cambiar con 30 días de aviso previo para nuevas suscripciones</li>
+                <li>Los negocios existentes mantendrán su precio actual durante el período de facturación vigente</li>
+              </ul>
+
+              <h2>8. Promociones y Descuentos para Usuarios</h2>
               <ul>
                 <li>Las promociones son ofrecidas por negocios aliados, no por Héroes Colombia directamente</li>
                 <li>Los descuentos están sujetos a disponibilidad y términos específicos de cada negocio</li>
@@ -58,7 +129,7 @@ export default function TermsPage() {
                 <li>Un descuento solo puede canjearse una vez por usuario, salvo que se indique lo contrario</li>
               </ul>
 
-              <h2>6. Cuenta de Usuario</h2>
+              <h2>9. Cuenta de Usuario</h2>
               <p>Eres responsable de:</p>
               <ul>
                 <li>Mantener tu contraseña segura y confidencial</li>
@@ -67,13 +138,13 @@ export default function TermsPage() {
                 <li>Mantener tu información de contacto actualizada</li>
               </ul>
 
-              <h2>7. Propiedad Intelectual</h2>
+              <h2>10. Propiedad Intelectual</h2>
               <p>
                 Todos los contenidos, marcas, logos y materiales en Héroes Colombia son propiedad de la empresa o sus
                 licenciantes. No puedes copiar, modificar o distribuir ningún contenido sin autorización escrita.
               </p>
 
-              <h2>8. Limitación de Responsabilidad</h2>
+              <h2>11. Limitación de Responsabilidad</h2>
               <p>Héroes Colombia no es responsable por:</p>
               <ul>
                 <li>Daños indirectos, incidentales o consecuentes del uso de la plataforma</li>
@@ -83,13 +154,13 @@ export default function TermsPage() {
                 <li>Contenido generado por usuarios</li>
               </ul>
 
-              <h2>9. Modificaciones del Servicio</h2>
+              <h2>12. Modificaciones del Servicio</h2>
               <p>
                 Nos reservamos el derecho de modificar, suspender o discontinuar cualquier parte del servicio en
                 cualquier momento, con o sin previo aviso.
               </p>
 
-              <h2>10. Terminación</h2>
+              <h2>13. Terminación</h2>
               <p>Podemos terminar o suspender tu cuenta si:</p>
               <ul>
                 <li>Violas estos términos</li>
@@ -98,19 +169,19 @@ export default function TermsPage() {
                 <li>Ya no eres elegible para los beneficios</li>
               </ul>
 
-              <h2>11. Ley Aplicable</h2>
+              <h2>14. Ley Aplicable</h2>
               <p>
                 Estos términos se rigen por las leyes de Colombia. Cualquier disputa será resuelta en los tribunales de
                 Bogotá, Colombia.
               </p>
 
-              <h2>12. Cambios a los Términos</h2>
+              <h2>15. Cambios a los Términos</h2>
               <p>
                 Podemos actualizar estos términos ocasionalmente. Te notificaremos de cambios importantes. El uso
                 continuado del servicio después de cambios constituye aceptación de los nuevos términos.
               </p>
 
-              <h2>13. Contacto</h2>
+              <h2>16. Contacto</h2>
               <p>
                 Para preguntas sobre estos términos, contáctanos en:
                 <br />

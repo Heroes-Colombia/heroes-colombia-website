@@ -34,7 +34,6 @@ import { useState } from "react"
 export default function BusinessPage() {
   const [isAnnual, setIsAnnual] = useState(true)
   const [showSignupModal, setShowSignupModal] = useState(false)
-  const [isProcessing, setIsProcessing] = useState(false)
   const pricing = getCurrentPricing()
   const showEarlyBird = isEarlyBirdActive()
 
@@ -61,37 +60,6 @@ export default function BusinessPage() {
     } catch (error) {
       console.error("[Trial] Error:", error)
       throw error // Re-throw to let modal handle it
-    }
-  }
-
-  const handlePurchase = async (planType: "basico" | "pro", billingPeriod: "monthly" | "annual") => {
-    setIsProcessing(true)
-    try {
-      const prices = {
-        basico: { monthly: pricing.regularPlans.basico.monthly, annual: pricing.regularPlans.basico.annual },
-        pro: { monthly: pricing.regularPlans.pro.monthly, annual: pricing.regularPlans.pro.annual },
-      }
-
-      const price = prices[planType][billingPeriod]
-      const title = `Plan ${planType === "basico" ? "Básico" : "Pro"} - ${billingPeriod === "monthly" ? "Mensual" : "Anual"}`
-      const description = `Suscripción ${billingPeriod === "monthly" ? "mensual" : "anual"} al plan ${planType === "basico" ? "Básico" : "Pro"} de Héroes Colombia`
-
-      const checkoutUrl = await createMercadoPagoCheckout({
-        title,
-        description,
-        price,
-        quantity: 1,
-        planType,
-        billingPeriod,
-      })
-
-      // Redirect to Mercado Pago checkout
-      window.location.href = checkoutUrl
-    } catch (error) {
-      console.error("[v0] Error creating checkout:", error)
-      alert("Hubo un error al procesar tu compra. Por favor intenta de nuevo.")
-    } finally {
-      setIsProcessing(false)
     }
   }
 
@@ -333,12 +301,8 @@ export default function BusinessPage() {
                       <span className="text-sm">Gestión de equipo básica</span>
                     </li>
                   </ul>
-                  <Button
-                    className="w-full"
-                    onClick={() => handlePurchase("basico", isAnnual ? "annual" : "monthly")}
-                    disabled={isProcessing}
-                  >
-                    {isProcessing ? "Procesando..." : "Comprar Ahora"}
+                  <Button className="w-full" onClick={handleStartTrial}>
+                    Comenzar con 7,140 COP
                   </Button>
                 </CardContent>
               </Card>
@@ -402,12 +366,8 @@ export default function BusinessPage() {
                       <span className="text-sm">Soporte 24/7</span>
                     </li>
                   </ul>
-                  <Button
-                    className="w-full shadow-lg"
-                    onClick={() => handlePurchase("pro", isAnnual ? "annual" : "monthly")}
-                    disabled={isProcessing}
-                  >
-                    {isProcessing ? "Procesando..." : "Comprar Ahora"}
+                  <Button className="w-full shadow-lg" onClick={handleStartTrial}>
+                    Comenzar con 7,140 COP
                   </Button>
                 </CardContent>
               </Card>
