@@ -97,7 +97,7 @@ export function ExitIntentPopup() {
             <Input
               id="exit-email"
               type="email"
-              placeholder="tu@email.com"
+              placeholder="nombre@email.com"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required

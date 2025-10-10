@@ -87,7 +87,7 @@ export default function TermsPage() {
                   <strong>Plan Gratuito:</strong> 1 ubicación, 1 promoción activa, pago por promoción adicional (11,900 COP + IVA)
                 </li>
                 <li>
-                  <strong>Plan Básico:</strong> 70,000 COP/mes (IVA incluido) - Hasta 3 ubicaciones, 10 promociones activas
+                  <strong>Plan Básico:</strong> 70,000 COP/mes (IVA incluido) - Hasta 3 ubicaciones, 5 promociones activas
                 </li>
                 <li>
                   <strong>Plan Pro:</strong> 270,000 COP/mes (IVA incluido) - Hasta 10 ubicaciones, promociones ilimitadas, analytics avanzados

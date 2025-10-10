@@ -63,12 +63,12 @@ export function TrialOfferHero({ onStartTrial }: TrialOfferHeroProps) {
   if (!showTrial) {
     // If trial is not active, show standard pricing CTA
     return (
-      <section className="relative overflow-hidden py-20 md:py-32">
+      <section className="relative overflow-hidden py-15 md:py-25">
         <div className="absolute inset-0 bg-gradient-to-br from-accent/5 via-background to-primary/5" />
         <div className="container relative max-w-7xl mx-auto px-4">
           <div className="mx-auto max-w-4xl text-center">
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-6">
-              Aumenta Tus Ventas con{" "}
+              Aumenta Tus Ventas hasta 3.5x con{" "}
               <span className="text-primary">Héroes Colombia</span>
             </h1>
             <p className="text-lg md:text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
@@ -93,7 +93,7 @@ export function TrialOfferHero({ onStartTrial }: TrialOfferHeroProps) {
   }
 
   return (
-    <section className="relative overflow-hidden py-20 md:py-32">
+    <section className="relative overflow-hidden py-15 md:py-25">
       <div className="absolute inset-0 bg-gradient-to-br from-accent/5 via-background to-primary/5" />
 
       <div className="container relative max-w-7xl mx-auto px-4">
@@ -107,7 +107,7 @@ export function TrialOfferHero({ onStartTrial }: TrialOfferHeroProps) {
 
           {/* Main Headline */}
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-6">
-            Aumenta Tus Ventas Hasta 3.5x con{" "}
+            Aumenta tus ventas hasta 3.5x con{" "}
             <span className="text-primary">Héroes Colombia</span>
           </h1>
 
@@ -121,7 +121,7 @@ export function TrialOfferHero({ onStartTrial }: TrialOfferHeroProps) {
           </div>
 
           {/* Trial Offer Card */}
-          <Card className="max-w-3xl mx-auto mb-8 border-4 border-primary shadow-2xl bg-gradient-to-br from-white to-primary/5 dark:from-slate-900 dark:to-primary/10">
+          <Card className="max-w-3xl mx-auto mb-10 border-4 border-primary shadow-2xl bg-gradient-to-br from-white to-primary/5 dark:from-slate-900 dark:to-primary/10">
             <CardContent className="p-8 md:p-12">
 
               {/* Price Display */}
@@ -151,7 +151,7 @@ export function TrialOfferHero({ onStartTrial }: TrialOfferHeroProps) {
                   </div>
                   <div className="flex items-start gap-2">
                     <Check className="h-5 w-5 text-green-500 shrink-0 mt-0.5" />
-                    <span>Analytics en tiempo real con IA</span>
+                    <span>Analytics en tiempo real</span>
                   </div>
                   <div className="flex items-start gap-2">
                     <Check className="h-5 w-5 text-green-500 shrink-0 mt-0.5" />
@@ -159,23 +159,15 @@ export function TrialOfferHero({ onStartTrial }: TrialOfferHeroProps) {
                   </div>
                   <div className="flex items-start gap-2">
                     <Check className="h-5 w-5 text-green-500 shrink-0 mt-0.5" />
-                    <span>Soporte prioritario 24/7</span>
+                    <span>Negocio destacado en la App</span>
+                  </div>
+                  <div className="flex items-start gap-2">
+                    <Check className="h-5 w-5 text-green-500 shrink-0 mt-0.5" />
+                    <span>Promociones destacadas en la App</span>
                   </div>
                   <div className="flex items-start gap-2">
                     <Check className="h-5 w-5 text-green-500 shrink-0 mt-0.5" />
                     <span>Gestión completa de equipo</span>
-                  </div>
-                  <div className="flex items-start gap-2">
-                    <Check className="h-5 w-5 text-green-500 shrink-0 mt-0.5" />
-                    <span>API personalizada</span>
-                  </div>
-                  <div className="flex items-start gap-2">
-                    <Check className="h-5 w-5 text-green-500 shrink-0 mt-0.5" />
-                    <span>Gerente de cuenta dedicado</span>
-                  </div>
-                  <div className="flex items-start gap-2">
-                    <Check className="h-5 w-5 text-green-500 shrink-0 mt-0.5" />
-                    <span>Consultoría estratégica</span>
                   </div>
                 </div>
               </div>
@@ -247,7 +239,7 @@ export function TrialOfferHero({ onStartTrial }: TrialOfferHeroProps) {
               </Link>
             </Button>
             <Button variant="ghost" size="lg" asChild>
-              <Link href="https://v0-heroes-colombia-dashboard.vercel.app/" target="_blank">
+              <Link href="https://app.heroescolombia.com" target="_blank">
                 Ver Dashboard Demo
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Link>

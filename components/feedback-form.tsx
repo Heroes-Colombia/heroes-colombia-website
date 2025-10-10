@@ -60,11 +60,11 @@ export function FeedbackForm({ variant }: FeedbackFormProps) {
     }
   }
 
-  const title = variant === "user" ? "Tu Opinión Importa" : "Propón una Alianza"
+  const title = variant === "user" ? "Tu opinión importa" : "Tu comentario nos importa"
   const description =
     variant === "user"
-      ? "Cuéntanos qué funcionalidades te gustaría ver o qué problemas enfrentas. Tu feedback nos ayuda a mejorar."
-      : "¿Tienes una propuesta de negocio o preguntas sobre cómo colaborar? Estamos aquí para escucharte."
+      ? "Cuéntanos qué funcionalidades te gustaría ver o qué problemas enfrentas. Tu retroalimentación nos ayuda a mejorar."
+      : "¿Tienes alguna pregunta? Estamos aquí para escucharte."
 
   return (
     <Card className="max-w-2xl mx-auto">
@@ -83,7 +83,7 @@ export function FeedbackForm({ variant }: FeedbackFormProps) {
             <div className="rounded-full bg-primary/10 w-16 h-16 flex items-center justify-center mx-auto mb-4">
               <Send className="h-8 w-8 text-primary" />
             </div>
-            <h3 className="text-xl font-semibold mb-2">¡Gracias por tu feedback!</h3>
+            <h3 className="text-xl font-semibold mb-2">¡Gracias por tu retroalimentación!</h3>
             <p className="text-muted-foreground">Revisaremos tu mensaje y te contactaremos pronto.</p>
           </div>
         ) : (
@@ -104,7 +104,7 @@ export function FeedbackForm({ variant }: FeedbackFormProps) {
                 <Input
                   id="email"
                   type="email"
-                  placeholder="tu@email.com"
+                  placeholder="nombre@email.com"
                   value={formData.email}
                   onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                   required
@@ -113,12 +113,12 @@ export function FeedbackForm({ variant }: FeedbackFormProps) {
             </div>
             <div className="space-y-2">
               <Label htmlFor="message">
-                {variant === "user" ? "Tu sugerencia o problema" : "Tu propuesta o pregunta"}
+                {variant === "user" ? "Tu sugerencia o problema" : "Tu pregunta"}
               </Label>
               <Textarea
                 id="message"
                 placeholder={
-                  variant === "user" ? "Me gustaría que la app tuviera..." : "Estoy interesado en colaborar con..."
+                  variant === "user" ? "Me gustaría que la app tuviera..." : "Estoy interesado en conocer mas de..."
                 }
                 rows={5}
                 value={formData.message}
@@ -141,7 +141,7 @@ export function FeedbackForm({ variant }: FeedbackFormProps) {
                   <Shield className="h-4 w-4 text-primary" />
                   No soy un robot
                 </label>
-                <p className="text-xs text-muted-foreground mt-1">Verifica que eres humano para proteger contra spam</p>
+                <p className="text-xs text-muted-foreground mt-1">Verifica que eres humano para protegernos contra spam</p>
               </div>
             </div>
 

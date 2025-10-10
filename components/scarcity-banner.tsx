@@ -9,7 +9,7 @@ export function ScarcityBanner({ variant = "user" }: { variant?: "user" | "busin
   useEffect(() => {
     // Simulate spots decreasing
     const interval = setInterval(() => {
-      setSpotsLeft((prev) => Math.max(prev - Math.floor(Math.random() * 3), variant === "user" ? 850 : 75))
+      setSpotsLeft((prev) => Math.max(prev - Math.floor(Math.random() * 3), variant === "user" ? 650 : 75))
     }, 30000) // Every 30 seconds
 
     return () => clearInterval(interval)

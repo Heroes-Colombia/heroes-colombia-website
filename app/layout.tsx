@@ -10,7 +10,9 @@ export const metadata: Metadata = {
   title: "Héroes Colombia - Beneficios Exclusivos para Militares",
   description:
     "Plataforma que conecta a militares colombianos y sus familias con promociones exclusivas en miles de negocios verificados.",
-  generator: "v0.app",
+  icons: {
+    icon: "/images/favicon.ico",
+  },
 }
 
 export default function RootLayout({

@@ -25,7 +25,7 @@ export default function HomePage() {
         <UrgencyBanner variant="user" />
 
         {/* Hero Section */}
-        <section className="relative overflow-hidden py-20 md:py-32">
+        <section className="relative overflow-hidden py-15 md:py-25">
           <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-background to-accent/5" />
           <div className="container relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="mx-auto max-w-4xl text-center">
@@ -34,7 +34,7 @@ export default function HomePage() {
                 Lanzamiento Diciembre 2025
               </div>
               <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight text-balance mb-6">
-                Beneficios Exclusivos para Nuestros <span className="text-primary">Héroes</span>
+                Beneficios exclusivos para nuestros <span className="text-primary">Héroes</span>
               </h1>
               <p className="text-lg md:text-xl text-muted-foreground text-balance mb-8 max-w-2xl mx-auto leading-relaxed">
                 Porque tu servicio merece reconocimiento. Accede a descuentos exclusivos en miles de negocios
@@ -93,27 +93,27 @@ export default function HomePage() {
           </div>
         </section>
 
-        <section className="py-16 md:py-20 bg-secondary border-y">
+        <section className="py-15 md:py-25 bg-secondary border-y">
           <div className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-12">
-              <h2 className="text-2xl md:text-3xl font-bold mb-2">El Impacto que Esperamos Crear</h2>
+              <h2 className="text-2xl md:text-3xl font-bold mb-2">El impacto que esperamos crear</h2>
               <p className="text-muted-foreground">Proyecciones para el primer año de operación</p>
             </div>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-              <AnimatedStat value="500" label="Negocios Aliados Esperados" suffix="+" />
-              <AnimatedStat value="380" label="Militares y Familias" suffix="K+" />
-              <AnimatedStat value="30" label="Ahorro Promedio Proyectado" suffix="%" />
-              <AnimatedStat value="100" label="Verificación Garantizada" suffix="%" />
+              <AnimatedStat value="500" label="Negocios aliados esperados" suffix="+" />
+              <AnimatedStat value="380" label="Militares y familias" suffix="K+" />
+              <AnimatedStat value="30" label="Ahorro promedio proyectado" suffix="%" />
+              <AnimatedStat value="100" label="Verificación garantizada" suffix="%" />
             </div>
           </div>
         </section>
 
         <TrustBadges />
 
-        <section className="py-20 md:py-32 bg-background">
+        <section className="py-15 md:py-25 bg-background">
           <div className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-5xl font-bold text-balance mb-4">Explora Categorías</h2>
+              <h2 className="text-3xl md:text-5xl font-bold text-balance mb-4">Explora categorías</h2>
               <p className="text-lg text-muted-foreground text-balance max-w-2xl mx-auto">
                 Desde restaurantes hasta tecnología, encuentra descuentos en todo lo que necesitas
               </p>
@@ -122,55 +122,59 @@ export default function HomePage() {
           </div>
         </section>
 
-        <section className="py-20 md:py-32 bg-secondary">
+        <section className="py-15 md:py-25 bg-secondary">
           <div className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <AppShowcase />
           </div>
         </section>
 
-        <section className="py-20 md:py-32 bg-gradient-to-br from-primary via-primary/90 to-accent text-primary-foreground">
+        <section className="py-15 md:py-25 bg-gradient-to-br from-primary via-primary/90 to-accent text-primary-foreground">
           <div className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="max-w-4xl mx-auto text-center">
               <Calendar className="h-16 w-16 mx-auto mb-6" />
               <h2 className="text-3xl md:text-5xl font-bold text-balance mb-6">
-                Celebramos Cada Fecha Especial Contigo
+                Celebramos cada fecha especial contigo
               </h2>
               <p className="text-lg text-primary-foreground/90 text-balance mb-8 leading-relaxed">
                 En Héroes Colombia reconocemos y celebramos las fechas más importantes para la comunidad militar.
                 Promociones especiales en el Día del Ejército, Día de la Armada, Día de la Fuerza Aeroespacial, Día de
                 la Policía, Día de la Independencia, y todas las fechas que honran tu servicio y el de tu familia.
               </p>
-              <div className="grid md:grid-cols-5 gap-4 mt-12">
-                <div className="bg-primary-foreground/10 backdrop-blur-sm rounded-xl p-6">
+              <div className="grid md:grid-cols-6 gap-4 mt-12">
+                <div className="bg-primary-foreground/10 backdrop-blur-sm rounded-xl p-5">
                   <div className="text-3xl font-bold mb-2">20 Jul</div>
                   <div className="text-sm">Día de la Independencia</div>
                 </div>
-                <div className="bg-primary-foreground/10 backdrop-blur-sm rounded-xl p-6">
+                <div className="bg-primary-foreground/10 backdrop-blur-sm rounded-xl p-5">
+                  <div className="text-3xl font-bold mb-2">24 Jul</div>
+                  <div className="text-sm">Día de la Armada Nacional</div>
+                </div>
+                <div className="bg-primary-foreground/10 backdrop-blur-sm rounded-xl p-5">
                   <div className="text-3xl font-bold mb-2">7 Ago</div>
                   <div className="text-sm">Batalla de Boyacá</div>
                 </div>
-                <div className="bg-primary-foreground/10 backdrop-blur-sm rounded-xl p-6">
+                <div className="bg-primary-foreground/10 backdrop-blur-sm rounded-xl p-5">
                   <div className="text-3xl font-bold mb-2">7 Ago</div>
-                  <div className="text-sm">Día de la Fuerza Aeroespacial</div>
+                  <div className="text-sm">Día del Ejército</div>
                 </div>
-                <div className="bg-primary-foreground/10 backdrop-blur-sm rounded-xl p-6">
-                  <div className="text-3xl font-bold mb-2">2 Nov</div>
+                <div className="bg-primary-foreground/10 backdrop-blur-sm rounded-xl p-5">
+                  <div className="text-3xl font-bold mb-2">5 Nov</div>
                   <div className="text-sm">Día de la Policía</div>
                 </div>
-                <div className="bg-primary-foreground/10 backdrop-blur-sm rounded-xl p-6">
-                  <div className="text-3xl font-bold mb-2">7 Nov</div>
-                  <div className="text-sm">Día del Ejército</div>
+                <div className="bg-primary-foreground/10 backdrop-blur-sm rounded-xl p-5">
+                  <div className="text-3xl font-bold mb-2">8 Nov</div>
+                  <div className="text-sm">Día de la Fuerza Aeroespacial</div>
                 </div>
               </div>
             </div>
           </div>
         </section>
 
-        <section id="beneficios" className="py-20 md:py-32 bg-background">
+        <section id="beneficios" className="py-15 md:py-25 bg-background">
           <div className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-16">
               <h2 className="text-3xl md:text-5xl font-bold text-balance mb-4">
-                Por Qué Miles de Militares Ya Se Registraron
+                Porque miles de militares ya se registraron
               </h2>
               <p className="text-lg text-muted-foreground text-balance max-w-2xl mx-auto">
                 Beneficios diseñados específicamente para reconocer tu servicio
@@ -183,7 +187,7 @@ export default function HomePage() {
                   <div className="rounded-full bg-primary/10 w-12 h-12 flex items-center justify-center mb-4">
                     <Shield className="h-6 w-6 text-primary" />
                   </div>
-                  <h3 className="font-semibold text-lg mb-2">100% Seguro y Verificado</h3>
+                  <h3 className="font-semibold text-lg mb-2">100% seguro y verificado</h3>
                   <p className="text-sm text-muted-foreground leading-relaxed">
                     Tu identidad militar está protegida con verificación de dos pasos y encriptación de datos de nivel
                     bancario.
@@ -196,7 +200,7 @@ export default function HomePage() {
                   <div className="rounded-full bg-primary/10 w-12 h-12 flex items-center justify-center mb-4">
                     <MapPin className="h-6 w-6 text-primary" />
                   </div>
-                  <h3 className="font-semibold text-lg mb-2">Negocios Físicos y En Línea</h3>
+                  <h3 className="font-semibold text-lg mb-2">Negocios físicos y en línea</h3>
                   <p className="text-sm text-muted-foreground leading-relaxed">
                     Descuentos en tiendas locales y e-commerce. Compra en línea o visita negocios cercanos con tu mapa
                     interactivo.
@@ -209,7 +213,7 @@ export default function HomePage() {
                   <div className="rounded-full bg-primary/10 w-12 h-12 flex items-center justify-center mb-4">
                     <Gift className="h-6 w-6 text-primary" />
                   </div>
-                  <h3 className="font-semibold text-lg mb-2">Descuentos Reales, No Simbólicos</h3>
+                  <h3 className="font-semibold text-lg mb-2">Descuentos reales, no simbólicos</h3>
                   <p className="text-sm text-muted-foreground leading-relaxed">
                     Ahorra hasta 30% en restaurantes, tiendas, servicios y más. Descuentos que realmente impactan tu
                     presupuesto.
@@ -222,7 +226,7 @@ export default function HomePage() {
                   <div className="rounded-full bg-primary/10 w-12 h-12 flex items-center justify-center mb-4">
                     <Smartphone className="h-6 w-6 text-primary" />
                   </div>
-                  <h3 className="font-semibold text-lg mb-2">Canjea en Segundos</h3>
+                  <h3 className="font-semibold text-lg mb-2">Canjea en segundos</h3>
                   <p className="text-sm text-muted-foreground leading-relaxed">
                     Sin complicaciones. Muestra tu código QR, el negocio lo escanea, y listo. Así de simple.
                   </p>
@@ -232,10 +236,10 @@ export default function HomePage() {
           </div>
         </section>
 
-        <section id="como-funciona" className="py-20 md:py-32 bg-secondary">
+        <section id="como-funciona" className="py-15 md:py-25 bg-secondary">
           <div className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-16">
-              <h2 className="text-3xl md:text-5xl font-bold text-balance mb-4">Comienza a Ahorrar en 3 Pasos</h2>
+              <h2 className="text-3xl md:text-5xl font-bold text-balance mb-4">Comienza a ahorrar en 3 pasos</h2>
               <p className="text-lg text-muted-foreground text-balance max-w-2xl mx-auto">
                 Tan fácil que lo harás en menos de 5 minutos
               </p>
@@ -246,7 +250,7 @@ export default function HomePage() {
                 <div className="rounded-full bg-primary text-primary-foreground w-16 h-16 flex items-center justify-center text-2xl font-bold mx-auto mb-4 shadow-lg">
                   1
                 </div>
-                <h3 className="font-semibold text-xl mb-3">Descarga y Regístrate</h3>
+                <h3 className="font-semibold text-xl mb-3">Descarga y regístrate</h3>
                 <p className="text-muted-foreground leading-relaxed">
                   Descarga la app gratis y verifica tu identidad militar de forma segura en minutos.
                 </p>
@@ -256,7 +260,7 @@ export default function HomePage() {
                 <div className="rounded-full bg-primary text-primary-foreground w-16 h-16 flex items-center justify-center text-2xl font-bold mx-auto mb-4 shadow-lg">
                   2
                 </div>
-                <h3 className="font-semibold text-xl mb-3">Explora y Guarda</h3>
+                <h3 className="font-semibold text-xl mb-3">Explora y guarda</h3>
                 <p className="text-muted-foreground leading-relaxed">
                   Navega por categorías, busca negocios cercanos y guarda tus favoritos para usarlos después.
                 </p>
@@ -266,7 +270,7 @@ export default function HomePage() {
                 <div className="rounded-full bg-primary text-primary-foreground w-16 h-16 flex items-center justify-center text-2xl font-bold mx-auto mb-4 shadow-lg">
                   3
                 </div>
-                <h3 className="font-semibold text-xl mb-3">Muestra y Ahorra</h3>
+                <h3 className="font-semibold text-xl mb-3">Muestra y ahorra</h3>
                 <p className="text-muted-foreground leading-relaxed">
                   Presenta tu código QR en el negocio y disfruta de tu descuento exclusivo al instante.
                 </p>
@@ -275,10 +279,10 @@ export default function HomePage() {
           </div>
         </section>
 
-        <section id="testimonios" className="py-20 md:py-32 bg-background">
+        <section id="testimonios" className="py-15 md:py-25 bg-background">
           <div className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-16">
-              <h2 className="text-3xl md:text-5xl font-bold text-balance mb-4">Lo Que Esperan Nuestros Héroes</h2>
+              <h2 className="text-3xl md:text-5xl font-bold text-balance mb-4">Lo que esperan nuestros Héroes</h2>
               <p className="text-lg text-muted-foreground text-balance max-w-2xl mx-auto">
                 Testimonios de militares que ya se registraron y esperan el lanzamiento
               </p>
@@ -325,7 +329,7 @@ export default function HomePage() {
                     </div>
                     <div>
                       <div className="font-semibold text-sm">Sargento Carlos Méndez</div>
-                      <div className="text-xs text-muted-foreground">Fuerza Aérea</div>
+                      <div className="text-xs text-muted-foreground">Fuerza Aeroespacial</div>
                     </div>
                   </div>
                 </CardContent>
@@ -357,18 +361,18 @@ export default function HomePage() {
           </div>
         </section>
 
-        <section className="py-20 md:py-32 bg-secondary">
+        <section className="py-15 md:py-25 bg-secondary">
           <div className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <FeedbackForm variant="user" />
           </div>
         </section>
 
-        <section className="py-20 md:py-32 bg-gradient-to-br from-primary via-primary to-accent text-primary-foreground">
+        <section className="py-15 md:py-32 bg-gradient-to-br from-primary via-primary to-accent text-primary-foreground">
           <div className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div id="descargar" className="max-w-3xl mx-auto text-center">
               <BadgeCheck className="h-16 w-16 mx-auto mb-6 animate-float" />
               <h2 className="text-3xl md:text-5xl font-bold text-balance mb-6">
-                Descarga la App y Comienza a Ahorrar Hoy
+                Descarga la App y comienza a ahorrar hoy
               </h2>
               <p className="text-lg text-primary-foreground/90 text-balance mb-8 leading-relaxed">
                 Sin costo para empezar, sin compromiso, sin tarjeta de crédito. Solo beneficios exclusivos diseñados
@@ -412,7 +416,7 @@ export default function HomePage() {
             </div>
           </div>
         </section>
-        <section id="faq" className="py-10 md:py-22 bg-background">
+        <section id="faq" className="py-10 md:py-25 bg-background">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-10">
             <FAQSection variant="user" />
           </div>

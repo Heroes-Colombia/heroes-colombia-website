@@ -1,6 +1,17 @@
+"use client"
+
 import { Clock } from "lucide-react"
+import { isTrialOfferActive, getTrialPrice, formatPrice, getCurrentPricing } from "@/lib/pricing-config"
 
 export function UrgencyBanner({ variant = "user" }: { variant?: "user" | "business" }) {
+  const isActive = isTrialOfferActive()
+
+  if (!isActive) return null
+
+  const trialPrice = getTrialPrice()
+  const pricing = getCurrentPricing()
+  const endDate = pricing.trialOffer?.nextBillingDate
+
   return (
     <div className="bg-primary/10 border-y border-primary/20 py-3">
       <div className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -14,8 +25,8 @@ export function UrgencyBanner({ variant = "user" }: { variant?: "user" | "busine
               </>
             ) : (
               <>
-                <span className="font-bold">Primeros 2 meses gratis</span> para negocios que se registren antes del
-                lanzamiento
+                <span className="font-bold">Solo {formatPrice(trialPrice)}</span> con acceso Enterprise hasta{" "}
+                {endDate ? new Date(endDate).toLocaleDateString("es-CO", { year: "numeric", month: "long", day: "numeric" }) : "Febrero 1, 2026"}
               </>
             )}
           </p>

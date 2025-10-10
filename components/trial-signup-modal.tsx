@@ -77,7 +77,7 @@ export function TrialSignupModal({ open, onOpenChange, onSubmit }: TrialSignupMo
         <DialogHeader>
           <div className="flex items-center gap-2 mb-2">
             <Sparkles className="h-6 w-6 text-primary" />
-            <DialogTitle className="text-2xl">¡Asegura tu Espacio!</DialogTitle>
+            <DialogTitle className="text-2xl">¡Asegura tu espacio!</DialogTitle>
           </div>
           <DialogDescription className="text-base">
             Solo faltan unos datos para comenzar tu prueba de{" "}
@@ -96,7 +96,7 @@ export function TrialSignupModal({ open, onOpenChange, onSubmit }: TrialSignupMo
             <Input
               id="email"
               type="email"
-              placeholder="negocio@ejemplo.com"
+              placeholder="tunegocio@email.com"
               value={formData.email}
               onChange={(e) => {
                 setFormData({ ...formData, email: e.target.value })
@@ -115,7 +115,7 @@ export function TrialSignupModal({ open, onOpenChange, onSubmit }: TrialSignupMo
             <Input
               id="businessName"
               type="text"
-              placeholder="Mi Negocio Increíble"
+              placeholder="Heroes Colombia"
               value={formData.businessName}
               onChange={(e) => {
                 setFormData({ ...formData, businessName: e.target.value })

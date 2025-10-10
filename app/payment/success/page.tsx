@@ -45,7 +45,7 @@ function SuccessContent() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button size="lg" asChild>
-              <Link href="https://v0-heroes-colombia-dashboard.vercel.app/" target="_blank">
+              <Link href="https://app.heroescolombia.com" target="_blank">
                 Ir al Dashboard
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Link>

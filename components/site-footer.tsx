@@ -113,7 +113,7 @@ export function SiteFooter() {
                 </li>
                 <li>
                   <Link
-                    href="https://v0-heroes-colombia-dashboard.vercel.app/"
+                    href="https://app.heroescolombia.com"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-sm text-muted-foreground hover:text-foreground transition-colors"

@@ -10,8 +10,82 @@ Heroes Colombia Website is a Next.js marketing and landing page for Heroes Colom
 - **Trial Offer**: 7,140 COP one-time payment (6,000 + 19% IVA)
 - **Access Period**: Until February 1, 2026
 - **Features During Trial**: Full Enterprise plan (unlimited locations, unlimited promotions, analytics, premium placement)
-- **After Trial**: Businesses select from Básico (70k), Pro (270k), or Enterprise (800k+) plans
-- **Early Bird**: 50% off first month if plan selected before January 15, 2025
+- **After Trial**: Businesses select from Gratis, Básico, Pro, or Enterprise plans
+- **Early Bird**: 50% off first month if plan selected before January 15, 2025 (**Dashboard-only** - not shown on marketing website)
+
+## Pricing Plans (All prices include 19% IVA)
+
+### Plan Gratis (Free)
+**Monthly Cost**: $0 COP
+**Per Promotion**: $11,900 COP
+
+**Features:**
+- 1 ubicación física u online
+- Pago por cada promoción publicada
+- Analítica básica
+- Acceso para 1 usuario
+- Soporte por email
+
+---
+
+### Plan Básico
+**Monthly**: $70,000 COP
+**Annual**: $714,000 COP (saves $126,000 - 15% discount)
+
+**Features:**
+- Hasta 3 ubicaciones
+- Hasta 3 promociones activas por ubicación
+- Analítica básica
+- Acceso para 2 usuarios
+- Soporte por email
+
+---
+
+### Plan Pro ⭐ (Most Popular)
+**Monthly**: $270,000 COP
+**Annual**: $2,754,000 COP (saves $486,000 - 15% discount)
+
+**Features:**
+- Hasta 10 ubicaciones
+- Hasta 10 promociones activas por ubicación
+- Segmentación de audiencia
+- Analítica avanzada
+- Acceso para 5 usuarios
+- Soporte prioritario
+
+---
+
+### Plan Enterprise
+**Monthly**: From $800,000 COP
+**Annual**: From $8,160,000 COP (saves $1,440,000 - 15% discount)
+
+**Features:**
+- Ubicaciones ilimitadas
+- Promociones ilimitadas por ubicación
+- Negocio destacado en la App
+- Promociones destacadas en la App
+- Segmentación de audiencia
+- Analítica avanzada
+- Acceso para 10 usuarios
+- Soporte prioritario
+- Precio personalizado para cadenas y franquicias
+
+---
+
+### Feature Comparison Matrix
+
+| Feature | Gratis | Básico | Pro | Enterprise |
+|---------|--------|--------|-----|------------|
+| **Locations** | 1 | 3 | 10 | Unlimited |
+| **Active Promotions** | Pay-per-promo | 3 per location | 10 per location | Unlimited |
+| **Cost per Promotion** | $11,900 | Included | Included | Included |
+| **Users** | 1 | 2 | 5 | 10 |
+| **Analytics** | Basic | Basic | Advanced | Advanced |
+| **Audience Segmentation** | ❌ | ❌ | ✅ | ✅ |
+| **Featured Business** | ❌ | ❌ | ❌ | ✅ |
+| **Featured Promotions** | ❌ | ❌ | ❌ | ✅ |
+| **Support** | Email | Email | Priority | Priority |
+| **Annual Discount** | N/A | 15% | 15% | 15% |
 
 ## Development Commands
 
@@ -87,14 +161,45 @@ lib/
 
 **Single source of truth**: `lib/pricing-config.ts`
 
+All pricing is managed through a dynamic configuration system with three pricing periods:
+
+1. **Pre-Launch Period** (Oct 6, 2024 - Nov 30, 2024)
+   - Trial offer: $7,140 COP for Enterprise access until Feb 1, 2026
+   - Early bird: 50% off first month if plan selected before Jan 15, 2025 (**Dashboard-only**)
+   - Regular plans available
+
+2. **Launch Period** (Dec 1, 2024 - Jan 31, 2026)
+   - Trial offer continues
+   - Early bird deadline: Jan 15, 2025 (**Dashboard-only**)
+   - Regular plans available
+
+3. **Post-Launch Period** (Feb 1, 2026+)
+   - Trial offer disabled
+   - Early bird disabled
+   - Only regular plans available
+
+**Important Note:**
+- **Early Bird Incentive** is only displayed and applied in the **dashboard** when businesses select their plan after the trial period ends
+- The marketing website does NOT show early bird promotions to avoid confusion for new sign-ups
+- This ensures fairness - all businesses joining during the trial period pay the same $7,140 COP
+- Early bird only rewards businesses for selecting a paid plan quickly after their trial ends
+
+**Helper Functions:**
 ```typescript
-getCurrentPricing() // Returns current pricing period
-formatPriceSimple(amount) // Formats price: "70,000"
+getCurrentPricing() // Returns current active pricing period
+formatPrice(amount) // Formats price with currency: "$70,000 COP"
+formatPriceSimple(amount) // Formats price without currency: "70,000"
 isTrialOfferActive() // Check if trial offer is available
 isEarlyBirdActive() // Check if early bird discount is active
+getTrialPrice() // Get current trial price
+getEarlyBirdDiscount() // Get early bird discount percentage
+calculateEarlyBirdPrice(plan, billingPeriod) // Calculate discounted price
 ```
 
-Pricing automatically transitions on February 1, 2026 from pre-launch to launch period.
+**Automatic Transitions:**
+- Pricing automatically transitions between periods based on current date
+- Components using pricing functions automatically update
+- No manual intervention needed for pricing changes
 
 ### Email System
 
@@ -201,9 +306,22 @@ FIREBASE_ADMIN_CREDENTIALS={"type":"service_account",...}
 
 ## Important Dates
 
-- **January 15, 2025**: Early bird deadline (50% off first month)
+- **January 15, 2025**: Early bird deadline (50% off first month - **dashboard-only**, not shown on website)
 - **February 1, 2026**: Trial period ends, regular pricing begins
 - **February 8, 2026**: Grace period ends (7 days after trial)
+
+## Marketing vs Dashboard Pricing
+
+### Marketing Website (heroescolombia.com)
+- **Shows**: Trial offer ($7,140 COP) and regular plan pricing
+- **Does NOT show**: Early bird banners or badges
+- **Goal**: Keep messaging simple and fair for all new sign-ups
+
+### Business Dashboard (app.heroescolombia.com)
+- **Shows**: All regular plan pricing
+- **Shows**: Early bird discount badge (50% off) if before Jan 15, 2025
+- **Applies**: Early bird discount automatically when selecting plan
+- **Goal**: Reward businesses for quick decision-making after trial
 
 ## Production Checklist
 

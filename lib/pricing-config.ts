@@ -61,8 +61,8 @@ export const PRICING_PERIODS: PricingPeriod[] = [
   {
     id: "pre-launch",
     name: "Pre-Lanzamiento",
-    startDate: new Date("2024-10-06T00:00:00-05:00"), // Colombia timezone
-    endDate: new Date("2024-11-30T23:59:59-05:00"),
+    startDate: new Date("2025-10-06T00:00:00-05:00"), // Colombia timezone
+    endDate: new Date("2025-11-30T23:59:59-05:00"),
 
     trialOffer: {
       enabled: true,
@@ -114,7 +114,7 @@ export const PRICING_PERIODS: PricingPeriod[] = [
   {
     id: "launch",
     name: "Lanzamiento",
-    startDate: new Date("2024-12-01T00:00:00-05:00"),
+    startDate: new Date("2025-12-01T00:00:00-05:00"),
     endDate: new Date("2026-01-31T23:59:59-05:00"),
 
     trialOffer: {

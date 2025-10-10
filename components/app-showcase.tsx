@@ -8,7 +8,7 @@ export function AppShowcase() {
   return (
     <div className="space-y-12">
       <div className="text-center mb-12">
-        <h2 className="text-3xl md:text-5xl font-bold text-balance mb-4">Experiencia Móvil Excepcional</h2>
+        <h2 className="text-3xl md:text-5xl font-bold text-balance mb-4">Experiencia móvil excepcional</h2>
         <p className="text-lg text-muted-foreground text-balance max-w-2xl mx-auto">
           Descubre beneficios exclusivos desde tu smartphone
         </p>
@@ -19,7 +19,7 @@ export function AppShowcase() {
           <div className="rounded-full bg-primary/10 w-12 h-12 flex items-center justify-center mx-auto mb-4">
             <Smartphone className="h-6 w-6 text-primary" />
           </div>
-          <h3 className="font-semibold mb-2">Interfaz Intuitiva</h3>
+          <h3 className="font-semibold mb-2">Interfaz intuitiva</h3>
           <p className="text-xs text-muted-foreground">Diseño simple y fácil de usar</p>
         </Card>
 
@@ -27,7 +27,7 @@ export function AppShowcase() {
           <div className="rounded-full bg-primary/10 w-12 h-12 flex items-center justify-center mx-auto mb-4">
             <MapPin className="h-6 w-6 text-primary" />
           </div>
-          <h3 className="font-semibold mb-2">Mapa Interactivo</h3>
+          <h3 className="font-semibold mb-2">Mapa interactivo</h3>
           <p className="text-xs text-muted-foreground">Encuentra negocios cercanos</p>
         </Card>
 
@@ -43,7 +43,7 @@ export function AppShowcase() {
           <div className="rounded-full bg-primary/10 w-12 h-12 flex items-center justify-center mx-auto mb-4">
             <User className="h-6 w-6 text-primary" />
           </div>
-          <h3 className="font-semibold mb-2">Perfil Seguro</h3>
+          <h3 className="font-semibold mb-2">Perfil seguro</h3>
           <p className="text-xs text-muted-foreground">Verificación militar protegida</p>
         </Card>
       </div>
@@ -73,7 +73,7 @@ export function AppShowcase() {
               <div className="absolute -left-1 top-52 w-1 h-12 bg-black/50 rounded-l" />
               <div className="absolute -right-1 top-36 w-1 h-16 bg-black/50 rounded-r" />
             </div>
-            <p className="text-center mt-4 font-medium text-sm">Pantalla de Inicio</p>
+            <p className="text-center mt-4 font-medium text-sm">Pantalla de inicio</p>
           </div>
         </div>
 
@@ -97,7 +97,7 @@ export function AppShowcase() {
               <div className="absolute -left-1 top-52 w-1 h-12 bg-black/50 rounded-l" />
               <div className="absolute -right-1 top-36 w-1 h-16 bg-black/50 rounded-r" />
             </div>
-            <p className="text-center mt-4 font-medium text-sm">Detalle de Negocio</p>
+            <p className="text-center mt-4 font-medium text-sm">Detalle de negocio</p>
           </div>
         </div>
 
@@ -145,7 +145,7 @@ export function AppShowcase() {
               <div className="absolute -left-1 top-52 w-1 h-12 bg-black/50 rounded-l" />
               <div className="absolute -right-1 top-36 w-1 h-16 bg-black/50 rounded-r" />
             </div>
-            <p className="text-center mt-4 font-medium text-sm">Perfil de Usuario</p>
+            <p className="text-center mt-4 font-medium text-sm">Perfil de usuario</p>
           </div>
         </div>
       </div>

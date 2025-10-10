@@ -8,7 +8,7 @@ export function DashboardShowcase() {
   return (
     <div className="space-y-12">
       <div className="text-center mb-12">
-        <h2 className="text-3xl md:text-5xl font-bold text-balance mb-4">Dashboard Profesional para Tu Negocio</h2>
+        <h2 className="text-3xl md:text-5xl font-bold text-balance mb-4">Dashboard profesional para tu negocio</h2>
         <p className="text-lg text-muted-foreground text-balance max-w-2xl mx-auto">
           Controla y optimiza tus promociones con métricas en tiempo real
         </p>
@@ -19,7 +19,7 @@ export function DashboardShowcase() {
           <div className="rounded-full bg-primary/10 w-12 h-12 flex items-center justify-center mx-auto mb-4">
             <BarChart3 className="h-6 w-6 text-primary" />
           </div>
-          <h3 className="font-semibold text-lg mb-2">Analíticas Avanzadas</h3>
+          <h3 className="font-semibold text-lg mb-2">Analíticas avanzadas</h3>
           <p className="text-sm text-muted-foreground">
             Visualiza impresiones, visitas, redenciones y conversión en tiempo real
           </p>
@@ -29,7 +29,7 @@ export function DashboardShowcase() {
           <div className="rounded-full bg-primary/10 w-12 h-12 flex items-center justify-center mx-auto mb-4">
             <TrendingUp className="h-6 w-6 text-primary" />
           </div>
-          <h3 className="font-semibold text-lg mb-2">Gestión de Promociones</h3>
+          <h3 className="font-semibold text-lg mb-2">Gestión de promociones</h3>
           <p className="text-sm text-muted-foreground">
             Crea, edita y administra todas tus promociones desde un solo lugar
           </p>
@@ -39,7 +39,7 @@ export function DashboardShowcase() {
           <div className="rounded-full bg-primary/10 w-12 h-12 flex items-center justify-center mx-auto mb-4">
             <Target className="h-6 w-6 text-primary" />
           </div>
-          <h3 className="font-semibold text-lg mb-2">Reportes Detallados</h3>
+          <h3 className="font-semibold text-lg mb-2">Reportes detallados</h3>
           <p className="text-sm text-muted-foreground">Exporta datos y programa reportes automáticos para tu equipo</p>
         </Card>
       </div>
@@ -52,7 +52,7 @@ export function DashboardShowcase() {
           <Card className="relative overflow-hidden border-2 hover:border-primary transition-all duration-300 shadow-lg hover:shadow-2xl">
             <div className="bg-gradient-to-br from-muted/30 to-background p-4 md:p-8">
               <div className="mb-4">
-                <h3 className="text-xl font-bold mb-1">Panel de Analíticas</h3>
+                <h3 className="text-xl font-bold mb-1">Panel de analíticas</h3>
                 <p className="text-sm text-muted-foreground">Métricas detalladas de rendimiento y conversión</p>
               </div>
               <div className="relative rounded-lg overflow-hidden border-2 border-border shadow-2xl">
@@ -74,7 +74,7 @@ export function DashboardShowcase() {
           <Card className="relative overflow-hidden border-2 hover:border-primary transition-all duration-300 shadow-lg hover:shadow-2xl">
             <div className="bg-gradient-to-br from-muted/30 to-background p-4 md:p-8">
               <div className="mb-4">
-                <h3 className="text-xl font-bold mb-1">Resumen General</h3>
+                <h3 className="text-xl font-bold mb-1">Resumen general</h3>
                 <p className="text-sm text-muted-foreground">Vista completa de tu negocio y promociones activas</p>
               </div>
               <div className="relative rounded-lg overflow-hidden border-2 border-border shadow-2xl">
@@ -96,7 +96,7 @@ export function DashboardShowcase() {
           <Card className="relative overflow-hidden border-2 hover:border-primary transition-all duration-300 shadow-lg hover:shadow-2xl">
             <div className="bg-gradient-to-br from-muted/30 to-background p-4 md:p-8">
               <div className="mb-4">
-                <h3 className="text-xl font-bold mb-1">Gestión de Promociones</h3>
+                <h3 className="text-xl font-bold mb-1">Gestión de promociones</h3>
                 <p className="text-sm text-muted-foreground">Administra todas tus ofertas y descuentos fácilmente</p>
               </div>
               <div className="relative rounded-lg overflow-hidden border-2 border-border shadow-2xl">

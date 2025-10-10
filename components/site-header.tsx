@@ -57,7 +57,7 @@ export function SiteHeader({ variant = "user" }: SiteHeaderProps) {
         <div className="hidden md:flex items-center gap-3">
           {variant === "business" && (
             <Button variant="ghost" asChild>
-              <Link href="https://v0-heroes-colombia-dashboard.vercel.app/">Acceder al Dashboard</Link>
+              <Link href="https://app.heroescolombia.com">Acceder al Dashboard</Link>
             </Button>
           )}
           <Button asChild>
@@ -90,7 +90,7 @@ export function SiteHeader({ variant = "user" }: SiteHeaderProps) {
               <div className="flex flex-col gap-3 mt-4 pt-4 border-t">
                 {variant === "business" && (
                   <Button variant="outline" asChild>
-                    <Link href="https://v0-heroes-colombia-dashboard.vercel.app/">Acceder al Dashboard</Link>
+                    <Link href="https://app.heroescolombia.com/">Acceder al Dashboard</Link>
                   </Button>
                 )}
                 <Button asChild>

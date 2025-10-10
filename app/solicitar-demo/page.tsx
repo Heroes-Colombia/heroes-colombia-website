@@ -85,7 +85,7 @@ export default function SolicitarDemoPage() {
                 <a href="/negocios">Volver a Negocios</a>
               </Button>
               <Button variant="outline" asChild>
-                <a href="https://v0-heroes-colombia-dashboard.vercel.app/" target="_blank" rel="noreferrer">
+                <a href="https://app.heroescolombia.com" target="_blank" rel="noreferrer">
                   Explorar Dashboard
                 </a>
               </Button>
