@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server"
 import { addContactToSystemeIO } from "@/lib/systeme-io"
+import { sendExitIntentEmail } from "@/lib/email"
 
 export async function POST(request: NextRequest) {
   try {
@@ -20,8 +21,14 @@ export async function POST(request: NextRequest) {
       email: body.email,
       firstName,
       lastName: lastNameParts.join(" "),
-      tags: ["exit-intent", "early-access", "lead"],
+      tags: ["exit-intent", "lead"],
       locale: "es",
+    })
+
+    // Send detailed feedback via email
+    await sendExitIntentEmail({
+      name: body.name,
+      email: body.email,
     })
 
     return NextResponse.json(

@@ -39,7 +39,7 @@ export function TrialCountdown() {
   if (!timeLeft) return null
 
   return (
-    <div className="inline-flex items-center gap-3 bg-gradient-to-r from-orange-500 to-red-500 text-white px-6 py-3 rounded-full shadow-lg">
+    <div className="inline-flex items-center gap-3 bg-gradient-to-r from-orange-500 to-red-500 text-white px-4 py-2 rounded-full shadow-lg">
       <Clock className="h-5 w-5 animate-pulse" />
       <div className="text-sm font-medium">La oferta termina en:</div>
       <div className="flex gap-2 font-mono text-base font-bold">

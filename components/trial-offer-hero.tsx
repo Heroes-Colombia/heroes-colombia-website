@@ -4,15 +4,12 @@ import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader } from "@/components/ui/card"
 import { Alert, AlertDescription } from "@/components/ui/alert"
-import { Badge } from "@/components/ui/badge"
 import { TrialCountdown } from "@/components/trial-countdown"
 import {
   Crown,
   Check,
-  Zap,
   Shield,
   CheckCircle2,
-  Info,
   Sparkles,
   Calendar,
   ArrowRight,
@@ -23,7 +20,6 @@ import {
   isTrialOfferActive,
   formatPriceSimple,
   isEarlyBirdActive,
-  getEarlyBirdDiscount,
 } from "@/lib/pricing-config"
 
 interface TrialOfferHeroProps {
@@ -93,7 +89,7 @@ export function TrialOfferHero({ onStartTrial }: TrialOfferHeroProps) {
   }
 
   return (
-    <section className="relative overflow-hidden py-15 md:py-25">
+    <section className="relative overflow-hidden py-15 md:py-20">
       <div className="absolute inset-0 bg-gradient-to-br from-accent/5 via-background to-primary/5" />
 
       <div className="container relative max-w-7xl mx-auto px-4">
@@ -147,6 +143,10 @@ export function TrialOfferHero({ onStartTrial }: TrialOfferHeroProps) {
                 <div className="grid md:grid-cols-2 gap-3 text-sm">
                   <div className="flex items-start gap-2">
                     <Check className="h-5 w-5 text-green-500 shrink-0 mt-0.5" />
+                    <span>Ubicaciones ilimitadas</span>
+                  </div>
+                  <div className="flex items-start gap-2">
+                    <Check className="h-5 w-5 text-green-500 shrink-0 mt-0.5" />
                     <span>Promociones ilimitadas</span>
                   </div>
                   <div className="flex items-start gap-2">
@@ -155,19 +155,15 @@ export function TrialOfferHero({ onStartTrial }: TrialOfferHeroProps) {
                   </div>
                   <div className="flex items-start gap-2">
                     <Check className="h-5 w-5 text-green-500 shrink-0 mt-0.5" />
-                    <span>Ubicaciones ilimitadas</span>
-                  </div>
-                  <div className="flex items-start gap-2">
-                    <Check className="h-5 w-5 text-green-500 shrink-0 mt-0.5" />
                     <span>Negocio destacado en la App</span>
                   </div>
                   <div className="flex items-start gap-2">
                     <Check className="h-5 w-5 text-green-500 shrink-0 mt-0.5" />
-                    <span>Promociones destacadas en la App</span>
+                    <span>Segmentación de audiencia</span>
                   </div>
                   <div className="flex items-start gap-2">
                     <Check className="h-5 w-5 text-green-500 shrink-0 mt-0.5" />
-                    <span>Gestión completa de equipo</span>
+                    <span>Acceso para 10 usuarios</span>
                   </div>
                 </div>
               </div>
@@ -178,7 +174,7 @@ export function TrialOfferHero({ onStartTrial }: TrialOfferHeroProps) {
                   <Sparkles className="h-4 w-4 text-yellow-600" />
                   <AlertDescription className="text-yellow-800 dark:text-yellow-200">
                     <strong>🎁 Bonus Exclusivo:</strong> Selecciona tu plan antes del 15 de enero
-                    y obtén <strong>{getEarlyBirdDiscount()}% de descuento</strong> en tu primer mes después de la prueba
+                    y obtén un<strong> descuento adicional </strong> en tu primer mes después de la prueba
                   </AlertDescription>
                 </Alert>
               )}
@@ -190,17 +186,15 @@ export function TrialOfferHero({ onStartTrial }: TrialOfferHeroProps) {
                 onClick={handleStartTrial}
                 disabled={isProcessing}
               >
-                <Zap className="mr-2 h-5 w-5" />
                 {isProcessing ? "Procesando..." : "Comenzar Ahora por 7,140 COP"}
               </Button>
 
               {/* Post-trial Info */}
               <Alert className="border-primary/50">
-                <Info className="h-4 w-4" />
                 <AlertDescription>
                   <strong>Sin cargos adicionales hasta Febrero 1, 2026.</strong>
                   <br />
-                  Después, elige tu plan desde 70,000 COP/mes o continúa gratis con límites.
+                  Después, elige el plan que deseas o continúa gratis.
                   <Button
                     variant="link"
                     className="p-0 h-auto ml-1 text-primary"
@@ -236,12 +230,6 @@ export function TrialOfferHero({ onStartTrial }: TrialOfferHeroProps) {
               <Link href="/solicitar-demo">
                 <Calendar className="mr-2 h-5 w-5" />
                 Solicitar Demo Personalizada
-              </Link>
-            </Button>
-            <Button variant="ghost" size="lg" asChild>
-              <Link href="https://app.heroescolombia.com" target="_blank">
-                Ver Dashboard Demo
-                <ArrowRight className="ml-2 h-5 w-5" />
               </Link>
             </Button>
           </div>

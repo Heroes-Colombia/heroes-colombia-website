@@ -56,9 +56,9 @@ export async function sendTrialWelcomeEmail({
   <style>
     body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; color: #333; }
     .container { max-width: 600px; margin: 0 auto; padding: 20px; }
-    .header { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 30px; text-align: center; border-radius: 8px 8px 0 0; }
+    .header { background: linear-gradient(135deg, #4a6838 0%, #c0dbaf 100%); color: white; padding: 30px; text-align: center; border-radius: 8px 8px 0 0; }
     .content { background: #fff; padding: 30px; border: 1px solid #e5e7eb; border-top: none; border-radius: 0 0 8px 8px; }
-    .button { display: inline-block; background: #667eea; color: white; padding: 12px 30px; text-decoration: none; border-radius: 6px; margin: 20px 0; }
+    .button { display: inline-block; background: #4a6838; color: white; padding: 12px 30px; text-decoration: none; border-radius: 6px; margin: 20px 0; }
     .footer { text-align: center; padding: 20px; color: #6b7280; font-size: 14px; }
     .highlight { background: #fef3c7; padding: 15px; border-left: 4px solid #f59e0b; margin: 20px 0; }
   </style>
@@ -91,13 +91,14 @@ export async function sendTrialWelcomeEmail({
       <ul>
         <li>✅ Ubicaciones ilimitadas</li>
         <li>✅ Promociones ilimitadas</li>
-        <li>✅ Analytics completos con IA</li>
-        <li>✅ Sección destacada premium</li>
-        <li>✅ Manager dedicado + API access</li>
+        <li>✅ Analitica avanzada</li>
+        <li>✅ Promociones ilimitadas por ubicación</li>
+        <li>✅ Negocio destacado en la App</li>
+        <li>✅ Acceso para 10 usuarios</li>
         <li>✅ Soporte prioritario</li>
       </ul>
 
-      <p><strong>Recordatorio Importante:</strong> Antes del 1 de febrero de 2026, podrás seleccionar tu plan de pago mensual. Si seleccionas antes del 15 de enero, obtienes 50% de descuento en tu primer mes. 🎁</p>
+      <p><strong>Recordatorio Importante:</strong> Antes del 1 de febrero de 2026, podrás seleccionar tu plan de pago mensual. Si seleccionas antes del 15 de enero, obtienes un descuento adicional en tu primer mes. 🎁</p>
 
       <p>Si tienes alguna pregunta, no dudes en contactarnos.</p>
 
@@ -130,12 +131,13 @@ Próximos Pasos:
 Tu Plan Enterprise Incluye:
 - Ubicaciones ilimitadas
 - Promociones ilimitadas
-- Analytics completos con IA
-- Sección destacada premium
-- Manager dedicado + API access
+- Analitica avanzada
+- Promociones ilimitadas por ubicación
+- Negocio destacado en la App
+- Acceso para 10 usuarios
 - Soporte prioritario
 
-Recordatorio: Antes del 1 de febrero de 2026, podrás seleccionar tu plan de pago mensual. ¡Si seleccionas antes del 15 de enero, obtienes 50% de descuento en tu primer mes!
+Recordatorio: Antes del 1 de febrero de 2026, podrás seleccionar tu plan de pago mensual. ¡Si seleccionas antes del 15 de enero, obtienes un descuento adicional en tu primer mes!
 
 ¿Preguntas? Contáctanos en soporte@heroescolombia.com
 
@@ -165,9 +167,9 @@ export async function sendDay45ReminderEmail({
   <style>
     body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; color: #333; }
     .container { max-width: 600px; margin: 0 auto; padding: 20px; }
-    .header { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 30px; text-align: center; border-radius: 8px 8px 0 0; }
+    .header { background: linear-gradient(135deg, #4a6838 0%, #c0dbaf 100%); color: white; padding: 30px; text-align: center; border-radius: 8px 8px 0 0; }
     .content { background: #fff; padding: 30px; border: 1px solid #e5e7eb; border-top: none; border-radius: 0 0 8px 8px; }
-    .button { display: inline-block; background: #667eea; color: white; padding: 12px 30px; text-decoration: none; border-radius: 6px; margin: 20px 0; }
+    .button { display: inline-block; background: #4a6838; color: white; padding: 12px 30px; text-decoration: none; border-radius: 6px; margin: 20px 0; }
     .highlight { background: #fef3c7; padding: 15px; border-left: 4px solid #f59e0b; margin: 20px 0; }
   </style>
 </head>
@@ -343,7 +345,7 @@ export async function sendTrialExpiredEmail({
     .container { max-width: 600px; margin: 0 auto; padding: 20px; }
     .header { background: #6b7280; color: white; padding: 30px; text-align: center; border-radius: 8px 8px 0 0; }
     .content { background: #fff; padding: 30px; border: 1px solid #e5e7eb; border-top: none; border-radius: 0 0 8px 8px; }
-    .button { display: inline-block; background: #667eea; color: white; padding: 12px 30px; text-decoration: none; border-radius: 6px; margin: 20px 0; }
+    .button { display: inline-block; background: #4a6838; color: white; padding: 12px 30px; text-decoration: none; border-radius: 6px; margin: 20px 0; }
   </style>
 </head>
 <body>
@@ -413,7 +415,6 @@ El Equipo de Héroes Colombia
   return sendEmail({ to, subject, html, text })
 }
 
-
 // Feedback Form Email
 export async function sendFeedbackEmail({
   name,
@@ -437,7 +438,7 @@ export async function sendFeedbackEmail({
   <style>
     body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; color: #333; }
     .container { max-width: 600px; margin: 0 auto; padding: 20px; }
-    .header { background: #667eea; color: white; padding: 20px; border-radius: 8px 8px 0 0; }
+    .header { background: #4a6838; color: white; padding: 20px; border-radius: 8px 8px 0 0; }
     .content { background: #fff; padding: 30px; border: 1px solid #e5e7eb; border-top: none; border-radius: 0 0 8px 8px; }
     .field { margin: 15px 0; }
     .label { font-weight: bold; color: #6b7280; }
@@ -479,7 +480,7 @@ export async function sendFeedbackEmail({
   <style>
     body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; color: #333; }
     .container { max-width: 600px; margin: 0 auto; padding: 20px; }
-    .header { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 30px; text-align: center; border-radius: 8px 8px 0 0; }
+    .header { background: linear-gradient(135deg, #4a6838 0%, #c0dbaf 100%); color: white; padding: 30px; text-align: center; border-radius: 8px 8px 0 0; }
     .content { background: #fff; padding: 30px; border: 1px solid #e5e7eb; border-top: none; border-radius: 0 0 8px 8px; }
   </style>
 </head>
@@ -492,6 +493,98 @@ export async function sendFeedbackEmail({
       <h2>Hola ${name},</h2>
       <p>Hemos recibido tu mensaje y lo valoramos mucho. Tu opinión nos ayuda a mejorar Héroes Colombia día a día.</p>
       <p>Nuestro equipo revisará tu mensaje y te contactaremos pronto si es necesario.</p>
+      <p>Saludos,<br><strong>El Equipo de Héroes Colombia</strong></p>
+    </div>
+  </div>
+</body>
+</html>
+`
+
+  // Send to admin
+  await sendEmail({
+    to: "jonathan@heroescolombia.com",
+    subject: adminSubject,
+    html: adminHtml,
+  })
+
+  // Send confirmation to user
+  return sendEmail({
+    to: email,
+    subject: userSubject,
+    html: userHtml,
+  })
+}
+
+// Exit Intent Form Email
+export async function sendExitIntentEmail({
+  name,
+  email,
+}: {
+  name: string
+  email: string
+}) {
+  const adminSubject = `Nuevo Feedback de Usuario - ${name}`
+  const userSubject = "Gracias por tu interes en Héroes Colombia"
+
+  const adminHtml = `
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <style>
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; color: #333; }
+    .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+    .header { background: #4a6838; color: white; padding: 20px; border-radius: 8px 8px 0 0; }
+    .content { background: #fff; padding: 30px; border: 1px solid #e5e7eb; border-top: none; border-radius: 0 0 8px 8px; }
+    .field { margin: 15px 0; }
+    .label { font-weight: bold; color: #6b7280; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h2>📝 Nuevo Interes en registrarse a Heroes Colombia</h2>
+    </div>
+    <div class="content">
+      <div class="field">
+        <div class="label">Tipo:</div>
+        <div>"Usuario"</div>
+      </div>
+      <div class="field">
+        <div class="label">Nombre:</div>
+        <div>${name}</div>
+      </div>
+      <div class="field">
+        <div class="label">Email:</div>
+        <div><a href="mailto:${email}">${email}</a></div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
+`
+
+  const userHtml = `
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <style>
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; color: #333; }
+    .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+    .header { background: linear-gradient(135deg, #4a6838 0%, #c0dbaf 100%); color: white; padding: 30px; text-align: center; border-radius: 8px 8px 0 0; }
+    .content { background: #fff; padding: 30px; border: 1px solid #e5e7eb; border-top: none; border-radius: 0 0 8px 8px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>¡Gracias por tu Interes!</h1>
+    </div>
+    <div class="content">
+      <h2>Hola ${name},</h2>
+      <p>Hemos recibido tu mensaje y valoramos mucho tu interes en ser parte de Heroes Colombia!</p>
+      <p>Nuestro equipo revisará tus datos y te contactaremos prontamente.</p>
       <p>Saludos,<br><strong>El Equipo de Héroes Colombia</strong></p>
     </div>
   </div>
@@ -597,7 +690,7 @@ export async function sendDemoRequestEmail({
   <style>
     body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; color: #333; }
     .container { max-width: 600px; margin: 0 auto; padding: 20px; }
-    .header { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 30px; text-align: center; border-radius: 8px 8px 0 0; }
+    .header { background: linear-gradient(135deg, #4a6838 0%, #c0dbaf 100%); color: white; padding: 30px; text-align: center; border-radius: 8px 8px 0 0; }
     .content { background: #fff; padding: 30px; border: 1px solid #e5e7eb; border-top: none; border-radius: 0 0 8px 8px; }
   </style>
 </head>

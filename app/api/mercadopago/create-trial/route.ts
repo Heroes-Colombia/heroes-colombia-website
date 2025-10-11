@@ -95,11 +95,9 @@ export async function POST(req: NextRequest) {
     try {
       await addContactToSystemeIO({
         email,
-        fields: {
-          firstName: businessName,
-          phone: phone || "",
-        },
-        tags: [1], // Tag ID 1 = "trial-signup" (you'll need to create this tag in Systeme.io)
+        firstName: businessName,
+        phone: phone || "",
+        tags: ['trial-signup'],
       })
     } catch (systemeError) {
       // Log error but don't fail the request

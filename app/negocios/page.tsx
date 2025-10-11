@@ -7,7 +7,6 @@ import { TrialSignupModal, type TrialSignupData } from "@/components/trial-signu
 import { AnimatedStat } from "@/components/animated-stats"
 import { FeedbackForm } from "@/components/feedback-form"
 import { DashboardShowcase } from "@/components/dashboard-showcase"
-import { ExitIntentPopup } from "@/components/exit-intent-popup"
 import { TrustBadges } from "@/components/trust-badges"
 import { Button } from "@/components/ui/button"
 import { FAQSection } from "@/components/faq-section"

@@ -87,11 +87,6 @@ export default function SolicitarDemoPage() {
               <Button asChild>
                 <a href="/negocios">Volver a Negocios</a>
               </Button>
-              <Button variant="outline" asChild>
-                <a href="https://app.heroescolombia.com" target="_blank" rel="noreferrer">
-                  Explorar Dashboard
-                </a>
-              </Button>
             </div>
           </div>
         </main>
@@ -111,7 +106,7 @@ export default function SolicitarDemoPage() {
               <Calendar className="h-4 w-4" />
               Demo Personalizada
             </div>
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">Solicita Tu Demo</h1>
+            <h1 className="text-4xl md:text-5xl font-bold mb-4">Solicita tu demo</h1>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
               Descubre cómo Héroes Colombia puede ayudarte a atraer más clientes y aumentar tus ventas. Agenda una demo
               personalizada con nuestro equipo.
@@ -124,7 +119,7 @@ export default function SolicitarDemoPage() {
                 <div className="rounded-full bg-primary/10 w-12 h-12 flex items-center justify-center mx-auto mb-3">
                   <Building2 className="h-6 w-6 text-primary" />
                 </div>
-                <h3 className="font-semibold mb-2">Análisis Personalizado</h3>
+                <h3 className="font-semibold mb-2">Análisis personalizado</h3>
                 <p className="text-sm text-muted-foreground">Evaluamos tu negocio y te mostramos el potencial de ROI</p>
               </CardContent>
             </Card>
@@ -133,7 +128,7 @@ export default function SolicitarDemoPage() {
                 <div className="rounded-full bg-primary/10 w-12 h-12 flex items-center justify-center mx-auto mb-3">
                   <Users className="h-6 w-6 text-primary" />
                 </div>
-                <h3 className="font-semibold mb-2">Tour Completo</h3>
+                <h3 className="font-semibold mb-2">Tour completo</h3>
                 <p className="text-sm text-muted-foreground">Conoce todas las funcionalidades del dashboard y la app</p>
               </CardContent>
             </Card>
@@ -142,7 +137,7 @@ export default function SolicitarDemoPage() {
                 <div className="rounded-full bg-primary/10 w-12 h-12 flex items-center justify-center mx-auto mb-3">
                   <TrendingUp className="h-6 w-6 text-primary" />
                 </div>
-                <h3 className="font-semibold mb-2">Estrategia de Crecimiento</h3>
+                <h3 className="font-semibold mb-2">Estrategia de crecimiento</h3>
                 <p className="text-sm text-muted-foreground">Te ayudamos a crear tu primera campaña exitosa</p>
               </CardContent>
             </Card>
@@ -150,7 +145,7 @@ export default function SolicitarDemoPage() {
 
           <Card>
             <CardHeader>
-              <CardTitle>Información de Tu Negocio</CardTitle>
+              <CardTitle>Información de tu negocio</CardTitle>
               <CardDescription>
                 Completa el formulario y nos pondremos en contacto contigo para agendar la demo
               </CardDescription>
@@ -159,7 +154,7 @@ export default function SolicitarDemoPage() {
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid md:grid-cols-2 gap-4">
                   <div className="space-y-2">
-                    <Label htmlFor="businessName">Nombre del Negocio *</Label>
+                    <Label htmlFor="businessName">Nombre del negocio *</Label>
                     <Input
                       id="businessName"
                       placeholder="Ej: Restaurante El Buen Sabor"
@@ -179,14 +174,27 @@ export default function SolicitarDemoPage() {
                         <SelectValue placeholder="Selecciona una categoría" />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="restaurantes">Restaurantes</SelectItem>
-                        <SelectItem value="hoteles">Hoteles</SelectItem>
-                        <SelectItem value="deportes">Deportes</SelectItem>
-                        <SelectItem value="educacion">Educación</SelectItem>
-                        <SelectItem value="salud">Salud</SelectItem>
-                        <SelectItem value="belleza">Belleza</SelectItem>
-                        <SelectItem value="tecnologia">Tecnología</SelectItem>
-                        <SelectItem value="vehiculos">Vehículos</SelectItem>
+                        <SelectItem value="Jugueterías">Jugueterías</SelectItem>
+                        <SelectItem value="Bares">Bares</SelectItem>
+                        <SelectItem value="Entretenimiento">Entretenimiento</SelectItem>
+                        <SelectItem value="Educación">Educación</SelectItem>
+                        <SelectItem value="Asistencia">Asistencia</SelectItem>
+                        <SelectItem value="Hoteles">Hoteles</SelectItem>
+                        <SelectItem value="Belleza">Belleza</SelectItem>
+                        <SelectItem value="Hogar">Hogar</SelectItem>
+                        <SelectItem value="Eventos">Eventos</SelectItem>
+                        <SelectItem value="Deportes">Deportes</SelectItem>
+                        <SelectItem value="Vestuario">Vestuario</SelectItem>
+                        <SelectItem value="Papelerías">Papelerías</SelectItem>
+                        <SelectItem value="Salud">Salud</SelectItem>
+                        <SelectItem value="Telefonía">Telefonía</SelectItem>
+                        <SelectItem value="Tienda">Tienda</SelectItem>
+                        <SelectItem value="Tecnología">Tecnología</SelectItem>
+                        <SelectItem value="Seguros">Seguros</SelectItem>
+                        <SelectItem value="Vehículos">Vehículos</SelectItem>
+                        <SelectItem value="Mascotas">Mascotas</SelectItem>
+                        <SelectItem value="Restaurantes">Restaurantes</SelectItem>
+                        <SelectItem value="Vivienda">Vivienda</SelectItem>
                         <SelectItem value="otro">Otro</SelectItem>
                       </SelectContent>
                     </Select>
@@ -195,7 +203,7 @@ export default function SolicitarDemoPage() {
 
                 <div className="grid md:grid-cols-2 gap-4">
                   <div className="space-y-2">
-                    <Label htmlFor="contactName">Nombre de Contacto *</Label>
+                    <Label htmlFor="contactName">Nombre de contacto *</Label>
                     <Input
                       id="contactName"
                       placeholder="Tu nombre completo"
@@ -209,7 +217,7 @@ export default function SolicitarDemoPage() {
                     <Input
                       id="email"
                       type="email"
-                      placeholder="tu@negocio.com"
+                      placeholder="tunombre@negocio.com"
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                       required
@@ -230,7 +238,7 @@ export default function SolicitarDemoPage() {
                     />
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="monthlyRevenue">Ingresos Mensuales Aprox.</Label>
+                    <Label htmlFor="monthlyRevenue">Ingresos mensuales aprox.</Label>
                     <Select
                       value={formData.monthlyRevenue}
                       onValueChange={(value) => setFormData({ ...formData, monthlyRevenue: value })}
@@ -249,7 +257,7 @@ export default function SolicitarDemoPage() {
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="message">Mensaje Adicional (Opcional)</Label>
+                  <Label htmlFor="message">Mensaje adicional (Opcional)</Label>
                   <Textarea
                     id="message"
                     placeholder="Cuéntanos más sobre tu negocio y qué te gustaría lograr con Héroes Colombia..."

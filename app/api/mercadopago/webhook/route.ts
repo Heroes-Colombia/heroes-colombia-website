@@ -139,11 +139,9 @@ export async function POST(request: Request) {
           try {
             await addContactToSystemeIO({
               email,
-              fields: {
-                firstName: businessName,
-                phone,
-              },
-              tags: [2], // Tag ID 2 = "trial-active" (create this tag in Systeme.io)
+              firstName: businessName,
+              phone,
+              tags: ['trial-active'],
             })
           } catch (systemeError) {
             console.error("[Webhook] Systeme.io error:", systemeError)
@@ -186,11 +184,9 @@ export async function POST(request: Request) {
           try {
             await addContactToSystemeIO({
               email: payment.payer.email,
-              fields: {
-                firstName: payment.payer.first_name || "",
-                phone: payment.payer.phone?.number || "",
-              },
-              tags: [3], // Tag ID 3 = "paid-customer" (create this tag in Systeme.io)
+              firstName: payment.payer.first_name || "",
+              phone: payment.payer.phone?.number || "",
+              tags: ['paid-customer'],
             })
           } catch (systemeError) {
             console.error("[Webhook] Systeme.io error:", systemeError)

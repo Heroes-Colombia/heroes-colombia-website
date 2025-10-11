@@ -75,8 +75,8 @@ export function SiteHeader({ variant = "user" }: SiteHeaderProps) {
               <span className="sr-only">Abrir menú</span>
             </Button>
           </SheetTrigger>
-          <SheetContent side="right" className="w-[300px]">
-            <nav className="flex flex-col gap-4 mt-8">
+          <SheetContent side="right" className="w-[200px]">
+            <nav className="flex flex-col gap-4 mt-8 mx-2">
               {navLinks.map((link) => (
                 <Link
                   key={link.href}
