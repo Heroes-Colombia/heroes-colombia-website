@@ -65,7 +65,6 @@ export default function BusinessPage() {
       <SiteHeader variant="business" />
       <UrgencyBanner variant="business" />
       <TrialSignupModal open={showSignupModal} onOpenChange={setShowSignupModal} onSubmit={handleSignupSubmit} />
-      <ExitIntentPopup />
 
       <main className="flex-1">
         {/* NEW: Trial Offer Hero Section */}

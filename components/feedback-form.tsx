@@ -10,7 +10,6 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Checkbox } from "@/components/ui/checkbox"
 import { MessageSquare, Send, Shield } from "lucide-react"
-import { addContactToSystemeIO } from "@/lib/systeme-io"
 
 interface FeedbackFormProps {
   variant: "user" | "business"
@@ -37,19 +36,24 @@ export function FeedbackForm({ variant }: FeedbackFormProps) {
     setIsSubmitting(true)
 
     try {
-      const [firstName, ...lastNameParts] = formData.name.split(" ")
-      await addContactToSystemeIO({
-        email: formData.email,
-        firstName,
-        lastName: lastNameParts.join(" "),
-        tags: [variant === "user" ? "feedback-user" : "feedback-business", "lead"],
-        customFields: {
-          message: formData.message,
-          source: "feedback-form",
+      const response = await fetch("/api/feedback", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
         },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          message: formData.message,
+          variant,
+        }),
       })
 
-      console.log("[v0] Feedback submitted to systeme.io:", formData)
+      if (!response.ok) {
+        throw new Error("Failed to submit feedback")
+      }
+
+      console.log("[v0] Feedback submitted successfully:", formData)
       setSubmitted(true)
       setTimeout(() => setSubmitted(false), 3000)
     } catch (error) {

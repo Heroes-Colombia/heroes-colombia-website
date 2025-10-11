@@ -8,7 +8,6 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Gift, X } from "lucide-react"
-import { addContactToSystemeIO } from "@/lib/systeme-io"
 
 export function ExitIntentPopup() {
   const [isOpen, setIsOpen] = useState(false)
@@ -43,15 +42,22 @@ export function ExitIntentPopup() {
     setIsSubmitting(true)
 
     try {
-      const [firstName, ...lastNameParts] = name.split(" ")
-      await addContactToSystemeIO({
-        email,
-        firstName,
-        lastName: lastNameParts.join(" "),
-        tags: ["exit-intent", "lead"],
+      const response = await fetch("/api/early-access", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name,
+          email,
+        }),
       })
 
-      console.log("[v0] Exit intent email captured and sent to systeme.io:", email)
+      if (!response.ok) {
+        throw new Error("Failed to register for early access")
+      }
+
+      console.log("[v0] Early access registration successful:", email)
       setIsOpen(false)
     } catch (error) {
       console.error("[v0] Error submitting to systeme.io:", error)
@@ -108,7 +114,7 @@ export function ExitIntentPopup() {
               {isSubmitting ? "Registrando..." : "Obtener Acceso Exclusivo"}
             </Button>
             <p className="text-xs text-center text-muted-foreground">
-              Únete a más de 5,000 personas que ya se registraron
+              Únete a más de 500 personas que ya se registraron
             </p>
           </div>
         </form>

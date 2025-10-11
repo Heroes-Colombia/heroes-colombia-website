@@ -14,7 +14,6 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Textarea } from "@/components/ui/textarea"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Calendar, CheckCircle2, Building2, Users, TrendingUp, Shield } from "lucide-react"
-import { addContactToSystemeIO } from "@/lib/systeme-io"
 
 export default function SolicitarDemoPage() {
   const [submitted, setSubmitted] = useState(false)
@@ -41,23 +40,27 @@ export default function SolicitarDemoPage() {
     setIsSubmitting(true)
 
     try {
-      const [firstName, ...lastNameParts] = formData.contactName.split(" ")
-      await addContactToSystemeIO({
-        email: formData.email,
-        firstName,
-        lastName: lastNameParts.join(" "),
-        phone: formData.phone,
-        tags: ["demo-request", "business", "lead"],
-        customFields: {
-          business_name: formData.businessName,
-          category: formData.category,
-          monthly_revenue: formData.monthlyRevenue,
-          message: formData.message,
-          source: "demo-form",
+      const response = await fetch("/api/demo-request", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
         },
+        body: JSON.stringify({
+          contactName: formData.contactName,
+          email: formData.email,
+          phone: formData.phone,
+          businessName: formData.businessName,
+          category: formData.category,
+          monthlyRevenue: formData.monthlyRevenue,
+          message: formData.message,
+        }),
       })
 
-      console.log("[v0] Demo request submitted to systeme.io:", formData)
+      if (!response.ok) {
+        throw new Error("Failed to submit demo request")
+      }
+
+      console.log("[v0] Demo request submitted successfully:", formData)
       setSubmitted(true)
     } catch (error) {
       console.error("[v0] Error submitting demo request:", error)

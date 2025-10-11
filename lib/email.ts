@@ -1,13 +1,10 @@
-// Email service using Resend
-// Install: pnpm add resend
-// import { Resend } from "resend"
+import { Resend } from "resend"
 
 const RESEND_API_KEY = process.env.RESEND_API_KEY
 const FROM_EMAIL = process.env.RESEND_FROM_EMAIL || "Héroes Colombia <noreply@heroescolombia.com>"
 const DASHBOARD_URL = process.env.NEXT_PUBLIC_DASHBOARD_URL || "https://app.heroescolombia.com"
 
-// Uncomment when Resend is installed:
-// const resend = RESEND_API_KEY ? new Resend(RESEND_API_KEY) : null
+const resend = RESEND_API_KEY ? new Resend(RESEND_API_KEY) : null
 
 interface SendEmailParams {
   to: string
@@ -23,20 +20,16 @@ export async function sendEmail({ to, subject, html, text }: SendEmailParams) {
   }
 
   try {
-    // Uncomment when Resend is installed:
-    // const data = await resend!.emails.send({
-    //   from: FROM_EMAIL,
-    //   to,
-    //   subject,
-    //   html,
-    //   text,
-    // })
-    // console.log("[Email] Sent successfully:", data)
-    // return { success: true, data }
+    const data = await resend!.emails.send({
+      from: FROM_EMAIL,
+      to,
+      subject,
+      html,
+      text,
+    })
+    console.log("[Email] Sent successfully:", data)
+    return { success: true, data }
 
-    // Temporary: Just log the email
-    console.log("[Email] Would send email:", { to, subject, from: FROM_EMAIL })
-    return { success: true, message: "Email service not yet active (Resend not installed)" }
   } catch (error) {
     console.error("[Email] Error sending email:", error)
     return { success: false, error }
@@ -419,3 +412,224 @@ El Equipo de Héroes Colombia
 
   return sendEmail({ to, subject, html, text })
 }
+
+
+// Feedback Form Email
+export async function sendFeedbackEmail({
+  name,
+  email,
+  message,
+  variant,
+}: {
+  name: string
+  email: string
+  message: string
+  variant: "user" | "business"
+}) {
+  const adminSubject = `Nuevo Feedback ${variant === "user" ? "de Usuario" : "de Negocio"} - ${name}`
+  const userSubject = "Gracias por tu retroalimentación - Héroes Colombia"
+
+  const adminHtml = `
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <style>
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; color: #333; }
+    .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+    .header { background: #667eea; color: white; padding: 20px; border-radius: 8px 8px 0 0; }
+    .content { background: #fff; padding: 30px; border: 1px solid #e5e7eb; border-top: none; border-radius: 0 0 8px 8px; }
+    .field { margin: 15px 0; }
+    .label { font-weight: bold; color: #6b7280; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h2>📝 Nuevo Feedback Recibido</h2>
+    </div>
+    <div class="content">
+      <div class="field">
+        <div class="label">Tipo:</div>
+        <div>${variant === "user" ? "Usuario" : "Negocio"}</div>
+      </div>
+      <div class="field">
+        <div class="label">Nombre:</div>
+        <div>${name}</div>
+      </div>
+      <div class="field">
+        <div class="label">Email:</div>
+        <div><a href="mailto:${email}">${email}</a></div>
+      </div>
+      <div class="field">
+        <div class="label">Mensaje:</div>
+        <div>${message}</div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
+`
+
+  const userHtml = `
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <style>
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; color: #333; }
+    .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+    .header { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 30px; text-align: center; border-radius: 8px 8px 0 0; }
+    .content { background: #fff; padding: 30px; border: 1px solid #e5e7eb; border-top: none; border-radius: 0 0 8px 8px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>¡Gracias por tu Retroalimentación!</h1>
+    </div>
+    <div class="content">
+      <h2>Hola ${name},</h2>
+      <p>Hemos recibido tu mensaje y lo valoramos mucho. Tu opinión nos ayuda a mejorar Héroes Colombia día a día.</p>
+      <p>Nuestro equipo revisará tu mensaje y te contactaremos pronto si es necesario.</p>
+      <p>Saludos,<br><strong>El Equipo de Héroes Colombia</strong></p>
+    </div>
+  </div>
+</body>
+</html>
+`
+
+  // Send to admin
+  await sendEmail({
+    to: "jonathan@heroescolombia.com",
+    subject: adminSubject,
+    html: adminHtml,
+  })
+
+  // Send confirmation to user
+  return sendEmail({
+    to: email,
+    subject: userSubject,
+    html: userHtml,
+  })
+}
+
+// Demo Request Email
+export async function sendDemoRequestEmail({
+  businessName,
+  category,
+  contactName,
+  email,
+  phone,
+  monthlyRevenue,
+  message,
+}: {
+  businessName: string
+  category: string
+  contactName: string
+  email: string
+  phone: string
+  monthlyRevenue: string
+  message: string
+}) {
+  const adminSubject = `Nueva Solicitud de Demo - ${businessName}`
+  const userSubject = "Tu solicitud de demo ha sido recibida - Héroes Colombia"
+
+  const adminHtml = `
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <style>
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; color: #333; }
+    .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+    .header { background: #10b981; color: white; padding: 20px; border-radius: 8px 8px 0 0; }
+    .content { background: #fff; padding: 30px; border: 1px solid #e5e7eb; border-top: none; border-radius: 0 0 8px 8px; }
+    .field { margin: 15px 0; }
+    .label { font-weight: bold; color: #6b7280; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h2>🎯 Nueva Solicitud de Demo</h2>
+    </div>
+    <div class="content">
+      <div class="field">
+        <div class="label">Nombre del Negocio:</div>
+        <div>${businessName}</div>
+      </div>
+      <div class="field">
+        <div class="label">Categoría:</div>
+        <div>${category}</div>
+      </div>
+      <div class="field">
+        <div class="label">Contacto:</div>
+        <div>${contactName}</div>
+      </div>
+      <div class="field">
+        <div class="label">Email:</div>
+        <div><a href="mailto:${email}">${email}</a></div>
+      </div>
+      <div class="field">
+        <div class="label">Teléfono:</div>
+        <div><a href="tel:${phone}">${phone}</a></div>
+      </div>
+      <div class="field">
+        <div class="label">Facturación Mensual:</div>
+        <div>${monthlyRevenue}</div>
+      </div>
+      <div class="field">
+        <div class="label">Mensaje:</div>
+        <div>${message}</div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
+`
+
+  const userHtml = `
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <style>
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; color: #333; }
+    .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+    .header { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 30px; text-align: center; border-radius: 8px 8px 0 0; }
+    .content { background: #fff; padding: 30px; border: 1px solid #e5e7eb; border-top: none; border-radius: 0 0 8px 8px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>¡Solicitud Recibida!</h1>
+    </div>
+    <div class="content">
+      <h2>Hola ${contactName},</h2>
+      <p>Gracias por tu interés en Héroes Colombia. Hemos recibido tu solicitud de demo para <strong>${businessName}</strong>.</p>
+      <p>Nuestro equipo revisará tu información y te contactaremos en las próximas 24-48 horas para coordinar una demostración personalizada.</p>
+      <p>Mientras tanto, puedes explorar más sobre nuestros planes y funcionalidades en <a href="https://heroescolombia.com">heroescolombia.com</a></p>
+      <p>Saludos,<br><strong>El Equipo de Héroes Colombia</strong></p>
+    </div>
+  </div>
+</body>
+</html>
+`
+
+  // Send to admin
+  await sendEmail({
+    to: "jonathan@heroescolombia.com",
+    subject: adminSubject,
+    html: adminHtml,
+  })
+
+  // Send confirmation to user
+  return sendEmail({
+    to: email,
+    subject: userSubject,
+    html: userHtml,
+  })
+}
+
