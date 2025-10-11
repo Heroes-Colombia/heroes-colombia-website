@@ -151,7 +151,7 @@ export async function POST(request: Request) {
           try {
             await createBusinessRecord({
               email,
-              businessName,
+              name: businessName,
               phone,
               planType: "enterprise",
               status: "trial",

@@ -1,47 +1,44 @@
-// Firebase Admin SDK for server-side operations
-// Install: pnpm add firebase-admin
-// import admin from "firebase-admin"
+import admin from "firebase-admin"
 
 const FIREBASE_PROJECT_ID = process.env.FIREBASE_PROJECT_ID
 const FIREBASE_ADMIN_CREDENTIALS = process.env.FIREBASE_ADMIN_CREDENTIALS
 
-// Uncomment when firebase-admin is installed:
-// let firebaseAdmin: admin.app.App | null = null
+let firebaseAdmin: admin.app.App | null = null
 
-// function getFirebaseAdmin() {
-//   if (firebaseAdmin) return firebaseAdmin
+function getFirebaseAdmin() {
+  if (firebaseAdmin) return firebaseAdmin
 
-//   if (!FIREBASE_ADMIN_CREDENTIALS || !FIREBASE_PROJECT_ID) {
-//     console.warn("[Firebase Admin] Credentials not configured")
-//     return null
-//   }
+  if (!FIREBASE_ADMIN_CREDENTIALS || !FIREBASE_PROJECT_ID) {
+    console.warn("[Firebase Admin] Credentials not configured")
+    return null
+  }
 
-//   try {
-//     const serviceAccount = JSON.parse(FIREBASE_ADMIN_CREDENTIALS)
+  try {
+    const serviceAccount = JSON.parse(FIREBASE_ADMIN_CREDENTIALS)
 
-//     firebaseAdmin = admin.initializeApp({
-//       credential: admin.credential.cert(serviceAccount),
-//       projectId: FIREBASE_PROJECT_ID,
-//     })
+    firebaseAdmin = admin.initializeApp({
+      credential: admin.credential.cert(serviceAccount),
+      projectId: FIREBASE_PROJECT_ID,
+    })
 
-//     console.log("[Firebase Admin] Initialized successfully")
-//     return firebaseAdmin
-//   } catch (error) {
-//     console.error("[Firebase Admin] Initialization error:", error)
-//     return null
-//   }
-// }
+    console.log("[Firebase Admin] Initialized successfully")
+    return firebaseAdmin
+  } catch (error) {
+    console.error("[Firebase Admin] Initialization error:", error)
+    return null
+  }
+}
 
-// export function getFirestore() {
-//   const app = getFirebaseAdmin()
-//   return app ? admin.firestore() : null
-// }
+export function getFirestore() {
+  const app = getFirebaseAdmin()
+  return app ? admin.firestore() : null
+}
 
 // Business record interface
 export interface BusinessRecord {
   id?: string
   email: string
-  businessName: string
+  name: string
   phone?: string
   planType: "gratis" | "basico" | "pro" | "enterprise"
   status: "trial" | "active" | "grace_period" | "expired" | "cancelled"
@@ -73,28 +70,23 @@ export async function createBusinessRecord(data: Omit<BusinessRecord, "id" | "cr
   }
 
   try {
-    // Uncomment when firebase-admin is installed:
-    // const db = getFirestore()
-    // if (!db) {
-    //   return { success: false, error: "Firestore not available" }
-    // }
+    const db = getFirestore()
+    if (!db) {
+      return { success: false, error: "Firestore not available" }
+    }
 
-    // const businessRef = db.collection("businesses").doc()
-    // const businessData: BusinessRecord = {
-    //   ...data,
-    //   id: businessRef.id,
-    //   createdAt: admin.firestore.FieldValue.serverTimestamp(),
-    //   updatedAt: admin.firestore.FieldValue.serverTimestamp(),
-    // }
+    const businessRef = db.collection("businesses").doc()
+    const businessData: BusinessRecord = {
+      ...data,
+      id: businessRef.id,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    }
 
-    // await businessRef.set(businessData)
+    await businessRef.set(businessData)
 
-    // console.log("[Firebase] Business created:", businessRef.id)
-    // return { success: true, id: businessRef.id, data: businessData }
-
-    // Temporary: Just log
-    console.log("[Firebase] Would create business record:", data)
-    return { success: true, message: "Firebase not yet active" }
+    console.log("[Firebase] Business created:", businessRef.id)
+    return { success: true, id: businessRef.id, data: businessData }
   } catch (error) {
     console.error("[Firebase] Error creating business:", error)
     return { success: false, error }
