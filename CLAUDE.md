@@ -34,7 +34,7 @@ Heroes Colombia Website is a Next.js marketing and landing page for Heroes Colom
 
 **Features:**
 - Hasta 3 ubicaciones
-- Hasta 3 promociones activas por ubicación
+- Hasta 3 promociones
 - Analítica básica
 - Acceso para 2 usuarios
 - Soporte por email
@@ -47,7 +47,7 @@ Heroes Colombia Website is a Next.js marketing and landing page for Heroes Colom
 
 **Features:**
 - Hasta 10 ubicaciones
-- Hasta 10 promociones activas por ubicación
+- Hasta 10 promociones
 - Segmentación de audiencia
 - Analítica avanzada
 - Acceso para 5 usuarios
@@ -61,7 +61,7 @@ Heroes Colombia Website is a Next.js marketing and landing page for Heroes Colom
 
 **Features:**
 - Ubicaciones ilimitadas
-- Promociones ilimitadas por ubicación
+- Promociones ilimitadas
 - Negocio destacado en la App
 - Promociones destacadas en la App
 - Segmentación de audiencia
@@ -77,7 +77,7 @@ Heroes Colombia Website is a Next.js marketing and landing page for Heroes Colom
 | Feature | Gratis | Básico | Pro | Enterprise |
 |---------|--------|--------|-----|------------|
 | **Locations** | 1 | 3 | 10 | Unlimited |
-| **Active Promotions** | Pay-per-promo | 3 per location | 10 per location | Unlimited |
+| **Active Promotions** | Pay-per-promo | 3 | 10 | Unlimited |
 | **Cost per Promotion** | $11,900 | Included | Included | Included |
 | **Users** | 1 | 2 | 5 | 10 |
 | **Analytics** | Basic | Basic | Advanced | Advanced |

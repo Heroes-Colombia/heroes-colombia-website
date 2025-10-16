@@ -280,7 +280,7 @@ export default function BusinessPage() {
                     </li>
                     <li className="flex items-start gap-2">
                       <CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
-                      <span className="text-sm">Hasta 3 promociones activas por ubicación</span>
+                      <span className="text-sm">Hasta 3 promociones activas</span>
                     </li>
                     <li className="flex items-start gap-2">
                       <CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
@@ -336,7 +336,7 @@ export default function BusinessPage() {
                     </li>
                     <li className="flex items-start gap-2">
                       <CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
-                      <span className="text-sm">Hasta 10 promociones activas por ubicación</span>
+                      <span className="text-sm">Hasta 10 promociones activas</span>
                     </li>
                     <li className="flex items-start gap-2">
                       <CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
@@ -395,7 +395,7 @@ export default function BusinessPage() {
                     </li>
                     <li className="flex items-start gap-2">
                       <CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
-                      <span className="text-sm">Promociones ilimitadas por ubicación</span>
+                      <span className="text-sm">Promociones ilimitadas</span>
                     </li>
                     <li className="flex items-start gap-2">
                       <CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />

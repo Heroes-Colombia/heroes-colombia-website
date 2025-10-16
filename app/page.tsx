@@ -87,7 +87,7 @@ export default function HomePage() {
               </div>
 
               <p className="text-sm text-muted-foreground">
-                Únete a más de 380,000 militares y sus familias que esperan beneficios exclusivos
+                Únete a más de 512,000 miembros de la fuerza pública y sus familias que esperan beneficios exclusivos
               </p>
             </div>
           </div>
