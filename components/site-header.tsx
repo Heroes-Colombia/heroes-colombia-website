@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button"
 import { Menu } from "lucide-react"
 import { useState } from "react"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
+import { isAppLaunched } from "@/lib/pricing-config"
 
 interface SiteHeaderProps {
   variant?: "user" | "business"
@@ -13,6 +14,7 @@ interface SiteHeaderProps {
 
 export function SiteHeader({ variant = "user" }: SiteHeaderProps) {
   const [isOpen, setIsOpen] = useState(false)
+  const appLaunched = isAppLaunched()
 
   const navLinks =
     variant === "user"
@@ -62,7 +64,7 @@ export function SiteHeader({ variant = "user" }: SiteHeaderProps) {
           )}
           <Button asChild>
             <Link href={variant === "user" ? "/#descargar" : "/solicitar-demo"}>
-              {variant === "user" ? "Descargar App" : "Solicitar Demo"}
+              {variant === "user" ? appLaunched ? "Descargar App" : "Unirse lista de espera" : "Solicitar Demo"}
             </Link>
           </Button>
         </div>
@@ -95,7 +97,7 @@ export function SiteHeader({ variant = "user" }: SiteHeaderProps) {
                 )}
                 <Button asChild>
                   <Link href={variant === "user" ? "/#descargar" : "/solicitar-demo"}>
-                    {variant === "user" ? "Descargar App" : "Solicitar Demo"}
+                    {variant === "user" ? appLaunched ? "Descargar App" : "Unirse lista de espera" : "Solicitar Demo"}
                   </Link>
                 </Button>
               </div>

@@ -7,12 +7,15 @@ import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } f
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
+import { Checkbox } from "@/components/ui/checkbox"
 import { Gift, X } from "lucide-react"
 
 export function ExitIntentPopup() {
   const [isOpen, setIsOpen] = useState(false)
   const [email, setEmail] = useState("")
   const [name, setName] = useState("")
+  const [phone, setPhone] = useState("")
+  const [captchaVerified, setCaptchaVerified] = useState(false)
   const [hasShown, setHasShown] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
 
@@ -39,10 +42,16 @@ export function ExitIntentPopup() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+
+    if (!captchaVerified) {
+      alert("Por favor acepta recibir las notificaciones del lanzamiento")
+      return
+    }
+
     setIsSubmitting(true)
 
     try {
-      const response = await fetch("/api/early-access", {
+      const response = await fetch("/api/waiting-list", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -50,14 +59,15 @@ export function ExitIntentPopup() {
         body: JSON.stringify({
           name,
           email,
+          phone,
         }),
       })
 
       if (!response.ok) {
-        throw new Error("Failed to register for early access")
+        throw new Error("Error al registrar tus datos")
       }
 
-      console.log("[v0] Early access registration successful:", email)
+      console.log("Early access registration successful:", email)
       setIsOpen(false)
     } catch (error) {
       console.error("[v0] Error submitting to systeme.io:", error)
@@ -81,14 +91,14 @@ export function ExitIntentPopup() {
           <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-primary/10">
             <Gift className="h-6 w-6 text-primary" />
           </div>
-          <DialogTitle className="text-center text-2xl">¡Espera! No Te Vayas Sin Tu Beneficio</DialogTitle>
+          <DialogTitle className="text-center text-2xl">¡Espera! No te Vayas sin conocer de nuestro lanzamiento</DialogTitle>
           <DialogDescription className="text-center">
             Regístrate ahora y obtén acceso exclusivo a beneficios de lanzamiento el 1 de diciembre
           </DialogDescription>
         </DialogHeader>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="space-y-2">
-            <Label htmlFor="exit-name">Nombre</Label>
+            <Label htmlFor="exit-name">Nombre*</Label>
             <Input
               id="exit-name"
               type="text"
@@ -99,7 +109,7 @@ export function ExitIntentPopup() {
             />
           </div>
           <div className="space-y-2">
-            <Label htmlFor="exit-email">Correo Electrónico</Label>
+            <Label htmlFor="exit-email">Correo Electrónico*</Label>
             <Input
               id="exit-email"
               type="email"
@@ -110,8 +120,35 @@ export function ExitIntentPopup() {
             />
           </div>
           <div className="space-y-2">
+            <Label htmlFor="exit-email">Teléfono(Whatsapp)*</Label>
+            <Input
+              id="exit-phone"
+              type="phone"
+              placeholder="+57 300 123 4567"
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
+              required
+            />
+          </div>
+
+          <div className="flex items-start space-x-3 p-4 border rounded-lg bg-muted/30">
+            <Checkbox
+              id="captcha"
+              checked={captchaVerified}
+              onCheckedChange={(checked) => setCaptchaVerified(checked as boolean)}
+            />
+            <div className="flex-1">
+              <label
+                htmlFor="captcha"
+                className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 flex items-center gap-2"
+              >
+                <p className="text-xs text-muted-foreground">Acepto recibir notificaciones sobre el lanzamiento</p>
+              </label>
+            </div>
+          </div>
+          <div className="space-y-2">
             <Button type="submit" className="w-full" size="lg" disabled={isSubmitting}>
-              {isSubmitting ? "Registrando..." : "Obtener Acceso Exclusivo"}
+              {isSubmitting ? "Registrando..." : "Registrarme - Accesso lanzamiento"}
             </Button>
             <p className="text-xs text-center text-muted-foreground">
               Únete a más de 500 personas que ya se registraron

@@ -45,9 +45,13 @@ export function TrialSignupModal({ open, onOpenChange, onSubmit }: TrialSignupMo
     } else if (formData.businessName.length < 3) {
       newErrors.businessName = "Mínimo 3 caracteres"
     }
-
-    if (formData.phone && !/^[0-9]{10}$/.test(formData.phone.replace(/\s/g, ""))) {
-      newErrors.phone = "Debe ser un número válido de 10 dígitos"
+    
+    if (formData.phone) {
+      if (formData.phone && !/^[0-9]{10}$/.test(formData.phone.replace(/\s/g, ""))) {
+        newErrors.phone = "Debe ser un número válido de 10 dígitos"
+      }
+    } else {
+      newErrors.businessName = "El teléfono es requerido para poder contactarte"
     }
 
     setErrors(newErrors)
@@ -62,7 +66,6 @@ export function TrialSignupModal({ open, onOpenChange, onSubmit }: TrialSignupMo
     setLoading(true)
     try {
       await onSubmit(formData)
-      // Modal will close and redirect will happen in parent
     } catch (error) {
       console.error("Trial signup error:", error)
       setErrors({ email: "Ocurrió un error. Por favor intenta de nuevo." })
@@ -128,7 +131,7 @@ export function TrialSignupModal({ open, onOpenChange, onSubmit }: TrialSignupMo
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="phone">Teléfono (Opcional)</Label>
+            <Label htmlFor="phone">Teléfono (Whatsapp) <span className="text-destructive">*</span></Label>
             <Input
               id="phone"
               type="tel"

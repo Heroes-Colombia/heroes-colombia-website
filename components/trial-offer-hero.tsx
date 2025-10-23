@@ -6,7 +6,6 @@ import { Card, CardContent, CardHeader } from "@/components/ui/card"
 import { Alert, AlertDescription } from "@/components/ui/alert"
 import { TrialCountdown } from "@/components/trial-countdown"
 import {
-  Crown,
   Check,
   Shield,
   CheckCircle2,
@@ -19,6 +18,7 @@ import {
   getCurrentPricing,
   isTrialOfferActive,
   formatPriceSimple,
+  formatPrice,
   isEarlyBirdActive,
 } from "@/lib/pricing-config"
 
@@ -127,7 +127,7 @@ export function TrialOfferHero({ onStartTrial }: TrialOfferHeroProps) {
                   <span className="text-3xl align-top"> COP</span>
                 </div>
                 <div className="text-xl md:text-2xl text-muted-foreground font-semibold">
-                  {pricing.trialOffer?.description || "Pago único por 2 meses completos"}
+                  {pricing.trialOffer?.description || "Pago único por acceso completo al plan Enterprise"}
                 </div>
                 <div className="text-sm text-muted-foreground mt-2">
                   (IVA 19% incluido)
@@ -137,8 +137,7 @@ export function TrialOfferHero({ onStartTrial }: TrialOfferHeroProps) {
               {/* What's Included - Enterprise Features */}
               <div className="bg-white dark:bg-slate-800 rounded-xl p-6 mb-8 shadow-inner">
                 <h3 className="font-bold text-lg mb-4 flex items-center gap-2 justify-center">
-                  <Crown className="h-6 w-6 text-yellow-500" />
-                  Acceso Completo Enterprise hasta Febrero 1, 2026
+                  Acceso Completo al plan Enterprise hasta Febrero 1, 2026
                 </h3>
                 <div className="grid md:grid-cols-2 gap-3 text-sm">
                   <div className="flex items-start gap-2">
@@ -151,7 +150,7 @@ export function TrialOfferHero({ onStartTrial }: TrialOfferHeroProps) {
                   </div>
                   <div className="flex items-start gap-2">
                     <Check className="h-5 w-5 text-green-500 shrink-0 mt-0.5" />
-                    <span>Analytics en tiempo real</span>
+                    <span>Analiticas en tiempo real</span>
                   </div>
                   <div className="flex items-start gap-2">
                     <Check className="h-5 w-5 text-green-500 shrink-0 mt-0.5" />
@@ -186,7 +185,7 @@ export function TrialOfferHero({ onStartTrial }: TrialOfferHeroProps) {
                 onClick={handleStartTrial}
                 disabled={isProcessing}
               >
-                {isProcessing ? "Procesando..." : "Comenzar Ahora por 7,140 COP"}
+                {isProcessing ? "Procesando..." : "Comenzar Ahora por " + formatPrice(pricing.trialOffer?.price || 0)}
               </Button>
 
               {/* Post-trial Info */}
@@ -223,17 +222,6 @@ export function TrialOfferHero({ onStartTrial }: TrialOfferHeroProps) {
 
             </CardContent>
           </Card>
-
-          {/* Secondary CTA */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Button variant="outline" size="lg" asChild>
-              <Link href="/solicitar-demo">
-                <Calendar className="mr-2 h-5 w-5" />
-                Solicitar Demo Personalizada
-              </Link>
-            </Button>
-          </div>
-
         </div>
       </div>
     </section>

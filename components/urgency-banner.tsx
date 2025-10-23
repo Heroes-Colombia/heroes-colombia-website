@@ -25,7 +25,7 @@ export function UrgencyBanner({ variant = "user" }: { variant?: "user" | "busine
               </>
             ) : (
               <>
-                <span className="font-bold">Solo {formatPrice(trialPrice)}</span> con acceso Enterprise hasta{" "}
+                <span className="font-bold">Solo por {formatPrice(trialPrice)} COP</span> con acceso Enterprise hasta{" "}
                 {endDate ? new Date(endDate).toLocaleDateString("es-CO", { year: "numeric", month: "long", day: "numeric" }) : "Febrero 1, 2026"}
               </>
             )}

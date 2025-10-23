@@ -28,13 +28,13 @@ export async function POST(req: NextRequest) {
 
     // Get current pricing
     const pricing = getCurrentPricing()
-    const trialPrice = pricing.trialOffer?.price || 7140
+    const trialPrice = pricing.trialOffer?.price || 20000
 
     // Create MercadoPago Preference
     const preference = {
       items: [
         {
-          title: `Héroes Colombia - Prueba Enterprise (${businessName})`,
+          title: `Héroes Colombia - Plan Enterprise - (${businessName})`,
           description: "Acceso Enterprise completo hasta el 1 de Febrero, 2026",
           quantity: 1,
           unit_price: trialPrice,

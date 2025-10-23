@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server"
-import { addContactToSystemeIO } from "@/lib/systeme-io"
+import { addContactToMailerLite } from "@/lib/mailer-lite"
 import { sendFeedbackEmail } from "@/lib/email"
 
 export async function POST(request: NextRequest) {
@@ -15,25 +15,32 @@ export async function POST(request: NextRequest) {
     }
 
     const [firstName, ...lastNameParts] = body.name.split(" ")
+    const { phone } = body
 
-    // Add to systeme.io (basic contact info only)
     try {
-      await addContactToSystemeIO({
+      const groups = body.variant === "busines" ? [
+        '169022939224606324', // clients
+        '169024123862779710' // client-contact
+      ] : [
+        '169022922953851914', // users
+        '169037101991462357' //user-contact-form
+      ];
+      await addContactToMailerLite({
         email: body.email,
         firstName,
         lastName: lastNameParts.join(" "),
-        tags: [body.variant === "user" ? "feedback-user" : "feedback-business", "lead"],
-        locale: "es",
+        phone,
+        groups
       })
     } catch (error) {
-      console.error("[Feedback API] Error adding to systeme.io:", error)
-      // Continue even if systeme.io fails - email is more important
+      console.error("[Feedback API] Error adding to Mailer Lite:", error)
     }
 
     // Send detailed feedback via email
     await sendFeedbackEmail({
       name: body.name,
       email: body.email,
+      phone: body.phone,
       message: body.message,
       variant: body.variant || "user",
     })

@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server"
-import { addContactToSystemeIO } from "@/lib/systeme-io"
+import { addContactToMailerLite } from "@/lib/mailer-lite"
 import { sendDemoRequestEmail } from "@/lib/email"
 
 export async function POST(request: NextRequest) {
@@ -18,16 +18,19 @@ export async function POST(request: NextRequest) {
 
     // Add to systeme.io (basic contact info only)
     try {
-      await addContactToSystemeIO({
+      const groups = [
+        '169022939224606324', // clients
+        '169024155505657128' // demo
+      ];
+      await addContactToMailerLite({
         email: body.email,
         firstName,
         lastName: lastNameParts.join(" "),
         phone: body.phone,
-        tags: ["demo-request", "business", "lead"],
-        locale: "es",
+        groups
       })
     } catch (error) {
-      console.error("[Demo Request API] Error adding to systeme.io:", error)
+      console.error("[Demo Request API] Error adding to Mailer Lite:", error)
       // Continue even if systeme.io fails - email is more important
     }
 

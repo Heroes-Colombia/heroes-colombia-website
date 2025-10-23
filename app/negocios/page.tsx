@@ -12,7 +12,7 @@ import { Button } from "@/components/ui/button"
 import { FAQSection } from "@/components/faq-section"
 import { UrgencyBanner } from "@/components/urgency-banner"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { getCurrentPricing, formatPriceSimple } from "@/lib/pricing-config"
+import { getCurrentPricing, formatPriceSimple, formatPrice } from "@/lib/pricing-config"
 import {
   TrendingUp,
   Users,
@@ -242,10 +242,8 @@ export default function BusinessPage() {
                       <span className="text-sm">Soporte por email</span>
                     </li>
                   </ul>
-                  <Button className="w-full bg-transparent" variant="outline" asChild>
-                    <Link href="https://app.heroescolombia.com" target="_blank">
-                      Comenzar Gratis
-                    </Link>
+                  <Button className="w-full bg-transparent" variant="outline" onClick={handleStartTrial}>
+                      Comenzar por solo {formatPrice(pricing.trialOffer?.price || 0)}
                   </Button>
                 </CardContent>
               </Card>
@@ -296,7 +294,7 @@ export default function BusinessPage() {
                     </li>
                   </ul>
                   <Button className="w-full" onClick={handleStartTrial}>
-                    Comenzar con 7,140 COP
+                    Comenzar por solo {formatPrice(pricing.trialOffer?.price || 0)}
                   </Button>
                 </CardContent>
               </Card>
@@ -356,7 +354,7 @@ export default function BusinessPage() {
                     </li>
                   </ul>
                   <Button className="w-full shadow-lg" onClick={handleStartTrial}>
-                    Comenzar con 7,140 COP
+                    Comenzar por solo {formatPrice(pricing.trialOffer?.price || 0)}
                   </Button>
                 </CardContent>
               </Card>
@@ -422,9 +420,15 @@ export default function BusinessPage() {
                       <span className="text-sm">Soporte prioritario</span>
                     </li>
                   </ul>
-                  <Button className="w-full bg-transparent" variant="outline" asChild>
-                    <Link href="/solicitar-demo">Contactar Ventas</Link>
-                  </Button>
+                  {pricing.id == 'post-launch' ? (
+                    <Button className="w-full bg-transparent" variant="outline" asChild>
+                      <Link href="/solicitar-demo">Contactar Ventas</Link>
+                    </Button>
+                  ) : (
+                    <Button className="w-full shadow-lg" onClick={handleStartTrial}>
+                      Comenzar por solo {formatPrice(pricing.trialOffer?.price || 0)}
+                    </Button>
+                  )}
                 </CardContent>
               </Card>
             </div>

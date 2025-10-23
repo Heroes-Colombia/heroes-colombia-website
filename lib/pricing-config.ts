@@ -66,16 +66,16 @@ export const PRICING_PERIODS: PricingPeriod[] = [
 
     trialOffer: {
       enabled: true,
-      price: 7140, // 6,000 + 19% IVA
+      price: 20000,
       duration: 119, // Days until Feb 1, 2026 (Oct 6 → Feb 1 = ~119 days)
       badge: "🎉 Pre-Lanzamiento - Primeros 100 Negocios",
-      headline: "7,140 COP",
-      description: "Pago único por 2 meses completos de acceso Enterprise",
+      headline: "20,000 COP",
+      description: "Pago único por acceso completo al plan Enterprise",
       nextBillingDate: new Date("2026-02-01T00:00:00-05:00"),
     },
 
     earlyBirdIncentive: {
-      enabled: true,
+      enabled: false,
       deadline: new Date("2025-01-15T23:59:59-05:00"),
       discount: 50, // 50% off first month
       badge: "⚡ Oferta Especial",
@@ -119,16 +119,16 @@ export const PRICING_PERIODS: PricingPeriod[] = [
 
     trialOffer: {
       enabled: true,
-      price: 7140,
+      price: 20000,
       duration: 61, // Days until Feb 1, 2026 (varies by signup date)
       badge: "🚀 Lanzamiento - Únete a los Primeros 500",
-      headline: "7,140 COP",
+      headline: "20,000 COP",
       description: "Pago único por acceso completo hasta Febrero 1, 2026",
       nextBillingDate: new Date("2026-02-01T00:00:00-05:00"),
     },
 
     earlyBirdIncentive: {
-      enabled: true,
+      enabled: false,
       deadline: new Date("2025-01-15T23:59:59-05:00"),
       discount: 50,
       badge: "⚡ Últimos Días",
@@ -340,6 +340,15 @@ export function formatPriceSimple(price: number): string {
     minimumFractionDigits: 0,
     maximumFractionDigits: 0,
   }).format(price)
+}
+
+/**
+ * Check if the app has been launched (December 1, 2025)
+ */
+export function isAppLaunched(): boolean {
+  const now = new Date()
+  const launchDate = new Date("2025-12-01T00:00:00-05:00") // Colombia timezone
+  return now >= launchDate
 }
 
 // ============================================================================

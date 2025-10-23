@@ -419,16 +419,17 @@ El Equipo de Héroes Colombia
 export async function sendFeedbackEmail({
   name,
   email,
+  phone,
   message,
   variant,
 }: {
   name: string
   email: string
+  phone: string
   message: string
   variant: "user" | "business"
 }) {
   const adminSubject = `Nuevo Feedback ${variant === "user" ? "de Usuario" : "de Negocio"} - ${name}`
-  const userSubject = "Gracias por tu retroalimentación - Héroes Colombia"
 
   const adminHtml = `
 <!DOCTYPE html>
@@ -463,37 +464,13 @@ export async function sendFeedbackEmail({
         <div><a href="mailto:${email}">${email}</a></div>
       </div>
       <div class="field">
+        <div class="label">Phone:</div>
+        <div>${phone}</div>
+      </div>
+      <div class="field">
         <div class="label">Mensaje:</div>
         <div>${message}</div>
       </div>
-    </div>
-  </div>
-</body>
-</html>
-`
-
-  const userHtml = `
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  <style>
-    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; color: #333; }
-    .container { max-width: 600px; margin: 0 auto; padding: 20px; }
-    .header { background: linear-gradient(135deg, #4a6838 0%, #c0dbaf 100%); color: white; padding: 30px; text-align: center; border-radius: 8px 8px 0 0; }
-    .content { background: #fff; padding: 30px; border: 1px solid #e5e7eb; border-top: none; border-radius: 0 0 8px 8px; }
-  </style>
-</head>
-<body>
-  <div class="container">
-    <div class="header">
-      <h1>¡Gracias por tu Retroalimentación!</h1>
-    </div>
-    <div class="content">
-      <h2>Hola ${name},</h2>
-      <p>Hemos recibido tu mensaje y lo valoramos mucho. Tu opinión nos ayuda a mejorar Héroes Colombia día a día.</p>
-      <p>Nuestro equipo revisará tu mensaje y te contactaremos pronto si es necesario.</p>
-      <p>Saludos,<br><strong>El Equipo de Héroes Colombia</strong></p>
     </div>
   </div>
 </body>
@@ -506,22 +483,21 @@ export async function sendFeedbackEmail({
     subject: adminSubject,
     html: adminHtml,
   })
-
-  // Send confirmation to user
-  return sendEmail({
-    to: email,
-    subject: userSubject,
-    html: userHtml,
-  })
 }
 
 // Exit Intent Form Email
 export async function sendExitIntentEmail({
-  name,
   email,
+  firstName,
+  lastName,
+  phone,
+  militaryBranch,
 }: {
-  name: string
   email: string
+  firstName: string
+  lastName: string
+  phone: string
+  militaryBranch: string
 }) {
   const adminSubject = `Nuevo Feedback de Usuario - ${name}`
   const userSubject = "Gracias por tu interes en Héroes Colombia"
@@ -547,12 +523,16 @@ export async function sendExitIntentEmail({
     </div>
     <div class="content">
       <div class="field">
-        <div class="label">Tipo:</div>
-        <div>"Usuario"</div>
+        <div class="label">Fuerza militar a la que perteneces:</div>
+        <div>${militaryBranch}</div>
       </div>
       <div class="field">
         <div class="label">Nombre:</div>
-        <div>${name}</div>
+        <div>${firstName} ${lastName}</div>
+      </div>
+      <div class="field">
+        <div class="label">Telefono(whatsapp):</div>
+        <div>${phone}</div>
       </div>
       <div class="field">
         <div class="label">Email:</div>
@@ -582,9 +562,14 @@ export async function sendExitIntentEmail({
       <h1>¡Gracias por tu Interes!</h1>
     </div>
     <div class="content">
-      <h2>Hola ${name},</h2>
-      <p>Hemos recibido tu mensaje y valoramos mucho tu interes en ser parte de Heroes Colombia!</p>
-      <p>Nuestro equipo revisará tus datos y te contactaremos prontamente.</p>
+      <h2>Hola ${firstName},</h2>
+      <p>Bienvenido a Heroes Colombia. Tu registro está confirmado!</p>
+      <p>El 1 de diciembre a las 8:00 AM recibirás el enlace de descarga.</p>
+      <p>Mientras tanto:
+      <ul>
+        <li>Síguenos en Instagram <a href="https://www.instagram.com/heroescolombiaoficial/" class="button">@heroescolombiaoficial</a> para contenido exclusivo</li>
+        <li>Comparte Heroes Colombia con tus compañeros</li>
+      </ul>
       <p>Saludos,<br><strong>El Equipo de Héroes Colombia</strong></p>
     </div>
   </div>
@@ -626,7 +611,6 @@ export async function sendDemoRequestEmail({
   message: string
 }) {
   const adminSubject = `Nueva Solicitud de Demo - ${businessName}`
-  const userSubject = "Tu solicitud de demo ha sido recibida - Héroes Colombia"
 
   const adminHtml = `
 <!DOCTYPE html>
@@ -682,47 +666,11 @@ export async function sendDemoRequestEmail({
 </html>
 `
 
-  const userHtml = `
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  <style>
-    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; color: #333; }
-    .container { max-width: 600px; margin: 0 auto; padding: 20px; }
-    .header { background: linear-gradient(135deg, #4a6838 0%, #c0dbaf 100%); color: white; padding: 30px; text-align: center; border-radius: 8px 8px 0 0; }
-    .content { background: #fff; padding: 30px; border: 1px solid #e5e7eb; border-top: none; border-radius: 0 0 8px 8px; }
-  </style>
-</head>
-<body>
-  <div class="container">
-    <div class="header">
-      <h1>¡Solicitud Recibida!</h1>
-    </div>
-    <div class="content">
-      <h2>Hola ${contactName},</h2>
-      <p>Gracias por tu interés en Héroes Colombia. Hemos recibido tu solicitud de demo para <strong>${businessName}</strong>.</p>
-      <p>Nuestro equipo revisará tu información y te contactaremos en las próximas 24-48 horas para coordinar una demostración personalizada.</p>
-      <p>Mientras tanto, puedes explorar más sobre nuestros planes y funcionalidades en <a href="https://heroescolombia.com">heroescolombia.com</a></p>
-      <p>Saludos,<br><strong>El Equipo de Héroes Colombia</strong></p>
-    </div>
-  </div>
-</body>
-</html>
-`
-
   // Send to admin
   await sendEmail({
     to: "jonathan@heroescolombia.com",
     subject: adminSubject,
     html: adminHtml,
-  })
-
-  // Send confirmation to user
-  return sendEmail({
-    to: email,
-    subject: userSubject,
-    html: userHtml,
   })
 }
 

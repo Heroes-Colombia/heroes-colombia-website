@@ -23,6 +23,7 @@ export function FeedbackForm({ variant }: FeedbackFormProps) {
     name: "",
     email: "",
     message: "",
+    phone: "",
   })
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -45,6 +46,7 @@ export function FeedbackForm({ variant }: FeedbackFormProps) {
           name: formData.name,
           email: formData.email,
           message: formData.message,
+          phone: formData.phone,
           variant,
         }),
       })
@@ -94,7 +96,7 @@ export function FeedbackForm({ variant }: FeedbackFormProps) {
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="grid md:grid-cols-2 gap-4">
               <div className="space-y-2">
-                <Label htmlFor="name">Nombre</Label>
+                <Label htmlFor="name">Nombre <span className="text-destructive">*</span></Label>
                 <Input
                   id="name"
                   placeholder="Tu nombre"
@@ -104,7 +106,7 @@ export function FeedbackForm({ variant }: FeedbackFormProps) {
                 />
               </div>
               <div className="space-y-2">
-                <Label htmlFor="email">Email</Label>
+                <Label htmlFor="email">Email <span className="text-destructive">*</span></Label>
                 <Input
                   id="email"
                   type="email"
@@ -114,6 +116,19 @@ export function FeedbackForm({ variant }: FeedbackFormProps) {
                   required
                 />
               </div>
+
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="phone">Teléfono (Whatsapp)</Label>
+              <Input
+                id="phone"
+                type="tel"
+                placeholder="+57 3001234567"
+                value={formData.phone}
+                onChange={(e) => {
+                  setFormData({ ...formData, phone: e.target.value })
+                }}
+              />
             </div>
             <div className="space-y-2">
               <Label htmlFor="message">

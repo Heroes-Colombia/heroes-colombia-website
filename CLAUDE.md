@@ -306,9 +306,59 @@ FIREBASE_ADMIN_CREDENTIALS={"type":"service_account",...}
 
 ## Important Dates
 
+- **December 1, 2025**: App Launch Date - waiting list ends, app downloads become available
 - **January 15, 2025**: Early bird deadline (50% off first month - **dashboard-only**, not shown on website)
 - **February 1, 2026**: Trial period ends, regular pricing begins
 - **February 8, 2026**: Grace period ends (7 days after trial)
+
+## Pre-Launch Waiting List Strategy
+
+**Status:** Active until December 1, 2025
+
+### Overview
+Before the app launches, the website shows a **waiting list form** instead of app download buttons. This creates scarcity and captures leads before launch day.
+
+### Implementation
+
+**Helper Function** (`lib/pricing-config.ts`):
+```typescript
+export function isAppLaunched(): boolean {
+  const now = new Date()
+  const launchDate = new Date("2025-12-01T00:00:00-05:00")
+  return now >= launchDate
+}
+```
+
+**Main Page Behavior** (`app/page.tsx`):
+- ✅ **Before Dec 1, 2025**: Shows `<WaitingListForm variant="hero" />` in hero and bottom CTA
+- ✅ **After Dec 1, 2025**: Shows App Store & Google Play download buttons
+- ✅ Automatically switches on launch date (no manual intervention needed)
+
+**Waiting List Form** (`components/waiting-list-form.tsx`):
+- Two variants: `"hero"` (compact) and `"section"` (full-featured)
+- Collects: Name, Email, Phone (optional), Military Branch, City (optional)
+- Integrates with Systeme.io CRM (tags: `waiting-list`, `branch-{branch}`, `city-{city}`)
+- API endpoint: `/api/waiting-list`
+
+**User Flow:**
+1. User visits website before Dec 1, 2025
+2. Sees countdown timer + waiting list form
+3. Submits form with military info
+4. Gets confirmation: "Te notificaremos el 1 de diciembre"
+5. Email sent on Dec 1 with download links
+6. On Dec 1+, website automatically shows download buttons
+
+### CRM Integration
+
+**Systeme.io Tags:**
+- `waiting-list` - All waiting list signups
+- `branch-ejercito`, `branch-armada`, etc. - Military branch segmentation
+- `city-bogota`, `city-medellin`, etc. - Geographic segmentation
+
+**Email Campaign:**
+- Day before launch (Nov 30): Reminder email
+- Launch day (Dec 1): Download links email with excitement
+- Day 3 post-launch: "Have you downloaded?" follow-up
 
 ## Marketing vs Dashboard Pricing
 
