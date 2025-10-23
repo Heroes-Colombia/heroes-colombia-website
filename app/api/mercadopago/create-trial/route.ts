@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server"
 import { getCurrentPricing } from "@/lib/pricing-config"
-import { addContactToSystemeIO } from "@/lib/systeme-io"
+import { addContactToMailerLite } from "@/lib/mailer-lite"
 
 const MERCADOPAGO_ACCESS_TOKEN = process.env.MERCADOPAGO_ACCESS_TOKEN!
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "https://heroescolombia.com"
@@ -90,19 +90,6 @@ export async function POST(req: NextRequest) {
     }
 
     const data = await response.json()
-
-    // Add contact to Systeme.io (non-blocking)
-    try {
-      await addContactToSystemeIO({
-        email,
-        firstName: businessName,
-        phone: phone || "",
-        tags: ['trial-signup'],
-      })
-    } catch (systemeError) {
-      // Log error but don't fail the request
-      console.error("[Trial API] Systeme.io error:", systemeError)
-    }
 
     // Return checkout URL
     return NextResponse.json({
