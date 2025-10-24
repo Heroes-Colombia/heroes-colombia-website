@@ -452,7 +452,7 @@ export async function sendExitIntentEmail({
     <div class="content">
       <h2>Hola ${firstName},</h2>
       <p>Bienvenido a Heroes Colombia. Tu registro está confirmado!</p>
-      <p>El 1 de diciembre a las 8:00 AM recibirás el enlace de descarga.</p>
+      <p>El 5 de diciembre a las 8:00 AM recibirás el enlace de descarga.</p>
       <p>Mientras tanto:
       <ul>
         <li>Síguenos en Instagram <a href="https://www.instagram.com/heroescolombiaoficial/" class="button">@heroescolombiaoficial</a> para contenido exclusivo</li>

@@ -93,7 +93,7 @@ export function ExitIntentPopup() {
           </div>
           <DialogTitle className="text-center text-2xl">¡Espera! No te Vayas sin conocer de nuestro lanzamiento</DialogTitle>
           <DialogDescription className="text-center">
-            Regístrate ahora y obtén acceso exclusivo a beneficios de lanzamiento el 1 de diciembre
+            Regístrate ahora y obtén acceso exclusivo a beneficios de lanzamiento el 5 de diciembre
           </DialogDescription>
         </DialogHeader>
         <form onSubmit={handleSubmit} className="space-y-4">

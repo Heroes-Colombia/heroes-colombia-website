@@ -324,7 +324,7 @@ Before the app launches, the website shows a **waiting list form** instead of ap
 ```typescript
 export function isAppLaunched(): boolean {
   const now = new Date()
-  const launchDate = new Date("2025-12-01T00:00:00-05:00")
+  const launchDate = new Date("2025-12-05T00:00:00-05:00")
   return now >= launchDate
 }
 ```
@@ -344,7 +344,7 @@ export function isAppLaunched(): boolean {
 1. User visits website before Dec 1, 2025
 2. Sees countdown timer + waiting list form
 3. Submits form with military info
-4. Gets confirmation: "Te notificaremos el 1 de diciembre"
+4. Gets confirmation: "Te notificaremos el 5 de diciembre"
 5. Email sent on Dec 1 with download links
 6. On Dec 1+, website automatically shows download buttons
 

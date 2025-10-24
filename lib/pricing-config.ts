@@ -114,7 +114,7 @@ export const PRICING_PERIODS: PricingPeriod[] = [
   {
     id: "launch",
     name: "Lanzamiento",
-    startDate: new Date("2025-12-01T00:00:00-05:00"),
+    startDate: new Date("2025-12-05T00:00:00-05:00"),
     endDate: new Date("2026-01-31T23:59:59-05:00"),
 
     trialOffer: {
@@ -347,7 +347,7 @@ export function formatPriceSimple(price: number): string {
  */
 export function isAppLaunched(): boolean {
   const now = new Date()
-  const launchDate = new Date("2025-12-01T00:00:00-05:00") // Colombia timezone
+  const launchDate = new Date("2025-12-05T00:00:00-05:00") // Colombia timezone
   return now >= launchDate
 }
 

@@ -208,7 +208,7 @@ export function WaitingListForm({ variant = "section" }: WaitingListFormProps) {
             </Button>
 
             <p className="text-sm text-center text-muted-foreground">
-              🚀 Lanzamiento oficial: <strong>1 de Diciembre, 2025</strong>
+              🚀 Lanzamiento oficial: <strong>5 de Diciembre, 2025</strong>
             </p>
           </form>
         )}
@@ -355,7 +355,7 @@ export function WaitingListForm({ variant = "section" }: WaitingListFormProps) {
             </Button>
 
             <p className="text-sm text-center text-muted-foreground">
-              🚀 Lanzamiento oficial: <strong>1 de Diciembre, 2025</strong>
+              🚀 Lanzamiento oficial: <strong>5 de Diciembre, 2025</strong>
             </p>
           </form>
         )}

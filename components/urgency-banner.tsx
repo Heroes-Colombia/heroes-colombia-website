@@ -20,7 +20,7 @@ export function UrgencyBanner({ variant = "user" }: { variant?: "user" | "busine
           <p className="text-sm font-medium text-primary">
             {variant === "user" ? (
               <>
-                <span className="font-bold">Regístrate antes del 1 de diciembre</span> y obtén beneficios exclusivos de
+                <span className="font-bold">Regístrate antes del 5 de diciembre</span> y obtén beneficios exclusivos de
                 lanzamiento
               </>
             ) : (
