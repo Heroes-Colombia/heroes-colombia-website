@@ -120,9 +120,9 @@ export default function PrivacyPage() {
               <p>
                 Si tienes preguntas sobre esta política o quieres ejercer tus derechos, contáctanos en:
                 <br />
-                <strong>Email:</strong> privacidad@heroescolombia.com
+                <strong>Email:</strong> gerencia@heroescolombia.com
                 <br />
-                <strong>Teléfono:</strong> +57 (1) 234-5678
+                <strong>Teléfono:</strong> +57 3115157814
               </p>
             </div>
           </div>

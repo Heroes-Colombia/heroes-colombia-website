@@ -55,13 +55,13 @@ export default function TermsPage() {
               </p>
               <ul>
                 <li>
-                  <strong>Precio:</strong> 7,140 COP (pago único que incluye 6,000 COP + 19% IVA)
+                  <strong>Precio:</strong> 20,000 COP (pago único que incluye IVA)
                 </li>
                 <li>
                   <strong>Acceso:</strong> Plan Enterprise completo hasta el 1 de febrero de 2026
                 </li>
                 <li>
-                  <strong>Características incluidas:</strong> Ubicaciones ilimitadas, promociones ilimitadas, analytics con IA, sección destacada premium, manager dedicado y API access
+                  <strong>Características incluidas:</strong> Ubicaciones ilimitadas, promociones ilimitadas, analiticas, sección destacada premium, soporte prioritario
                 </li>
                 <li>
                   <strong>Sin renovación automática:</strong> Al finalizar el período de prueba, NO se realizarán cargos automáticos
@@ -70,7 +70,7 @@ export default function TermsPage() {
                   <strong>Selección de plan:</strong> Antes del 1 de febrero de 2026, los negocios deben seleccionar un plan regular (Básico, Pro o Enterprise) para continuar con el servicio
                 </li>
                 <li>
-                  <strong>Incentivo temprano:</strong> Negocios que seleccionen su plan antes del 15 de enero de 2025 recibirán 50% de descuento en el primer mes
+                  <strong>Incentivo temprano:</strong> Negocios que seleccionen su plan antes del 15 de enero de 2025 recibirán un descuento en su primer mes
                 </li>
                 <li>
                   <strong>Período de gracia:</strong> Después del 1 de febrero de 2026, los negocios tendrán 7 días de acceso de solo lectura para seleccionar un plan
@@ -87,10 +87,10 @@ export default function TermsPage() {
                   <strong>Plan Gratuito:</strong> 1 ubicación, 1 promoción activa, pago por promoción adicional (11,900 COP + IVA)
                 </li>
                 <li>
-                  <strong>Plan Básico:</strong> 70,000 COP/mes (IVA incluido) - Hasta 3 ubicaciones, 5 promociones activas
+                  <strong>Plan Básico:</strong> 70,000 COP/mes (IVA incluido) - Hasta 3 ubicaciones, 3 promociones activas
                 </li>
                 <li>
-                  <strong>Plan Pro:</strong> 270,000 COP/mes (IVA incluido) - Hasta 10 ubicaciones, promociones ilimitadas, analytics avanzados
+                  <strong>Plan Pro:</strong> 270,000 COP/mes (IVA incluido) - Hasta 10 ubicaciones, 10 promociones activas, analiticas avanzados
                 </li>
                 <li>
                   <strong>Plan Enterprise:</strong> Desde 800,000 COP/mes (IVA incluido) - Ubicaciones ilimitadas, todas las funciones premium, precio personalizado
@@ -111,7 +111,7 @@ export default function TermsPage() {
                 <li>Todos los pagos se procesan a través de MercadoPago</li>
                 <li>Los precios incluyen IVA del 19% según la legislación colombiana</li>
                 <li>
-                  <strong>Reembolsos de prueba:</strong> El pago de la prueba (7,140 COP) NO es reembolsable una vez procesado
+                  <strong>Reembolsos de prueba:</strong> El pago de la prueba (20,000 COP) NO es reembolsable una vez procesado
                 </li>
                 <li>
                   <strong>Reembolsos de suscripción:</strong> Los pagos de suscripciones regulares no son reembolsables, pero el servicio continuará hasta el final del período pagado
@@ -185,14 +185,14 @@ export default function TermsPage() {
               <p>
                 Para preguntas sobre estos términos, contáctanos en:
                 <br />
-                <strong>Email:</strong> legal@heroescolombia.com
+                <strong>Email:</strong> gerencia@heroescolombia.com
                 <br />
-                <strong>Teléfono:</strong> +57 (1) 234-5678
+                <strong>Teléfono:</strong> +57 3115157814
               </p>
             </div>
-          </div>
-        </section>
-      </main>
+            </div>
+            </section>
+            </main>
 
       <SiteFooter />
     </div>
