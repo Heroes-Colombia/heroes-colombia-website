@@ -32,8 +32,11 @@ export default function TrialSuccessPage() {
               <div className="flex-1">
                 <h3 className="font-semibold mb-2">Revisa tu Correo Electrónico</h3>
                 <p className="text-sm text-muted-foreground">
-                  Te enviamos un correo con las instrucciones para crear tu cuenta en el dashboard y comenzar a usar todas
+                  Te enviamos un correo con las instrucciones para crear tu cuenta en Heroes Colombia y comenzar a usar todas
                   las funciones Enterprise.
+                </p>
+                <p className="mt-2 text-sm text-muted-foreground">
+                  O crea tu cuenta con el botón de abajo 👇
                 </p>
               </div>
             </div>
@@ -68,7 +71,7 @@ export default function TrialSuccessPage() {
               </li>
               <li className="flex items-start gap-2 text-sm">
                 <CheckCircle2 className="h-4 w-4 text-primary shrink-0 mt-0.5" />
-                <span>Acceder a analytics completos con IA</span>
+                <span>Acceder a analiticas completas de tu negocio</span>
               </li>
               <li className="flex items-start gap-2 text-sm">
                 <CheckCircle2 className="h-4 w-4 text-primary shrink-0 mt-0.5" />
@@ -76,7 +79,7 @@ export default function TrialSuccessPage() {
               </li>
               <li className="flex items-start gap-2 text-sm">
                 <CheckCircle2 className="h-4 w-4 text-primary shrink-0 mt-0.5" />
-                <span>Soporte dedicado con manager personal</span>
+                <span>Soporte prioritario</span>
               </li>
             </ul>
           </div>
@@ -84,9 +87,9 @@ export default function TrialSuccessPage() {
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-3 pt-4">
             <Button asChild className="flex-1 bg-gradient-to-r from-primary to-orange-500">
-              <Link href={dashboardUrl} target="_blank">
+              <Link href={dashboardUrl+'/register'} target="_blank">
                 <ExternalLink className="mr-2 h-4 w-4" />
-                Ir al Dashboard
+                Ir al panel de Administración
               </Link>
             </Button>
             <Button asChild variant="outline" className="flex-1">

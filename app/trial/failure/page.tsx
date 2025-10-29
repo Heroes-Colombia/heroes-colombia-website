@@ -95,11 +95,15 @@ export default function TrialFailurePage() {
           <div className="text-center pt-4 border-t">
             <p className="text-sm text-muted-foreground mb-3">¿Necesitas Ayuda?</p>
             <Button asChild variant="link" size="sm">
-              <a href="https://wa.me/573115157814" target="_blank" rel="noopener noreferrer">
-                <MessageCircle className="mr-2 h-4 w-4" />
+              <a href="https://wa.me/573115157814" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">
                 Contactar Soporte por WhatsApp
               </a>
             </Button>
+            <p className="text-xs text-muted-foreground">
+              <a href="mailto:soporte@heroescolombia.com" className="text-primary hover:underline">
+                soporte@heroescolombia.com
+              </a>
+            </p>
           </div>
         </CardContent>
       </Card>

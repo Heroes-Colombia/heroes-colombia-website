@@ -49,51 +49,6 @@ export async function getOrCreatePreApprovalPlan() {
   }
 }
 
-// Create a subscription for a business
-export async function createSubscription(params: CreateSubscriptionParams) {
-  try {
-    const planId = await getOrCreatePreApprovalPlan()
-    const baseUrl = process.env.VERCEL_URL
-      ? `https://${process.env.VERCEL_URL}`
-      : process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000"
-
-    console.log("[v0] Creating subscription for:", params.payerEmail)
-
-    const subscription = await preApprovalClient.create({
-      body: {
-        preapproval_plan_id: planId,
-        reason: `Héroes Colombia - ${params.businessName}`,
-        payer_email: params.payerEmail,
-        card_token_id: undefined,
-        auto_recurring: {
-          frequency: 1,
-          frequency_type: "months",
-          transaction_amount: 3000,
-          currency_id: "COP",
-          start_date: new Date().toISOString(),
-          billing_day: 1,
-          billing_day_proportional: false,
-        },
-        back_url: `${baseUrl}/negocios`,
-        status: "pending",
-        external_reference: params.businessId || `business_${Date.now()}`,
-      },
-    })
-
-    console.log("[v0] Created subscription:", subscription.id)
-    console.log("[v0] Init point:", subscription.init_point)
-
-    return {
-      subscriptionId: subscription.id!,
-      initPoint: subscription.init_point!,
-      sandboxInitPoint: subscription.sandbox_init_point,
-    }
-  } catch (error) {
-    console.error("[v0] Error creating subscription:", error)
-    throw error
-  }
-}
-
 // Verify webhook signature
 export function verifyWebhookSignature(xSignature: string, xRequestId: string, dataId: string): boolean {
   try {

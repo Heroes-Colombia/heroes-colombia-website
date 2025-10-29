@@ -144,7 +144,7 @@ export async function POST(request: Request) {
             groups,
           })
         } catch (systemeError) {
-          console.error("[Webhook] Systeme.io error:", systemeError)
+          console.error("[Webhook] MailerLite error:", systemeError)
         }
 
         // Create business record in Firebase
