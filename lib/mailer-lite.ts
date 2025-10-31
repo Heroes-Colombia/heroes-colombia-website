@@ -35,27 +35,26 @@ export async function addContactToMailerLite(
   }
 
   try {
-    // Only send basic fields - no custom fields to avoid schema issues
-    const fields = []
+    // Build fields as a flat object matching MailerLite schema
+    const fields: Record<string, string> = {}
 
-    // Add standard fields to the fields array
     if (contact.firstName) {
-      fields.push({ slug: "name", value: contact.firstName })
+      fields.name = contact.firstName
     }
     if (contact.lastName) {
-      fields.push({ slug: "last_name", value: contact.lastName })
+      fields.last_name = contact.lastName
     }
     if (contact.phone) {
-      fields.push({ slug: "phone", value: contact.phone })
+      fields.phone = contact.phone
     }
     if (contact.militaryBranch) {
-      fields.push({ slug: "company", value: contact.militaryBranch })
+      fields.company = contact.militaryBranch
     }
 
     const requestBody = {
       email: contact.email,
       groups: contact.groups,
-      ...(fields.length > 0 && { fields }),
+      ...(Object.keys(fields).length > 0 && { fields }),
     }
 
     if (process.env.NODE_ENV === "development") {
