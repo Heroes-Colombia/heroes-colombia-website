@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server"
 import { getCurrentPricing } from "@/lib/pricing-config"
-import { addContactToMailerLite } from "@/lib/mailer-lite"
+import { sendTrialAdminEmail } from "@/lib/email"
 
 const MERCADOPAGO_ACCESS_TOKEN = process.env.MERCADOPAGO_ACCESS_TOKEN!
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "https://heroescolombia.com"
@@ -88,6 +88,13 @@ export async function POST(req: NextRequest) {
         { status: response.status }
       )
     }
+
+    // Send detailed demo request via email
+    await sendTrialAdminEmail({
+      businessName,
+      email,
+      phone,
+    })
 
     const data = await response.json()
 

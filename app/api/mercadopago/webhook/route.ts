@@ -1,5 +1,4 @@
 import { NextResponse } from "next/server"
-import { createBusinessRecord } from "@/lib/firebase-admin"
 import crypto from "crypto"
 import { addContactToMailerLite } from "@/lib/mailer-lite"
 
@@ -9,28 +8,14 @@ const MERCADOPAGO_WEBHOOK_SECRET = process.env.MERCADOPAGO_WEBHOOK_SECRET
 interface MercadoPagoPayment {
   id: number
   status: string
-  status_detail: string
   transaction_amount: number
-  currency_id: string
-  metadata: {
-    type?: string
-    email?: string
-    business_name?: string
-    phone?: string
-    trial_end_date?: string
-    plan_type?: string
-  }
   payer: {
     email: string
     first_name?: string
     identification?: {
       number: string
     }
-    phone?: {
-      number: string
-    }
   }
-  external_reference?: string
 }
 
 /**
@@ -119,17 +104,17 @@ export async function POST(request: Request) {
       console.log("[Webhook] Payment details:", {
         id: payment.id,
         status: payment.status,
-        metadata: payment.metadata,
+        metadata: payment.payer,
       })
 
       // Process approved payments
       if (payment.status === "approved") {
-        const metadata = payment.metadata
+        const metadata = payment.payer
         console.log("[Webhook] Processing trial payment:", payment.id)
 
-        const email = metadata.email || payment.payer.email
-        const businessName = metadata.business_name || payment.payer.first_name || ""
-        const phone = metadata.phone || payment.payer.phone?.number || ""
+        const email = metadata.email
+        const businessName = metadata.first_name || ""
+        const phone = ""
 
         // Update Systeme.io contact with trial-active tag
         try {
@@ -146,26 +131,6 @@ export async function POST(request: Request) {
         } catch (systemeError) {
           console.error("[Webhook] MailerLite error:", systemeError)
         }
-
-        // Create business record in Firebase
-        try {
-          await createBusinessRecord({
-            email,
-            name: businessName,
-            phone,
-            planType: "enterprise",
-            status: "trial",
-            trialEndDate: metadata.trial_end_date || "2026-02-01",
-            paymentId: payment.id.toString(),
-            metadata: {
-              earlyBirdDiscount: false, // Will be updated if they select plan before Jan 15
-            },
-          })
-        } catch (firebaseError) {
-          console.error("[Webhook] Firebase error:", firebaseError)
-        }
-
-        console.log("[Webhook] Trial payment processed successfully:", payment.id)
       }
 
       return NextResponse.json({ received: true })
