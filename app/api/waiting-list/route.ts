@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server"
 import { addContactToMailerLite } from "@/lib/mailer-lite"
+import { sendWelcomeWhatsAppMessage } from "@/lib/manychat"
 
 export async function POST(request: Request) {
   try {
@@ -33,6 +34,19 @@ export async function POST(request: Request) {
       })
     } catch (error) {
       console.error("[Feedback API] Error adding to MailerLite:", error)
+    }
+
+    // Add to systeme.io (basic contact info only)
+    try {
+      await sendWelcomeWhatsAppMessage({
+        firstName,
+        lastName,
+        phone,
+        email,
+      })
+      console.log("user created in whatsapp successfully")
+    } catch (error) {
+      console.error("[ManyChat API] Error adding to ManyChat:", error)
     }
 
     return NextResponse.json(
