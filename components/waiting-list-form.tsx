@@ -9,6 +9,7 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Checkbox } from "@/components/ui/checkbox"
+import { PhoneInput, formatFullPhoneNumber } from "@/components/ui/phone-input"
 import { Bell, Send, Shield, CheckCircle2 } from "lucide-react"
 
 interface WaitingListFormProps {
@@ -19,6 +20,7 @@ export function WaitingListForm({ variant = "section" }: WaitingListFormProps) {
   const [submitted, setSubmitted] = useState(false)
   const [captchaVerified, setCaptchaVerified] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const [countryCode, setCountryCode] = useState("+57") // Default to Colombia
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -38,19 +40,25 @@ export function WaitingListForm({ variant = "section" }: WaitingListFormProps) {
     setIsSubmitting(true)
 
     try {
+      // Combine country code with phone number
+      const fullPhoneNumber = formatFullPhoneNumber(countryCode, formData.phone)
+
       const response = await fetch("/api/waiting-list", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({
+          ...formData,
+          phone: fullPhoneNumber,
+        }),
       })
 
       if (!response.ok) {
         throw new Error("Failed to join waiting list")
       }
 
-      console.log("[WaitingList] User joined successfully:", formData)
+      console.log("[WaitingList] User joined successfully:", { ...formData, phone: fullPhoneNumber })
       setSubmitted(true)
 
       // Reset form after 5 seconds
@@ -63,6 +71,7 @@ export function WaitingListForm({ variant = "section" }: WaitingListFormProps) {
           phone: "",
           militaryBranch: "",
         })
+        setCountryCode("+57")
         setCaptchaVerified(false)
       }, 5000)
     } catch (error) {
@@ -154,14 +163,14 @@ export function WaitingListForm({ variant = "section" }: WaitingListFormProps) {
 
             <div className="space-y-1.5">
               <Label htmlFor="hero-phone" className="text-xs">Telefono(Whatsapp)*</Label>
-              <Input
+              <PhoneInput
                 id="hero-phone"
-                type="phone"
-                placeholder="+57 300 123 4567"
                 value={formData.phone}
-                onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                onChange={(value) => setFormData({ ...formData, phone: value })}
+                countryCode={countryCode}
+                onCountryCodeChange={setCountryCode}
                 required
-                className="h-9 text-sm"
+                size="sm"
               />
             </div>
 
@@ -298,13 +307,13 @@ export function WaitingListForm({ variant = "section" }: WaitingListFormProps) {
                 />
               </div>
               <div className="space-y-2">
-                <Label htmlFor="phone">Teléfono(Whastapp)*</Label>
-                <Input
+                <Label htmlFor="phone">Teléfono(Whatsapp)*</Label>
+                <PhoneInput
                   id="phone"
-                  type="tel"
-                  placeholder="+57 300 123 4567"
                   value={formData.phone}
-                  onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                  onChange={(value) => setFormData({ ...formData, phone: value })}
+                  countryCode={countryCode}
+                  onCountryCodeChange={setCountryCode}
                   required
                 />
               </div>

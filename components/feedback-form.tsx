@@ -9,6 +9,7 @@ import { Textarea } from "@/components/ui/textarea"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Checkbox } from "@/components/ui/checkbox"
+import { PhoneInput, formatFullPhoneNumber } from "@/components/ui/phone-input"
 import { MessageSquare, Send, Shield } from "lucide-react"
 
 interface FeedbackFormProps {
@@ -19,6 +20,7 @@ export function FeedbackForm({ variant }: FeedbackFormProps) {
   const [submitted, setSubmitted] = useState(false)
   const [captchaVerified, setCaptchaVerified] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const [countryCode, setCountryCode] = useState("+57")
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -37,6 +39,8 @@ export function FeedbackForm({ variant }: FeedbackFormProps) {
     setIsSubmitting(true)
 
     try {
+      const fullPhoneNumber = formData.phone ? formatFullPhoneNumber(countryCode, formData.phone) : ""
+
       const response = await fetch("/api/feedback", {
         method: "POST",
         headers: {
@@ -46,7 +50,7 @@ export function FeedbackForm({ variant }: FeedbackFormProps) {
           name: formData.name,
           email: formData.email,
           message: formData.message,
-          phone: formData.phone,
+          phone: fullPhoneNumber,
           variant,
         }),
       })
@@ -120,14 +124,12 @@ export function FeedbackForm({ variant }: FeedbackFormProps) {
             </div>
             <div className="space-y-2">
               <Label htmlFor="phone">Teléfono (Whatsapp)</Label>
-              <Input
+              <PhoneInput
                 id="phone"
-                type="tel"
-                placeholder="+57 3001234567"
                 value={formData.phone}
-                onChange={(e) => {
-                  setFormData({ ...formData, phone: e.target.value })
-                }}
+                onChange={(value) => setFormData({ ...formData, phone: value })}
+                countryCode={countryCode}
+                onCountryCodeChange={setCountryCode}
               />
             </div>
             <div className="space-y-2">

@@ -5,6 +5,7 @@ import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } f
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
+import { PhoneInput, formatFullPhoneNumber } from "@/components/ui/phone-input"
 import { Loader2, Sparkles } from "lucide-react"
 import { getCurrentPricing, formatPriceSimple } from "@/lib/pricing-config"
 
@@ -23,6 +24,7 @@ export interface TrialSignupData {
 export function TrialSignupModal({ open, onOpenChange, onSubmit }: TrialSignupModalProps) {
   const [loading, setLoading] = useState(false)
   const [errors, setErrors] = useState<Partial<Record<keyof TrialSignupData, string>>>({})
+  const [countryCode, setCountryCode] = useState("+57")
   const pricing = getCurrentPricing()
 
   const [formData, setFormData] = useState<TrialSignupData>({
@@ -65,7 +67,11 @@ export function TrialSignupModal({ open, onOpenChange, onSubmit }: TrialSignupMo
 
     setLoading(true)
     try {
-      await onSubmit(formData)
+      const dataToSubmit = {
+        ...formData,
+        phone: formData.phone ? formatFullPhoneNumber(countryCode, formData.phone) : undefined,
+      }
+      await onSubmit(dataToSubmit)
     } catch (error) {
       console.error("Trial signup error:", error)
       setErrors({ email: "Ocurrió un error. Por favor intenta de nuevo." })
@@ -132,17 +138,18 @@ export function TrialSignupModal({ open, onOpenChange, onSubmit }: TrialSignupMo
 
           <div className="space-y-2">
             <Label htmlFor="phone">Teléfono (Whatsapp) <span className="text-destructive">*</span></Label>
-            <Input
+            <PhoneInput
               id="phone"
-              type="tel"
-              placeholder="3001234567"
-              value={formData.phone}
-              onChange={(e) => {
-                setFormData({ ...formData, phone: e.target.value })
+              value={formData.phone || ""}
+              onChange={(value) => {
+                setFormData({ ...formData, phone: value })
                 setErrors({ ...errors, phone: undefined })
               }}
+              countryCode={countryCode}
+              onCountryCodeChange={setCountryCode}
               disabled={loading}
-              className={errors.phone ? "border-destructive" : ""}
+              error={!!errors.phone}
+              required
             />
             {errors.phone && <p className="text-sm text-destructive">{errors.phone}</p>}
           </div>

@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Checkbox } from "@/components/ui/checkbox"
+import { PhoneInput, formatFullPhoneNumber } from "@/components/ui/phone-input"
 import { Gift, X } from "lucide-react"
 
 export function ExitIntentPopup() {
@@ -15,6 +16,7 @@ export function ExitIntentPopup() {
   const [email, setEmail] = useState("")
   const [name, setName] = useState("")
   const [phone, setPhone] = useState("")
+  const [countryCode, setCountryCode] = useState("+57")
   const [captchaVerified, setCaptchaVerified] = useState(false)
   const [hasShown, setHasShown] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -51,6 +53,8 @@ export function ExitIntentPopup() {
     setIsSubmitting(true)
 
     try {
+      const fullPhoneNumber = formatFullPhoneNumber(countryCode, phone)
+
       const response = await fetch("/api/waiting-list", {
         method: "POST",
         headers: {
@@ -59,7 +63,7 @@ export function ExitIntentPopup() {
         body: JSON.stringify({
           name,
           email,
-          phone,
+          phone: fullPhoneNumber,
         }),
       })
 
@@ -120,13 +124,13 @@ export function ExitIntentPopup() {
             />
           </div>
           <div className="space-y-2">
-            <Label htmlFor="exit-email">Teléfono(Whatsapp)*</Label>
-            <Input
+            <Label htmlFor="exit-phone">Teléfono(Whatsapp)*</Label>
+            <PhoneInput
               id="exit-phone"
-              type="phone"
-              placeholder="+57 300 123 4567"
               value={phone}
-              onChange={(e) => setPhone(e.target.value)}
+              onChange={setPhone}
+              countryCode={countryCode}
+              onCountryCodeChange={setCountryCode}
               required
             />
           </div>

@@ -13,12 +13,14 @@ import { Label } from "@/components/ui/label"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Textarea } from "@/components/ui/textarea"
 import { Checkbox } from "@/components/ui/checkbox"
+import { PhoneInput, formatFullPhoneNumber } from "@/components/ui/phone-input"
 import { Calendar, CheckCircle2, Building2, Users, TrendingUp, Shield } from "lucide-react"
 
 export default function SolicitarDemoPage() {
   const [submitted, setSubmitted] = useState(false)
   const [captchaVerified, setCaptchaVerified] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const [countryCode, setCountryCode] = useState("+57")
   const [formData, setFormData] = useState({
     businessName: "",
     category: "",
@@ -40,6 +42,8 @@ export default function SolicitarDemoPage() {
     setIsSubmitting(true)
 
     try {
+      const fullPhoneNumber = formatFullPhoneNumber(countryCode, formData.phone)
+
       const response = await fetch("/api/demo-request", {
         method: "POST",
         headers: {
@@ -48,7 +52,7 @@ export default function SolicitarDemoPage() {
         body: JSON.stringify({
           contactName: formData.contactName,
           email: formData.email,
-          phone: formData.phone,
+          phone: fullPhoneNumber,
           businessName: formData.businessName,
           category: formData.category,
           monthlyRevenue: formData.monthlyRevenue,
@@ -228,12 +232,12 @@ export default function SolicitarDemoPage() {
                 <div className="grid md:grid-cols-2 gap-4">
                   <div className="space-y-2">
                     <Label htmlFor="phone">Teléfono *</Label>
-                    <Input
+                    <PhoneInput
                       id="phone"
-                      type="tel"
-                      placeholder="+57 300 123 4567"
                       value={formData.phone}
-                      onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                      onChange={(value) => setFormData({ ...formData, phone: value })}
+                      countryCode={countryCode}
+                      onCountryCodeChange={setCountryCode}
                       required
                     />
                   </div>
