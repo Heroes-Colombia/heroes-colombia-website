@@ -61,7 +61,7 @@ export function WaitingListForm({ variant = "section" }: WaitingListFormProps) {
       console.log("[WaitingList] User joined successfully:", { ...formData, phone: fullPhoneNumber })
       setSubmitted(true)
 
-      // Reset form after 5 seconds
+      // Reset form after 1 minute
       setTimeout(() => {
         setSubmitted(false)
         setFormData({
@@ -73,7 +73,7 @@ export function WaitingListForm({ variant = "section" }: WaitingListFormProps) {
         })
         setCountryCode("+57")
         setCaptchaVerified(false)
-      }, 5000)
+      }, 60000)
     } catch (error) {
       console.error("[WaitingList] Error:", error)
       alert("Hubo un error al unirte a la lista de espera. Por favor intenta de nuevo.")
@@ -104,13 +104,13 @@ export function WaitingListForm({ variant = "section" }: WaitingListFormProps) {
               </ul>
               <ol className="mt-3">
                 <li>
-                  1. Revisa tu correo (puede estar en spam)
+                  1. 🔴 Unete a nuestra comunidad en WhatsApp: <a className="text-primary underline" href="https://chat.whatsapp.com/COpOoaAzZtvFg3dxCKOXQR?mode=wwt" target="blank">AQUI</a>
                 </li>
                 <li>
-                  2. Síguenos en instagram: <a className="text-primary hover:underline" href="https://www.instagram.com/heroescolombiaoficial/" target="blank">@heroescolombiaoficial</a>
+                  2. Revisa tu correo (puede estar en spam)
                 </li>
                 <li>
-                  3. Comparte con tus compañeros militares
+                  3. Comparte con tus familiares, amigos y compañeros
                 </li>
               </ol>
             </div>
