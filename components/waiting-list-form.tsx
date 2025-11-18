@@ -189,8 +189,8 @@ export function WaitingListForm({ variant = "section" }: WaitingListFormProps) {
                   <SelectItem value="armada">Armada Nacional</SelectItem>
                   <SelectItem value="fuerza-aerea">Fuerza Aeroespacial</SelectItem>
                   <SelectItem value="policia">Policía Nacional</SelectItem>
-                  <SelectItem value="retirado">Personal Retirado</SelectItem>
-                  <SelectItem value="familia">Familia Militar</SelectItem>
+                  <SelectItem value="retirado">Pensionado</SelectItem>
+                  <SelectItem value="familia">Beneficiario</SelectItem>
                 </SelectContent>
               </Select>
             </div>
@@ -335,8 +335,8 @@ export function WaitingListForm({ variant = "section" }: WaitingListFormProps) {
                     <SelectItem value="armada">Armada Nacional</SelectItem>
                     <SelectItem value="fuerza-aerea">Fuerza Aeroespacial</SelectItem>
                     <SelectItem value="policia">Policía Nacional</SelectItem>
-                    <SelectItem value="retirado">Personal Retirado</SelectItem>
-                    <SelectItem value="familia">Familia Militar</SelectItem>
+                    <SelectItem value="retirado">Pensionado</SelectItem>
+                    <SelectItem value="familia">Beneficiario</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
