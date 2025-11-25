@@ -19,15 +19,15 @@ export function SiteHeader({ variant = "user" }: SiteHeaderProps) {
   const navLinks =
     variant === "user"
       ? [
-          { href: "/#beneficios", label: "Beneficios" },
-          { href: "/#como-funciona", label: "Cómo Funciona" },
-          { href: "/negocios", label: "Para Negocios" },
-        ]
+        { href: "/#beneficios", label: "Beneficios" },
+        { href: "/#como-funciona", label: "Cómo Funciona" },
+        { href: "/negocios", label: "Para Negocios" },
+      ]
       : [
-          { href: "/negocios#beneficios", label: "Beneficios" },
-          { href: "/negocios#planes", label: "Planes" },
-          { href: "/", label: "Para Usuarios" },
-        ]
+        { href: "/negocios#beneficios", label: "Beneficios" },
+        { href: "/negocios#planes", label: "Planes" },
+        { href: "/", label: "Para Usuarios" },
+      ]
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -59,7 +59,7 @@ export function SiteHeader({ variant = "user" }: SiteHeaderProps) {
         <div className="hidden md:flex items-center gap-3">
           {variant === "business" && (
             <Button variant="ghost" asChild>
-              <Link href="https://app.heroescolombia.com">Acceder al Dashboard</Link>
+              <Link href="https://app.heroescolombia.com">Acceder al Portal web</Link>
             </Button>
           )}
           <Button asChild>
@@ -92,7 +92,7 @@ export function SiteHeader({ variant = "user" }: SiteHeaderProps) {
               <div className="flex flex-col gap-3 mt-4 pt-4 border-t">
                 {variant === "business" && (
                   <Button variant="outline" asChild>
-                    <Link href="https://app.heroescolombia.com/">Acceder al Dashboard</Link>
+                    <Link href="https://app.heroescolombia.com/">Acceder al Portal web</Link>
                   </Button>
                 )}
                 <Button asChild>

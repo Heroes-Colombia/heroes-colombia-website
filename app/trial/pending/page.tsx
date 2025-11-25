@@ -52,7 +52,7 @@ export default function TrialPendingPage() {
                 <div className="h-6 w-6 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
                   <span className="text-xs font-bold text-primary">3</span>
                 </div>
-                <p>Podrás acceder al dashboard y comenzar a usar la plataforma</p>
+                <p>Podrás acceder al Portal web y comenzar a usar la plataforma</p>
               </div>
             </div>
           </div>
