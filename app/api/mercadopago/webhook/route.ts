@@ -71,6 +71,70 @@ function verifyWebhookSignature(request: Request, body: any): boolean {
   }
 }
 
+async function processPaymentWebhook(body: any, startTime: number) {
+  try {
+    console.log("[Webhook] Starting payment processing...")
+
+    // Handle payment notifications
+    if (body.type === "payment") {
+      const paymentId = body.data.id
+
+      // Fetch payment details from MercadoPago API
+      const response = await fetch(`https://api.mercadopago.com/v1/payments/${paymentId}`, {
+        headers: {
+          Authorization: `Bearer ${MERCADOPAGO_ACCESS_TOKEN}`,
+        },
+      })
+
+      if (!response.ok) {
+        const errorText = await response.text()
+        console.error("[Webhook] Error fetching payment:", errorText)
+        return
+      }
+
+      const payment: MercadoPagoPayment = await response.json()
+
+      console.log("[Webhook] Payment details:", {
+        id: payment.id,
+        status: payment.status,
+        metadata: payment.payer,
+      })
+
+      // Process approved payments
+      if (payment.status === "approved") {
+        const metadata = payment.payer
+        console.log("[Webhook] Processing approved payment:", payment.id)
+
+        const email = metadata.email
+        const businessName = metadata.first_name || ""
+        const phone = ""
+
+        // Update MailerLite contact
+        try {
+          const groups = [
+            '169022939224606324', // clients
+            '169040520922793379' // client-registered
+          ];
+          await addContactToMailerLite({
+            email,
+            firstName: businessName,
+            phone,
+            groups,
+          })
+          console.log("[Webhook] MailerLite contact added successfully")
+        } catch (mailerLiteError) {
+          console.error("[Webhook] MailerLite error:", mailerLiteError)
+        }
+      }
+    }
+
+    const totalTime = Date.now() - startTime
+    console.log(`[Webhook] Processing complete (${totalTime}ms total)`)
+  } catch (error) {
+    console.error("[Webhook] Error in payment processing:", error)
+  }
+}
+
 export async function POST(request: Request) {
   const startTime = Date.now()
 
@@ -84,76 +148,16 @@ export async function POST(request: Request) {
       console.warn("[Webhook] ⚠️ Signature verification failed - ALLOWING for debugging")
     }
 
-    // CRITICAL: Return 200 OK immediately to MercadoPago
+    // Process the webhook (with timeout protection)
+    // This ensures we respond within 5 seconds even if processing takes longer
+    await Promise.race([
+      processPaymentWebhook(body, startTime),
+      new Promise(resolve => setTimeout(resolve, 4000)) // 4 second timeout
+    ])
+
     const responseTime = Date.now() - startTime
     console.log(`[Webhook] Sending 200 OK response (${responseTime}ms)`)
 
-    // Process webhook asynchronously (non-blocking)
-    Promise.resolve().then(async () => {
-      try {
-        console.log("[Webhook] Starting async processing...")
-
-        // Handle payment notifications
-        if (body.type === "payment") {
-          const paymentId = body.data.id
-
-          // Fetch payment details from MercadoPago API
-          const response = await fetch(`https://api.mercadopago.com/v1/payments/${paymentId}`, {
-            headers: {
-              Authorization: `Bearer ${MERCADOPAGO_ACCESS_TOKEN}`,
-            },
-          })
-
-          if (!response.ok) {
-            const errorText = await response.text()
-            console.error("[Webhook] Error fetching payment:", errorText)
-            return
-          }
-
-          const payment: MercadoPagoPayment = await response.json()
-
-          console.log("[Webhook] Payment details:", {
-            id: payment.id,
-            status: payment.status,
-            metadata: payment.payer,
-          })
-
-          // Process approved payments
-          if (payment.status === "approved") {
-            const metadata = payment.payer
-            console.log("[Webhook] Processing trial payment:", payment.id)
-
-            const email = metadata.email
-            const businessName = metadata.first_name || ""
-            const phone = ""
-
-            // Update MailerLite contact
-            try {
-              const groups = [
-                '169022939224606324', // clients
-                '169040520922793379' // client-registered
-              ];
-              await addContactToMailerLite({
-                email,
-                firstName: businessName,
-                phone,
-                groups,
-              })
-              console.log("[Webhook] MailerLite contact added successfully")
-            } catch (systemeError) {
-              console.error("[Webhook] MailerLite error:", systemeError)
-            }
-          }
-        }
-
-        const totalTime = Date.now() - startTime
-        console.log(`[Webhook] Async processing complete (${totalTime}ms total)`)
-      } catch (asyncError) {
-        console.error("[Webhook] Error in async processing:", asyncError)
-      }
-    })
-
-    // Return immediately - don't wait for async processing
     return NextResponse.json({ received: true })
   } catch (error) {
     console.error("[Webhook] Error processing webhook:", error)
