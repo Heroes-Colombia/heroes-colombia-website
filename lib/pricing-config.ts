@@ -62,7 +62,7 @@ export const PRICING_PERIODS: PricingPeriod[] = [
     id: "pre-launch",
     name: "Pre-Lanzamiento",
     startDate: new Date("2025-10-06T00:00:00-05:00"), // Colombia timezone
-    endDate: new Date("2025-11-30T23:59:59-05:00"),
+    endDate: new Date("2026-01-30T23:59:59-05:00"),
 
     trialOffer: {
       enabled: true,
@@ -76,7 +76,7 @@ export const PRICING_PERIODS: PricingPeriod[] = [
 
     earlyBirdIncentive: {
       enabled: false,
-      deadline: new Date("2025-01-15T23:59:59-05:00"),
+      deadline: new Date("2026-01-15T23:59:59-05:00"),
       discount: 50, // 50% off first month
       badge: "⚡ Oferta Especial",
       description: "Selecciona tu plan antes del 15 de enero y obtén 50% de descuento en tu primer mes",
@@ -129,7 +129,7 @@ export const PRICING_PERIODS: PricingPeriod[] = [
 
     earlyBirdIncentive: {
       enabled: false,
-      deadline: new Date("2025-01-15T23:59:59-05:00"),
+      deadline: new Date("2026-01-15T23:59:59-05:00"),
       discount: 50,
       badge: "⚡ Últimos Días",
       description: "Selecciona tu plan antes del 15 de enero y obtén 50% de descuento en tu primer mes",
