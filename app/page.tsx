@@ -47,13 +47,6 @@ export default function HomePage() {
                 verificados, diseñados especialmente para ti y tu familia.
               </p>
 
-              <div className="mb-10">
-                <p className="text-sm font-medium text-muted-foreground mb-4">
-                  Faltan solo días para el lanzamiento oficial
-                </p>
-                <CountdownTimer />
-              </div>
-
               {appLaunched ? (
                 <>
                   <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-6">
@@ -96,6 +89,13 @@ export default function HomePage() {
                 </>
               ) : (
                 <>
+                  <div className="mb-10">
+                    <p className="text-sm font-medium text-muted-foreground mb-4">
+                      Faltan solo días para el lanzamiento oficial
+                    </p>
+                    <CountdownTimer />
+                  </div>
+
                   <div className="mb-6">
                     <WaitingListForm variant="hero" />
                   </div>

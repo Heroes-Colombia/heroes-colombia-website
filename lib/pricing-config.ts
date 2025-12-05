@@ -343,11 +343,11 @@ export function formatPriceSimple(price: number): string {
 }
 
 /**
- * Check if the app has been launched (December 1, 2025)
+ * Check if the app has been launched (December 5, 2025)
  */
 export function isAppLaunched(): boolean {
   const now = new Date()
-  const launchDate = new Date("2025-12-05T00:00:00-05:00") // Colombia timezone
+  const launchDate = new Date("2025-12-04T00:00:00-05:00") // Colombia timezone
   return now >= launchDate
 }
 

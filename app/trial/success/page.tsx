@@ -63,7 +63,7 @@ export default function TrialSuccessPage() {
             <ul className="space-y-2">
               <li className="flex items-start gap-2 text-sm">
                 <CheckCircle2 className="h-4 w-4 text-primary shrink-0 mt-0.5" />
-                <span>Crear ubicaciones ilimitadas para tu negocio</span>
+                <span>Crear puntos de venta ilimitados para tu negocio</span>
               </li>
               <li className="flex items-start gap-2 text-sm">
                 <CheckCircle2 className="h-4 w-4 text-primary shrink-0 mt-0.5" />
@@ -87,9 +87,9 @@ export default function TrialSuccessPage() {
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-3 pt-4">
             <Button asChild className="flex-1 bg-gradient-to-r from-primary to-orange-500">
-              <Link href={dashboardUrl+'/register'} target="_blank">
+              <Link href={dashboardUrl + '/register'} target="_blank">
                 <ExternalLink className="mr-2 h-4 w-4" />
-                Ir al panel de Administración
+                Acceder al portal web
               </Link>
             </Button>
             <Button asChild variant="outline" className="flex-1">
