@@ -46,13 +46,13 @@ export async function POST(req: NextRequest) {
         name: businessName,
         phone: phone
           ? {
-              area_code: "57",
-              number: phone,
-            }
+            area_code: "57",
+            number: phone,
+          }
           : undefined,
       },
       back_urls: {
-        success: `${BASE_URL}/trial/success`,
+        success: `https://app.heroescolombia.com/register`,
         failure: `${BASE_URL}/trial/failure`,
         pending: `${BASE_URL}/trial/pending`,
       },
