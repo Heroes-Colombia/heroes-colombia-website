@@ -141,13 +141,6 @@ export async function POST(request: Request) {
   try {
     const body = await request.json()
 
-    console.log("[Webhook] Received notification:", body)
-
-    // Verify webhook signature for security
-    if (!verifyWebhookSignature(request, body)) {
-      console.warn("[Webhook] ⚠️ Signature verification failed - ALLOWING for debugging")
-    }
-
     // Process the webhook (with timeout protection)
     // This ensures we respond within 5 seconds even if processing takes longer
     await Promise.race([
