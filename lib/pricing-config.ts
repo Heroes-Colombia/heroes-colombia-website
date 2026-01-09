@@ -31,10 +31,10 @@ export interface PlanPricing {
 }
 
 export interface RegularPlans {
-  gratis: {
-    monthly: number
-    perPromotion: number
-  }
+  // gratis: {
+  //   monthly: number
+  //   perPromotion: number
+  // }
   basico: PlanPricing
   pro: PlanPricing
   enterprise: PlanPricing
@@ -62,7 +62,7 @@ export const PRICING_PERIODS: PricingPeriod[] = [
     id: "pre-launch",
     name: "Pre-Lanzamiento",
     startDate: new Date("2025-10-06T00:00:00-05:00"), // Colombia timezone
-    endDate: new Date("2026-01-30T23:59:59-05:00"),
+    endDate: new Date("2025-12-06T23:59:59-05:00"),
 
     trialOffer: {
       enabled: true,
@@ -83,14 +83,14 @@ export const PRICING_PERIODS: PricingPeriod[] = [
     },
 
     regularPlans: {
-      gratis: {
-        monthly: 0,
-        perPromotion: 11900, // 10,000 + 19% IVA
-      },
+      // gratis: {
+      //   monthly: 0,
+      //   perPromotion: 11900, // 10,000 + 19% IVA
+      // },
       basico: {
-        monthly: 70000,
-        annual: 714000, // 70,000 × 12 × 0.85 (15% discount)
-        savings: 126000,
+        monthly: 50000,
+        annual: 510000,
+        savings: 90000,
         savingsPercent: 15,
       },
       pro: {
@@ -121,7 +121,7 @@ export const PRICING_PERIODS: PricingPeriod[] = [
       enabled: true,
       price: 20000,
       duration: 61, // Days until Feb 1, 2026 (varies by signup date)
-      badge: "🚀 Lanzamiento - Únete a los Primeros 500",
+      badge: "🚀 Lanzamiento - Únete a los Primeros 100",
       headline: "20,000 COP",
       description: "Pago único por acceso completo hasta Febrero 1, 2026",
       nextBillingDate: new Date("2026-02-01T00:00:00-05:00"),
@@ -136,14 +136,14 @@ export const PRICING_PERIODS: PricingPeriod[] = [
     },
 
     regularPlans: {
-      gratis: {
-        monthly: 0,
-        perPromotion: 11900,
-      },
+      // gratis: {
+      //   monthly: 0,
+      //   perPromotion: 11900,
+      // },
       basico: {
-        monthly: 70000,
-        annual: 714000,
-        savings: 126000,
+        monthly: 50000,
+        annual: 510000,
+        savings: 90000,
         savingsPercent: 15,
       },
       pro: {
@@ -177,14 +177,14 @@ export const PRICING_PERIODS: PricingPeriod[] = [
     earlyBirdIncentive: undefined,
 
     regularPlans: {
-      gratis: {
-        monthly: 0,
-        perPromotion: 11900,
-      },
+      // gratis: {
+      //   monthly: 0,
+      //   perPromotion: 11900,
+      // },
       basico: {
-        monthly: 70000,
-        annual: 714000,
-        savings: 126000,
+        monthly: 50000,
+        annual: 510000,
+        savings: 90000,
         savingsPercent: 15,
       },
       pro: {
@@ -355,5 +355,5 @@ export function isAppLaunched(): boolean {
 // TYPE EXPORTS FOR COMPONENTS
 // ============================================================================
 
-export type PlanType = "gratis" | "basico" | "pro" | "enterprise"
+export type PlanType = "basico" | "pro" | "enterprise"
 export type BillingPeriod = "monthly" | "annual"

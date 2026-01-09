@@ -72,14 +72,14 @@ export default function BusinessPage() {
         <section className="py-15 md:py-25 bg-secondary border-y">
           <div className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-12">
-              <h2 className="text-2xl md:text-3xl font-bold mb-2">El Potencial de tu negocio</h2>
-              <p className="text-muted-foreground">Proyecciones basadas en estudios de mercado y datos reales</p>
+              <h2 className="text-2xl md:text-3xl font-bold mb-2">Resultados Reales de la Plataforma</h2>
+              <p className="text-muted-foreground">Datos verificados desde el lanzamiento del 6 de diciembre de 2025</p>
             </div>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-              <AnimatedStat value="380" label="Clientes potenciales" suffix="K+" />
-              <AnimatedStat value="85" label="Tasa de retención esperada" suffix="%" />
-              <AnimatedStat value="3.5" label="ROI proyectado primer Año" suffix="x" />
-              <AnimatedStat value="100" label="Cupos disponibles lanzamiento" suffix="" />
+              <AnimatedStat value="50" label="Negocios activos" suffix="+" />
+              <AnimatedStat value="1000" label="Vistas de promociones" suffix="+" />
+              <AnimatedStat value="300" label="Usuarios verificados" suffix="+" />
+              <AnimatedStat value="20" label="Ahorro promedio usuarios" suffix="%" />
             </div>
           </div>
         </section>
@@ -94,7 +94,7 @@ export default function BusinessPage() {
           <div className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-16">
               <h2 className="text-3xl md:text-5xl font-bold text-balance mb-4">
-                Porque decenas de negocios ya se registraron
+                50+ negocios activos confían en nuestra plataforma
               </h2>
               <p className="text-lg text-muted-foreground text-balance max-w-2xl mx-auto">
                 Una plataforma completa para atraer clientes leales y aumentar tus ventas
@@ -122,7 +122,7 @@ export default function BusinessPage() {
                   </div>
                   <h3 className="font-semibold text-lg mb-2">Métricas en tiempo real</h3>
                   <p className="text-sm text-muted-foreground leading-relaxed">
-                    Dashboard inteligente que te muestra exactamente qué funciona: vistas, canjes, ROI y más.
+                    Portal web inteligente que te muestra exactamente qué funciona: vistas, canjes, ROI y más.
                   </p>
                 </CardContent>
               </Card>
@@ -206,9 +206,9 @@ export default function BusinessPage() {
               </div>
             </div>
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
               {/* Gratis Plan */}
-              <Card className="hover:shadow-lg transition-shadow">
+              {/* <Card className="hover:shadow-lg transition-shadow">
                 <CardHeader>
                   <CardTitle className="text-2xl">Gratis</CardTitle>
                   <div className="mt-4">
@@ -246,7 +246,7 @@ export default function BusinessPage() {
                       Comenzar por solo {formatPrice(pricing.trialOffer?.price || 0)}
                   </Button>
                 </CardContent>
-              </Card>
+              </Card> */}
 
               {/* Básico Plan */}
               <Card className="hover:shadow-lg transition-shadow">
@@ -274,19 +274,19 @@ export default function BusinessPage() {
                   <ul className="space-y-3 mb-6">
                     <li className="flex items-start gap-2">
                       <CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
-                      <span className="text-sm">Hasta 3 ubicaciones</span>
+                      <span className="text-sm">1 ubicación física u online</span>
                     </li>
                     <li className="flex items-start gap-2">
                       <CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
-                      <span className="text-sm">Hasta 3 promociones activas</span>
+                      <span className="text-sm">Hasta 2 promociones activas</span>
                     </li>
                     <li className="flex items-start gap-2">
                       <CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
-                      <span className="text-sm">Analítica basica</span>
+                      <span className="text-sm">Analítica básica</span>
                     </li>
                     <li className="flex items-start gap-2">
                       <CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
-                      <span className="text-sm">Acceso para 2 usuarios</span>
+                      <span className="text-sm">Acceso para 1 usuario</span>
                     </li>
                     <li className="flex items-start gap-2">
                       <CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
@@ -330,11 +330,11 @@ export default function BusinessPage() {
                   <ul className="space-y-3 mb-6">
                     <li className="flex items-start gap-2">
                       <CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
-                      <span className="text-sm">Hasta 10 ubicaciones</span>
+                      <span className="text-sm">Hasta 5 ubicaciones</span>
                     </li>
                     <li className="flex items-start gap-2">
                       <CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
-                      <span className="text-sm">Hasta 10 promociones activas</span>
+                      <span className="text-sm">Hasta 5 promociones activas</span>
                     </li>
                     <li className="flex items-start gap-2">
                       <CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
@@ -346,7 +346,7 @@ export default function BusinessPage() {
                     </li>
                     <li className="flex items-start gap-2">
                       <CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
-                      <span className="text-sm">Acceso para 5 usuarios</span>
+                      <span className="text-sm">Acceso para 3 usuarios</span>
                     </li>
                     <li className="flex items-start gap-2">
                       <CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
@@ -437,12 +437,109 @@ export default function BusinessPage() {
 
         <TrustBadges />
 
+        <section className="py-10 md:py-15 bg-accent/5 border-y">
+          <div className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-8">
+              <div className="inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-2 rounded-full text-sm font-medium mb-4">
+                <Target className="h-4 w-4" />
+                Ventaja de Pioneros
+              </div>
+              <h2 className="text-2xl md:text-3xl font-bold mb-3">
+                Únete ahora y obtén ventajas exclusivas
+              </h2>
+              <p className="text-muted-foreground max-w-2xl mx-auto">
+                Los primeros 100 negocios en unirse obtienen beneficios únicos mientras la plataforma crece
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
+              <Card className="text-left">
+                <CardContent className="pt-6">
+                  <div className="rounded-full bg-primary/10 w-12 h-12 flex items-center justify-center mb-4">
+                    <Target className="h-6 w-6 text-primary" />
+                  </div>
+                  <h3 className="font-semibold text-lg mb-2">Menor competencia</h3>
+                  <p className="text-sm text-muted-foreground">
+                    Destaca entre pocos negocios por la atención de 300+ usuarios verificados y creciendo semanalmente
+                  </p>
+                </CardContent>
+              </Card>
+
+              <Card className="text-left">
+                <CardContent className="pt-6">
+                  <div className="rounded-full bg-primary/10 w-12 h-12 flex items-center justify-center mb-4">
+                    <Star className="h-6 w-6 text-primary" />
+                  </div>
+                  <h3 className="font-semibold text-lg mb-2">Reconocimiento temprano</h3>
+                  <p className="text-sm text-muted-foreground">
+                    Construye reconocimiento de marca desde el día 1 con la comunidad militar
+                  </p>
+                </CardContent>
+              </Card>
+
+              <Card className="text-left">
+                <CardContent className="pt-6">
+                  <div className="rounded-full bg-primary/10 w-12 h-12 flex items-center justify-center mb-4">
+                    <TrendingUp className="h-6 w-6 text-primary" />
+                  </div>
+                  <h3 className="font-semibold text-lg mb-2">Crece con la plataforma</h3>
+                  <p className="text-sm text-muted-foreground">
+                    Posiciónate ahora para cuando la plataforma escale a miles de usuarios militares
+                  </p>
+                </CardContent>
+              </Card>
+
+              <Card className="text-left">
+                <CardContent className="pt-6">
+                  <div className="rounded-full bg-primary/10 w-12 h-12 flex items-center justify-center mb-4">
+                    <Users className="h-6 w-6 text-primary" />
+                  </div>
+                  <h3 className="font-semibold text-lg mb-2">Feedback directo</h3>
+                  <p className="text-sm text-muted-foreground">
+                    Influye en el desarrollo del producto con feedback directo al equipo
+                  </p>
+                </CardContent>
+              </Card>
+
+              <Card className="text-left">
+                <CardContent className="pt-6">
+                  <div className="rounded-full bg-primary/10 w-12 h-12 flex items-center justify-center mb-4">
+                    <CheckCircle2 className="h-6 w-6 text-primary" />
+                  </div>
+                  <h3 className="font-semibold text-lg mb-2">Visibilidad preferencial</h3>
+                  <p className="text-sm text-muted-foreground">
+                    Primeros 100 socios obtienen destacados especiales en la app conforme crece
+                  </p>
+                </CardContent>
+              </Card>
+
+              <Card className="text-left">
+                <CardContent className="pt-6">
+                  <div className="rounded-full bg-primary/10 w-12 h-12 flex items-center justify-center mb-4">
+                    <Shield className="h-6 w-6 text-primary" />
+                  </div>
+                  <h3 className="font-semibold text-lg mb-2">Audiencia de calidad</h3>
+                  <p className="text-sm text-muted-foreground">
+                    Militares con ingresos estables y alta lealtad de marca desde el inicio
+                  </p>
+                </CardContent>
+              </Card>
+            </div>
+
+            <div className="text-center mt-8">
+              <p className="text-sm text-muted-foreground">
+                <span className="font-semibold text-primary">50+ negocios</span> ya están posicionados. Quedan <span className="font-semibold text-primary">50 cupos</span> para beneficios de fundadores.
+              </p>
+            </div>
+          </div>
+        </section>
+
         <section className="py-15 md:py-25 bg-secondary">
           <div className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-16">
-              <h2 className="text-3xl md:text-5xl font-bold text-balance mb-4">Negocios listos para crecer</h2>
+              <h2 className="text-3xl md:text-5xl font-bold text-balance mb-4">Negocios reales que ya están usando Heroes</h2>
               <p className="text-lg text-muted-foreground text-balance max-w-2xl mx-auto">
-                Empresarios que ya se registraron y esperan el lanzamiento
+                Socios activos compartiendo su experiencia con nuestra plataforma
               </p>
             </div>
 
@@ -455,11 +552,10 @@ export default function BusinessPage() {
                     ))}
                   </div>
                   <p className="text-sm text-muted-foreground mb-4 leading-relaxed">
-                    "Estamos emocionados de ser parte del lanzamiento. La comunidad militar es un mercado que siempre
-                    hemos querido alcanzar y esta plataforma nos da la oportunidad perfecta."
+                    "Heroes tiene mucho potencial, es un proyecto muy valioso el cual reconoce el valor a todos los militares de Colombia. A mí personalmente me gusta que es sectorizado y siempre había querido llegar a ese mercado que en ocasiones, es muy difícil de llegar."
                   </p>
                   <div>
-                    <div className="font-semibold text-sm">Restaurante El Buen Sabor</div>
+                    <div className="font-semibold text-sm">Biker's Paradise</div>
                     <div className="text-xs text-muted-foreground">Bogotá</div>
                   </div>
                 </CardContent>
@@ -473,12 +569,11 @@ export default function BusinessPage() {
                     ))}
                   </div>
                   <p className="text-sm text-muted-foreground mb-4 leading-relaxed">
-                    "Ya nos registramos y estamos preparando promociones especiales para el lanzamiento. Esperamos
-                    atraer clientes leales que valoren nuestros servicios."
+                    "Nosotros ofrecemos créditos y productos especializados para policías, y no habíamos encontrado una empresa que solo se enfocara en ellos. Estamos felices de ser parte de Héroes y apoyar en todo el proceso desde el inicio."
                   </p>
                   <div>
-                    <div className="font-semibold text-sm">Gimnasio FitZone</div>
-                    <div className="text-xs text-muted-foreground">Medellín</div>
+                    <div className="font-semibold text-sm">Hogar</div>
+                    <div className="text-xs text-muted-foreground">Bogotá</div>
                   </div>
                 </CardContent>
               </Card>
@@ -491,12 +586,11 @@ export default function BusinessPage() {
                     ))}
                   </div>
                   <p className="text-sm text-muted-foreground mb-4 leading-relaxed">
-                    "La plataforma se ve muy profesional. Nos encanta la idea de poder segmentar nuestras campañas y
-                    medir el ROI en tiempo real. Esperamos grandes resultados."
+                    "El mercado de los militares es muy interesante y ya habíamos intentado llegar a ellos pero era muy difícil. Con Heroes podemos crear descuentos y promociones de nicho lo cual nos ayuda a incrementar nuestras ventas como empresa. Nos gusta mucho de Heroes el portal web, es fácil de usar y tienen tecnología bastante avanzada para las métricas."
                   </p>
                   <div>
-                    <div className="font-semibold text-sm">Tienda Deportiva ProSport</div>
-                    <div className="text-xs text-muted-foreground">Cali</div>
+                    <div className="font-semibold text-sm">Hogar</div>
+                    <div className="text-xs text-muted-foreground">Medellín</div>
                   </div>
                 </CardContent>
               </Card>
@@ -518,8 +612,7 @@ export default function BusinessPage() {
                 Comienza a atraer clientes leales Hhoy
               </h2>
               <p className="text-lg text-primary-foreground/90 text-balance mb-8 leading-relaxed">
-                Únete a los primeros 500 negocios y obtén visibilidad premium durante el lanzamiento. Solicita una demo
-                personalizada sin compromiso o comienza gratis ahora mismo.
+                Únete a los 50+ negocios activos generando 1,000+ vistas de promociones. Primeros 100 nuevos socios obtienen visibilidad preferencial en la plataforma.
               </p>
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-6">
                 <Button size="lg" variant="secondary" asChild className="w-full sm:w-auto shadow-lg">
@@ -540,7 +633,7 @@ export default function BusinessPage() {
                 </Button>
               </div>
               <p className="text-sm text-primary-foreground/80">
-                Más de 50 negocios ya se registraron para el lanzamiento
+                50+ negocios activos • 1,000+ vistas de promociones • 300+ usuarios verificados
               </p>
             </div>
           </div>

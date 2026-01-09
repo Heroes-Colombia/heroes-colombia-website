@@ -8,7 +8,7 @@ export function DashboardShowcase() {
   return (
     <div className="space-y-12">
       <div className="text-center mb-12">
-        <h2 className="text-3xl md:text-5xl font-bold text-balance mb-4">Dashboard profesional para tu negocio</h2>
+        <h2 className="text-3xl md:text-5xl font-bold text-balance mb-4">Portal web profesional para tu negocio</h2>
         <p className="text-lg text-muted-foreground text-balance max-w-2xl mx-auto">
           Controla y optimiza tus promociones con métricas en tiempo real
         </p>

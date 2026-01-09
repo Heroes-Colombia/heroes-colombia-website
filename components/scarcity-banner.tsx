@@ -4,7 +4,7 @@ import { useState, useEffect } from "react"
 import { AlertCircle } from "lucide-react"
 
 export function ScarcityBanner({ variant = "user" }: { variant?: "user" | "business" }) {
-  const [spotsLeft, setSpotsLeft] = useState(variant === "user" ? 200 : 100)
+  const [spotsLeft, setSpotsLeft] = useState(variant === "user" ? 200 : 50)
 
   useEffect(() => {
     // Simulate spots decreasing
@@ -23,7 +23,7 @@ export function ScarcityBanner({ variant = "user" }: { variant?: "user" | "busin
           <p className="text-sm font-medium text-accent">
             {variant === "user" ? (
               <>
-                <span className="font-bold">{spotsLeft} cupos restantes</span> para beneficios exclusivos de lanzamiento
+                <span className="font-bold">{spotsLeft} cupos restantes</span> para ser miembro fundador de Héroes Colombia
               </>
             ) : (
               <>

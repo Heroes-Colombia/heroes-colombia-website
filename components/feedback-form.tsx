@@ -73,7 +73,7 @@ export function FeedbackForm({ variant }: FeedbackFormProps) {
   const title = variant === "user" ? "Tu opinión importa" : "Tu comentario nos importa"
   const description =
     variant === "user"
-      ? "Cuéntanos qué funcionalidades te gustaría ver o qué problemas enfrentas. Tu retroalimentación nos ayuda a mejorar."
+      ? "Cuéntanos qué funcionalidades te gustaría ver o qué problemas enfrentas en la app. Tu retroalimentación nos ayuda a mejorar."
       : "¿Tienes alguna pregunta? Estamos aquí para escucharte."
 
   return (

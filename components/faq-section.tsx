@@ -25,31 +25,26 @@ function getBusinessFAQs(): FAQItem[] {
     {
       question: "¿Cuánto cuesta registrar mi negocio?",
       answer: isTrialActive
-        ? `¡Oferta de lanzamiento! Los primeros 100 negocios pueden acceder por solo ${formatPrice(trialPrice)} (pago único) con acceso Enterprise completo hasta ${pricing.trialOffer?.nextBillingDate ? new Date(pricing.trialOffer.nextBillingDate).toLocaleDateString("es-CO", { year: "numeric", month: "long", day: "numeric" }) : "Febrero 1, 2026"}. Después, puedes elegir entre nuestros planes regulares: Gratis (pago por promoción), Básico desde ${formatPrice(pricing.regularPlans.basico.monthly)}/mes, Pro desde ${formatPrice(pricing.regularPlans.pro.monthly)}/mes, o Enterprise desde ${formatPrice(pricing.regularPlans.enterprise.monthly)}/mes. Todos los precios incluyen IVA.`
-        : `Tenemos planes flexibles para todos los tamaños de negocio: Plan Gratis (pagas ${formatPrice(pricing.regularPlans.gratis.perPromotion)} por promoción), Básico desde ${formatPrice(pricing.regularPlans.basico.monthly)}/mes, Pro desde ${formatPrice(pricing.regularPlans.pro.monthly)}/mes, y Enterprise desde ${formatPrice(pricing.regularPlans.enterprise.monthly)}/mes. Todos los precios incluyen IVA y puedes cancelar en cualquier momento.`,
+        ? `¡Oferta de lanzamiento! Los primeros 100 negocios pueden acceder por solo ${formatPrice(trialPrice)} (pago único) con acceso Enterprise completo hasta ${pricing.trialOffer?.nextBillingDate ? new Date(pricing.trialOffer.nextBillingDate).toLocaleDateString("es-CO", { year: "numeric", month: "long", day: "numeric" }) : "Febrero 1, 2026"}. Después, puedes elegir entre nuestros planes regulares: Básico desde ${formatPrice(pricing.regularPlans.basico.monthly)}/mes, Pro desde ${formatPrice(pricing.regularPlans.pro.monthly)}/mes, o Enterprise desde ${formatPrice(pricing.regularPlans.enterprise.monthly)}/mes. Todos los precios incluyen IVA.`
+        : `Tenemos planes flexibles para todos los tamaños de negocio: Básico desde ${formatPrice(pricing.regularPlans.basico.monthly)}/mes, Pro desde ${formatPrice(pricing.regularPlans.pro.monthly)}/mes, y Enterprise desde ${formatPrice(pricing.regularPlans.enterprise.monthly)}/mes. Todos los precios incluyen IVA y puedes cancelar en cualquier momento.`,
     },
     {
       question: "¿Qué incluye cada plan?",
-      answer: `**Plan Gratis:** 1 ubicación, pago por promoción (${formatPrice(pricing.regularPlans.gratis.perPromotion)}), analítica básica, 1 usuario, soporte por email. **Plan Básico:** Hasta 3 ubicaciones, 3 promociones activas por ubicación, analítica básica, 2 usuarios, soporte por email. **Plan Pro:** Hasta 10 ubicaciones, 10 promociones activas por ubicación, segmentación de audiencia, analítica avanzada, 5 usuarios, soporte prioritario. **Plan Enterprise:** Ubicaciones y promociones ilimitadas, negocio y promociones destacadas en la app, segmentación de audiencia, analítica avanzada, 10 usuarios, soporte prioritario.`,
+      answer: `**Plan Básico:** Hasta 3 ubicaciones, 3 promociones activas por ubicación, analítica básica, 2 usuarios, soporte por email. **Plan Pro:** Hasta 10 ubicaciones, 10 promociones activas por ubicación, segmentación de audiencia, analítica avanzada, 5 usuarios, soporte prioritario. **Plan Enterprise:** Ubicaciones y promociones ilimitadas, negocio y promociones destacadas en la app, segmentación de audiencia, analítica avanzada, 10 usuarios, soporte prioritario.`,
     },
     {
       question: "¿Los planes anuales tienen descuento?",
       answer: `Sí, todos los planes anuales incluyen 15% de descuento. Por ejemplo: Básico anual ${formatPrice(pricing.regularPlans.basico.annual)} (ahorras ${formatPrice(pricing.regularPlans.basico.savings)}), Pro anual ${formatPrice(pricing.regularPlans.pro.annual)} (ahorras ${formatPrice(pricing.regularPlans.pro.savings)}), Enterprise anual ${formatPrice(pricing.regularPlans.enterprise.annual)} (ahorras ${formatPrice(pricing.regularPlans.enterprise.savings)}).`,
     },
     {
-      question: "¿Cómo verifican que los usuarios son militares reales?",
-      answer:
-        "Tenemos un sistema de verificación riguroso de dos pasos que valida la identidad militar de cada usuario con documentos oficiales. Solo personas con credenciales válidas pueden acceder a los beneficios, garantizando que tu inversión llegue a la audiencia correcta.",
-    },
-    {
       question: "¿Puedo cancelar en cualquier momento?",
       answer:
-        "Sí, sin preguntas ni penalizaciones. No hay contratos a largo plazo. Cancela cuando quieras desde tu dashboard con un solo clic.",
+        "Sí, sin preguntas ni penalizaciones. No hay contratos a largo plazo. Cancela cuando quieras desde tu portal web con un solo clic.",
     },
     {
       question: "¿Cuántos usuarios puedo esperar que vean mi promoción?",
       answer:
-        "Tenemos más de 380,000 militares activos y sus familias registrados esperando el lanzamiento. Tu negocio aparecerá en búsquedas por categoría, ubicación, y en el feed principal de la app.",
+        "Nuestra proyección para 2026 es abarcar a todos los policías activos y sus familias. Tu negocio aparecerá en búsquedas por categoría, ubicación, y en el feed principal de la app.",
     },
     {
       question: "¿Qué tipo de negocios tienen más éxito en la plataforma?",
@@ -59,29 +54,29 @@ function getBusinessFAQs(): FAQItem[] {
     {
       question: "¿Puedo cambiar o actualizar mi plan más adelante?",
       answer:
-        "Sí, tienes control total. Puedes actualizar, cambiar de plan, pausar temporalmente, o cancelar en cualquier momento desde tu dashboard. Nuestra política es 100% flexible y sin compromisos a largo plazo.",
+        "Sí, tienes control total. Puedes actualizar, cambiar de plan, pausar temporalmente, o cancelar en cualquier momento desde tu portal web. Nuestra política es 100% flexible y sin compromisos a largo plazo.",
     },
   ]
 }
 
 const userFAQs: FAQItem[] = [
   {
-    question: "¿Cómo verifico mi identidad militar?",
+    question: "¿Cómo redimo una de las promociones que se ven en la app?",
     answer:
-      "El proceso es simple y seguro. Solo necesitas tu cédula militar o carnet institucional. Nuestro sistema verifica tu información inmediatamente y tus datos están completamente protegidos.",
+      "Solo tienes que mostrar la promoción en el establecimiento, mostrar tu carnet militar y listo, recibiras el descuento que se ve en la app.",
   },
   {
     question: "¿Tiene algún costo la app?",
     answer:
-      "No, la app es gratuita para descargar y usar. Puedes acceder a todos los beneficios exclusivos sin costo durante el periodo de lanzamiento.",
+      "No, la app es totalmente GRATIS para descargar y usar. Puedes acceder a todos los beneficios exclusivos sin costo alguno.",
   },
   {
     question: "¿Puedo usar los beneficios para mi familia?",
     answer:
-      "Absolutamente. Los beneficios están diseñados para ti y tu familia. Puedes compartir las promociones con tus seres queridos.",
+      "Absolutamente. Los beneficios están diseñados para ti y tu familia. En tu perfil, podrás compartir un código único para que lo compartas con tus familiares.",
   },
   {
-    question: "¿Qué pasa si un negocio no acepta mi código?",
+    question: "¿Qué pasa si un negocio no acepta mi código cuando muestre la app?",
     answer:
       "Contáctanos inmediatamente. Tenemos un equipo de soporte dedicado que resolverá cualquier problema en menos de 24 horas y garantizará que recibas tu beneficio.",
   },

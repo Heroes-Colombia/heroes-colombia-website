@@ -108,7 +108,7 @@ export function TrialOfferHero({ onStartTrial }: TrialOfferHeroProps) {
           </h1>
 
           <p className="text-lg md:text-xl text-muted-foreground mb-12 max-w-2xl mx-auto">
-            Accede a 380,000 clientes leales con alto poder adquisitivo
+            Accede a miembros de las fuerzas armadas con alto poder adquisitivo
           </p>
 
           {/* Countdown Timer */}

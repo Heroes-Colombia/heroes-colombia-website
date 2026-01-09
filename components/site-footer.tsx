@@ -20,7 +20,7 @@ export function SiteFooter() {
                 />
               </Link>
               <p className="text-sm text-muted-foreground max-w-md leading-relaxed">
-                Conectando a nuestros héroes militares con los mejores beneficios y promociones exclusivas en Colombia.
+                Conectando a nuestros héroes con los mejores beneficios y promociones exclusivas en a nivel nacional.
               </p>
               <div className="flex items-center gap-4 mt-6">
                 <Link
@@ -69,7 +69,7 @@ export function SiteFooter() {
                     href="/#testimonios"
                     className="text-sm text-muted-foreground hover:text-foreground transition-colors"
                   >
-                    Testimonios
+                    Que dicen de Héroes Colombia
                   </Link>
                 </li>
                 <li>
