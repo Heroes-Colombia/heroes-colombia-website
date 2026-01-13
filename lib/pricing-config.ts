@@ -31,10 +31,6 @@ export interface PlanPricing {
 }
 
 export interface RegularPlans {
-  // gratis: {
-  //   monthly: number
-  //   perPromotion: number
-  // }
   basico: PlanPricing
   pro: PlanPricing
   enterprise: PlanPricing
@@ -83,14 +79,10 @@ export const PRICING_PERIODS: PricingPeriod[] = [
     },
 
     regularPlans: {
-      // gratis: {
-      //   monthly: 0,
-      //   perPromotion: 11900, // 10,000 + 19% IVA
-      // },
       basico: {
-        monthly: 50000,
-        annual: 510000,
-        savings: 90000,
+        monthly: 100000,
+        annual: 1020000,
+        savings: 180000,
         savingsPercent: 15,
       },
       pro: {
@@ -136,14 +128,10 @@ export const PRICING_PERIODS: PricingPeriod[] = [
     },
 
     regularPlans: {
-      // gratis: {
-      //   monthly: 0,
-      //   perPromotion: 11900,
-      // },
       basico: {
-        monthly: 50000,
-        annual: 510000,
-        savings: 90000,
+        monthly: 100000,
+        annual: 1020000,
+        savings: 180000,
         savingsPercent: 15,
       },
       pro: {
@@ -177,14 +165,10 @@ export const PRICING_PERIODS: PricingPeriod[] = [
     earlyBirdIncentive: undefined,
 
     regularPlans: {
-      // gratis: {
-      //   monthly: 0,
-      //   perPromotion: 11900,
-      // },
       basico: {
-        monthly: 50000,
-        annual: 510000,
-        savings: 90000,
+        monthly: 100000,
+        annual: 1020000,
+        savings: 180000,
         savingsPercent: 15,
       },
       pro: {
