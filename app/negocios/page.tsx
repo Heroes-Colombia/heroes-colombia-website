@@ -11,8 +11,8 @@ import { TrustBadges } from "@/components/trust-badges"
 import { Button } from "@/components/ui/button"
 import { FAQSection } from "@/components/faq-section"
 import { UrgencyBanner } from "@/components/urgency-banner"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { getCurrentPricing, formatPriceSimple, formatPrice } from "@/lib/pricing-config"
+import { Card, CardContent } from "@/components/ui/card"
+import { getCurrentPricing, formatPrice } from "@/lib/pricing-config"
 import {
   TrendingUp,
   Users,
@@ -24,12 +24,12 @@ import {
   Shield,
   Smartphone,
   Calendar,
+  Play,
 } from "lucide-react"
 import Link from "next/link"
 import { useState } from "react"
 
 export default function BusinessPage() {
-  const [isAnnual, setIsAnnual] = useState(true)
   const [showSignupModal, setShowSignupModal] = useState(false)
   const pricing = getCurrentPricing()
 
@@ -180,257 +180,22 @@ export default function BusinessPage() {
           </div>
         </section>
 
+        {/* Pricing CTA Section */}
         <section id="planes" className="py-15 md:py-25 bg-background">
-          <div className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-16">
+          <div className="container max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center">
               <h2 className="text-3xl md:text-5xl font-bold text-balance mb-4">
-                Elige el plan perfecto para tu negocio
+                Planes flexibles para cada negocio
               </h2>
-              <p className="text-lg text-muted-foreground text-balance max-w-2xl mx-auto">
-                Comienza gratis y escala cuando veas resultados. Sin sorpresas.
+              <p className="text-lg text-muted-foreground text-balance max-w-2xl mx-auto mb-8">
+                Conoce nuestros precios y descubre qué plan es el ideal para ti. Nuestro director te explica todo en un video.
               </p>
-              <div className="flex items-center justify-center gap-3 mt-6">
-                <span className={`text-sm ${!isAnnual ? "font-medium" : "text-muted-foreground"}`}>Mensual</span>
-                <label className="relative inline-flex items-center cursor-pointer">
-                  <input
-                    type="checkbox"
-                    className="sr-only peer pricing-toggle"
-                    checked={isAnnual}
-                    onChange={(e) => setIsAnnual(e.target.checked)}
-                  />
-                  <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-primary/20 rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
-                </label>
-                <span className={`text-sm ${isAnnual ? "font-medium" : "text-muted-foreground"}`}>
-                  Anual <span className="text-primary">(Ahorra hasta 15%)</span>
-                </span>
-              </div>
-            </div>
-
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
-              {/* Gratis Plan */}
-              {/* <Card className="hover:shadow-lg transition-shadow">
-                <CardHeader>
-                  <CardTitle className="text-2xl">Gratis</CardTitle>
-                  <div className="mt-4">
-                    <span className="text-4xl font-bold">{formatPriceSimple(pricing.regularPlans.gratis.monthly)}</span>
-                    <span className="text-muted-foreground">/mes</span>
-                  </div>
-                  <p className="text-sm text-muted-foreground mt-2">
-                    + {formatPriceSimple(pricing.regularPlans.gratis.perPromotion)} COP por promoción. IVA incluido
-                  </p>
-                </CardHeader>
-                <CardContent>
-                  <ul className="space-y-3 mb-6">
-                    <li className="flex items-start gap-2">
-                      <CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
-                      <span className="text-sm">1 ubicación física u online</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
-                      <span className="text-sm">Paga por cada promoción</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
-                      <span className="text-sm">Analítica básica</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
-                      <span className="text-sm">Acceso para 1 usuario</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
-                      <span className="text-sm">Soporte por email</span>
-                    </li>
-                  </ul>
-                  <Button className="w-full bg-transparent" variant="outline" onClick={handleStartTrial}>
-                      Comenzar por solo {formatPrice(pricing.trialOffer?.price || 0)}
-                  </Button>
-                </CardContent>
-              </Card> */}
-
-              {/* Básico Plan */}
-              <Card className="hover:shadow-lg transition-shadow">
-                <CardHeader>
-                  <CardTitle className="text-2xl">Básico</CardTitle>
-                  <div className="mt-4">
-                    {!isAnnual ? (
-                      <>
-                        <span className="text-4xl font-bold">{formatPriceSimple(pricing.regularPlans.basico.monthly)}</span>
-                        <span className="text-muted-foreground">/mes</span>
-                      </>
-                    ) : (
-                      <>
-                        <span className="text-4xl font-bold">{formatPriceSimple(pricing.regularPlans.basico.annual)}</span>
-                        <span className="text-muted-foreground">/año</span>
-                        <div className="text-sm text-primary font-medium mt-1">
-                          Ahorras {formatPriceSimple(pricing.regularPlans.basico.savings)} COP
-                        </div>
-                      </>
-                    )}
-                  </div>
-                  <p className="text-sm text-muted-foreground mt-2">IVA incluido • Para negocios en crecimiento</p>
-                </CardHeader>
-                <CardContent>
-                  <ul className="space-y-3 mb-6">
-                    <li className="flex items-start gap-2">
-                      <CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
-                      <span className="text-sm">1 ubicación física u online</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
-                      <span className="text-sm">Hasta 2 promociones activas</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
-                      <span className="text-sm">Analítica básica</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
-                      <span className="text-sm">Acceso para 1 usuario</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
-                      <span className="text-sm">Soporte por email</span>
-                    </li>
-                  </ul>
-                  <Button className="w-full" onClick={handleStartTrial}>
-                    Comenzar por solo {formatPrice(pricing.trialOffer?.price || 0)}
-                  </Button>
-                </CardContent>
-              </Card>
-
-              {/* Pro Plan */}
-              <Card className="border-2 border-primary relative hover:shadow-xl transition-shadow">
-                <div className="absolute -top-3 left-1/2 -translate-x-1/2">
-                  <span className="bg-primary text-primary-foreground text-xs font-semibold px-3 py-1 rounded-full shadow-lg">
-                    Más Popular
-                  </span>
-                </div>
-                <CardHeader>
-                  <CardTitle className="text-2xl">Pro</CardTitle>
-                  <div className="mt-4">
-                    {!isAnnual ? (
-                      <>
-                        <span className="text-4xl font-bold">{formatPriceSimple(pricing.regularPlans.pro.monthly)}</span>
-                        <span className="text-muted-foreground">/mes</span>
-                      </>
-                    ) : (
-                      <>
-                        <span className="text-4xl font-bold">{formatPriceSimple(pricing.regularPlans.pro.annual)}</span>
-                        <span className="text-muted-foreground">/año</span>
-                        <div className="text-sm text-primary font-medium mt-1">
-                          Ahorras {formatPriceSimple(pricing.regularPlans.pro.savings)} COP
-                        </div>
-                      </>
-                    )}
-                  </div>
-                  <p className="text-sm text-muted-foreground mt-2">IVA incluido • Máximo crecimiento</p>
-                </CardHeader>
-                <CardContent>
-                  <ul className="space-y-3 mb-6">
-                    <li className="flex items-start gap-2">
-                      <CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
-                      <span className="text-sm">Hasta 5 ubicaciones</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
-                      <span className="text-sm">Hasta 5 promociones activas</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
-                      <span className="text-sm">Segmentación de audiencia</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
-                      <span className="text-sm">Analítica avanzada</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
-                      <span className="text-sm">Acceso para 3 usuarios</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
-                      <span className="text-sm">Soporte prioritario</span>
-                    </li>
-                  </ul>
-                  <Button className="w-full shadow-lg" onClick={handleStartTrial}>
-                    Comenzar por solo {formatPrice(pricing.trialOffer?.price || 0)}
-                  </Button>
-                </CardContent>
-              </Card>
-
-              {/* Enterprise Plan */}
-              <Card className="hover:shadow-lg transition-shadow">
-                <CardHeader>
-                  <CardTitle className="text-2xl">Enterprise</CardTitle>
-                  <div className="mt-4">
-                    {!isAnnual ? (
-                      <>
-                        <span className="text-3xl font-bold">Desde</span>
-                        <br />
-                        <span className="text-4xl font-bold">{formatPriceSimple(pricing.regularPlans.enterprise.monthly)}</span>
-                        <span className="text-muted-foreground">/mes</span>
-                      </>
-                    ) : (
-                      <>
-                        <span className="text-3xl font-bold">Desde</span>
-                        <br />
-                        <span className="text-4xl font-bold">{formatPriceSimple(pricing.regularPlans.enterprise.annual)}</span>
-                        <span className="text-muted-foreground">/año</span>
-                        <div className="text-sm text-primary font-medium mt-1">
-                          Ahorras {formatPriceSimple(pricing.regularPlans.enterprise.savings)} COP
-                        </div>
-                      </>
-                    )}
-                  </div>
-                  <p className="text-sm text-muted-foreground mt-2">IVA incluido • Precio personalizado para cadenas y franquicias</p>
-                </CardHeader>
-                <CardContent>
-                  <ul className="space-y-3 mb-6">
-                    <li className="flex items-start gap-2">
-                      <CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
-                      <span className="text-sm">Ubicaciones ilimitadas</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
-                      <span className="text-sm">Promociones ilimitadas</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
-                      <span className="text-sm">Negocio destacado en la App</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
-                      <span className="text-sm">Promociones destacadas en la App</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
-                      <span className="text-sm">Segmentación de audiencia</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
-                      <span className="text-sm">Analítica avanzada</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
-                      <span className="text-sm">Acceso para 10 usuarios</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
-                      <span className="text-sm">Soporte prioritario</span>
-                    </li>
-                  </ul>
-                  {pricing.id == 'post-launch' ? (
-                    <Button className="w-full bg-transparent" variant="outline" asChild>
-                      <Link href="/solicitar-demo">Contactar Ventas</Link>
-                    </Button>
-                  ) : (
-                    <Button className="w-full shadow-lg" onClick={handleStartTrial}>
-                      Comenzar por solo {formatPrice(pricing.trialOffer?.price || 0)}
-                    </Button>
-                  )}
-                </CardContent>
-              </Card>
+              <Button size="lg" asChild className="shadow-lg">
+                <Link href="/negocios/precios">
+                  <CheckCircle2 className="mr-2 h-5 w-5" />
+                  Ver precios y planes
+                </Link>
+              </Button>
             </div>
           </div>
         </section>

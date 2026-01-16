@@ -25,7 +25,7 @@ export function SiteHeader({ variant = "user" }: SiteHeaderProps) {
       ]
       : [
         { href: "/negocios#beneficios", label: "Beneficios" },
-        { href: "/negocios#planes", label: "Planes" },
+        { href: "/negocios/precios", label: "Planes" },
         { href: "/", label: "Para Usuarios" },
       ]
 
