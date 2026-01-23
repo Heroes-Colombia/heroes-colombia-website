@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { getCurrentPricing, formatPriceSimple, formatPrice } from "@/lib/pricing-config"
 import { CheckCircle2, Play } from "lucide-react"
+import { ExitIntentPopup } from "@/components/exit-intent-popup"
 import Link from "next/link"
 import { useState } from "react"
 
@@ -46,6 +47,7 @@ export default function PreciosPage() {
       <SiteHeader variant="business" />
       <UrgencyBanner variant="business" />
       <TrialSignupModal open={showSignupModal} onOpenChange={setShowSignupModal} onSubmit={handleSignupSubmit} />
+      <ExitIntentPopup page="business" />
 
       <main className="flex-1">
         {/* Video Hero Section */}

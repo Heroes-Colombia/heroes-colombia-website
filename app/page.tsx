@@ -9,6 +9,7 @@ import { FeedbackForm } from "@/components/feedback-form"
 import { WaitingListForm } from "@/components/waiting-list-form"
 import { AppShowcase } from "@/components/app-showcase"
 import { ExitIntentPopup } from "@/components/exit-intent-popup"
+import { AppDownloadBanner } from "@/components/app-download-banner"
 import { TrustBadges } from "@/components/trust-badges"
 import { ScarcityBanner } from "@/components/scarcity-banner"
 import { FAQSection } from "@/components/faq-section"
@@ -22,8 +23,9 @@ export default function HomePage() {
 
   return (
     <div className="flex min-h-screen flex-col">
+      <AppDownloadBanner />
       <SiteHeader variant="user" />
-      <ExitIntentPopup />
+      <ExitIntentPopup page="user" />
 
       <main className="flex-1">
         <ScarcityBanner variant="user" />
