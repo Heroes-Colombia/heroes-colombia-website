@@ -92,7 +92,7 @@ export default function HomePage() {
                 </div>
                 <div className="flex items-center gap-2">
                   <Users className="h-5 w-5 text-primary" />
-                  <span>300+ Héroes ahorrando</span>
+                  <span>1,300+ Héroes ahorrando</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <Sparkles className="h-5 w-5 text-primary" />
@@ -143,7 +143,7 @@ export default function HomePage() {
             <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
               <Card className="text-center">
                 <CardContent className="pt-6">
-                  <div className="text-4xl font-bold text-primary mb-2">300+</div>
+                  <div className="text-4xl font-bold text-primary mb-2">1,300+</div>
                   <div className="text-sm text-muted-foreground">Miembros de las fuerzas armadas ahorrando</div>
                 </CardContent>
               </Card>
@@ -401,7 +401,7 @@ export default function HomePage() {
                     </Link>
                   </div>
                   <p className="text-sm text-primary-foreground/80">
-                    Únete a los más de 300+ miembros de las fuerzas armadas que ya están ahorrando con la app.
+                    Únete a los más de 1,300+ miembros de las fuerzas armadas que ya están ahorrando con la app.
                   </p>
                 </>
               ) : (

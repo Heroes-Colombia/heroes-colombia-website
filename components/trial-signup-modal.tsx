@@ -13,15 +13,23 @@ interface TrialSignupModalProps {
   open: boolean
   onOpenChange: (open: boolean) => void
   onSubmit: (data: TrialSignupData) => Promise<void>
+  selectedPlan?: PlanDetails
+}
+
+export interface PlanDetails {
+  name: string
+  price: number
+  billingPeriod: "monthly" | "annual"
 }
 
 export interface TrialSignupData {
   email: string
   businessName: string
   phone?: string
+  planDetails?: PlanDetails
 }
 
-export function TrialSignupModal({ open, onOpenChange, onSubmit }: TrialSignupModalProps) {
+export function TrialSignupModal({ open, onOpenChange, onSubmit, selectedPlan }: TrialSignupModalProps) {
   const [loading, setLoading] = useState(false)
   const [errors, setErrors] = useState<Partial<Record<keyof TrialSignupData, string>>>({})
   const [countryCode, setCountryCode] = useState("+57")
@@ -47,7 +55,7 @@ export function TrialSignupModal({ open, onOpenChange, onSubmit }: TrialSignupMo
     } else if (formData.businessName.length < 3) {
       newErrors.businessName = "Mínimo 3 caracteres"
     }
-    
+
     if (formData.phone) {
       if (formData.phone && !/^[0-9]{10}$/.test(formData.phone.replace(/\s/g, ""))) {
         newErrors.phone = "Debe ser un número válido de 10 dígitos"
@@ -67,9 +75,10 @@ export function TrialSignupModal({ open, onOpenChange, onSubmit }: TrialSignupMo
 
     setLoading(true)
     try {
-      const dataToSubmit = {
+      const dataToSubmit: TrialSignupData = {
         ...formData,
         phone: formData.phone ? formatFullPhoneNumber(countryCode, formData.phone) : undefined,
+        planDetails: selectedPlan,
       }
       await onSubmit(dataToSubmit)
     } catch (error) {
@@ -89,11 +98,19 @@ export function TrialSignupModal({ open, onOpenChange, onSubmit }: TrialSignupMo
             <DialogTitle className="text-2xl">¡Asegura tu espacio!</DialogTitle>
           </div>
           <DialogDescription className="text-base">
-            Solo faltan unos datos para comenzar tu prueba de{" "}
-            <span className="font-bold text-primary">
-              {formatPriceSimple(pricing.trialOffer?.price || 0)} COP
-            </span>{" "}
-            con acceso Enterprise completo hasta el 1 de febrero de 2026.
+            {selectedPlan ? (
+              <>
+                Completa tus datos para suscribirte al plan <span className="font-bold text-primary">{selectedPlan.name}</span>.
+              </>
+            ) : (
+              <>
+                Solo faltan unos datos para comenzar tu prueba de{" "}
+                <span className="font-bold text-primary">
+                  {formatPriceSimple(pricing.trialOffer?.price || 0)} COP
+                </span>{" "}
+                con acceso Enterprise completo hasta el 1 de febrero de 2026.
+              </>
+            )}
           </DialogDescription>
         </DialogHeader>
 
@@ -155,18 +172,37 @@ export function TrialSignupModal({ open, onOpenChange, onSubmit }: TrialSignupMo
           </div>
 
           <div className="bg-secondary/50 rounded-lg p-4 space-y-2">
-            <div className="flex justify-between items-center">
-              <span className="text-sm text-muted-foreground">Pago único:</span>
-              <span className="text-lg font-bold">{formatPriceSimple(pricing.trialOffer?.price || 0)} COP</span>
-            </div>
-            <div className="flex justify-between items-center">
-              <span className="text-sm text-muted-foreground">Acceso hasta:</span>
-              <span className="text-sm font-medium">1 de Febrero, 2026</span>
-            </div>
-            <div className="flex justify-between items-center">
-              <span className="text-sm text-muted-foreground">Plan incluido:</span>
-              <span className="text-sm font-bold text-primary">Enterprise Completo</span>
-            </div>
+            {selectedPlan ? (
+              <>
+                <div className="flex justify-between items-center">
+                  <span className="text-sm text-muted-foreground">Plan seleccionado:</span>
+                  <span className="text-lg font-bold text-primary">{selectedPlan.name}</span>
+                </div>
+                <div className="flex justify-between items-center">
+                  <span className="text-sm text-muted-foreground">Frecuencia:</span>
+                  <span className="text-sm font-medium capitalize">{selectedPlan.billingPeriod === "monthly" ? "Mensual" : "Anual"}</span>
+                </div>
+                <div className="flex justify-between items-center border-t border-border pt-2 mt-2">
+                  <span className="text-sm text-muted-foreground">Total a pagar:</span>
+                  <span className="text-lg font-bold">{formatPriceSimple(selectedPlan.price)} COP</span>
+                </div>
+              </>
+            ) : (
+              <>
+                <div className="flex justify-between items-center">
+                  <span className="text-sm text-muted-foreground">Pago único:</span>
+                  <span className="text-lg font-bold">{formatPriceSimple(pricing.trialOffer?.price || 0)} COP</span>
+                </div>
+                <div className="flex justify-between items-center">
+                  <span className="text-sm text-muted-foreground">Acceso hasta:</span>
+                  <span className="text-sm font-medium">1 de Febrero, 2026</span>
+                </div>
+                <div className="flex justify-between items-center">
+                  <span className="text-sm text-muted-foreground">Plan incluido:</span>
+                  <span className="text-sm font-bold text-primary">Enterprise Completo</span>
+                </div>
+              </>
+            )}
           </div>
 
           <div className="flex gap-3 pt-2">

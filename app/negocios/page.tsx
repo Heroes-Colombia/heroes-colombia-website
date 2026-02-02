@@ -225,7 +225,7 @@ export default function BusinessPage() {
                   </div>
                   <h3 className="font-semibold text-lg mb-2">Menor competencia</h3>
                   <p className="text-sm text-muted-foreground">
-                    Destaca entre pocos negocios por la atención de 300+ usuarios verificados y creciendo semanalmente
+                    Destaca entre pocos negocios por la atención de 1,300+ usuarios verificados y creciendo semanalmente
                   </p>
                 </CardContent>
               </Card>
@@ -392,13 +392,13 @@ export default function BusinessPage() {
                   className="w-full sm:w-auto bg-transparent border-primary-foreground text-primary-foreground hover:bg-primary-foreground/10"
                   asChild
                 >
-                  <Link href="https://app.heroescolombia.com" target="_blank">
-                    Comenzar Gratis
+                  <Link href="/negocios/precios">
+                    Comenzar Ahora
                   </Link>
                 </Button>
               </div>
               <p className="text-sm text-primary-foreground/80">
-                50+ negocios activos • 1,000+ vistas de promociones • 300+ usuarios verificados
+                50+ negocios activos • 1,000+ vistas de promociones • 1,300+ usuarios verificados
               </p>
             </div>
           </div>

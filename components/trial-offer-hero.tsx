@@ -71,9 +71,13 @@ export function TrialOfferHero({ onStartTrial }: TrialOfferHeroProps) {
               Conecta con 380,000 militares y sus familias con alto poder adquisitivo
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <Button size="lg" onClick={scrollToPricing}>
-                Ver Planes
-                <ArrowRight className="ml-2 h-5 w-5" />
+              <Button size="lg">
+                <Link href="/negocios/precios">
+                  <div className="flex items-center">
+                    Ver Planes
+                    <ArrowRight className="ml-2 h-5 w-5" />
+                  </div>
+                </Link>
               </Button>
               <Button size="lg" variant="outline" asChild>
                 <Link href="/solicitar-demo">
@@ -197,9 +201,10 @@ export function TrialOfferHero({ onStartTrial }: TrialOfferHeroProps) {
                   <Button
                     variant="link"
                     className="p-0 h-auto ml-1 text-primary"
-                    onClick={scrollToPricing}
                   >
-                    Ver planes completos →
+                    <Link href="/negocios/precios">
+                      Ver planes completos →
+                    </Link>
                   </Button>
                 </AlertDescription>
               </Alert>

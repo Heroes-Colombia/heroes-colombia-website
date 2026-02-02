@@ -2,7 +2,7 @@
 
 import { SiteHeader } from "@/components/site-header"
 import { SiteFooter } from "@/components/site-footer"
-import { TrialSignupModal, type TrialSignupData } from "@/components/trial-signup-modal"
+import { TrialSignupModal, type TrialSignupData, type PlanDetails } from "@/components/trial-signup-modal"
 import { FAQSection } from "@/components/faq-section"
 import { UrgencyBanner } from "@/components/urgency-banner"
 import { Button } from "@/components/ui/button"
@@ -16,9 +16,15 @@ import { useState } from "react"
 export default function PreciosPage() {
   const [isAnnual, setIsAnnual] = useState(true)
   const [showSignupModal, setShowSignupModal] = useState(false)
+  const [selectedPlan, setSelectedPlan] = useState<PlanDetails | undefined>(undefined)
   const pricing = getCurrentPricing()
 
-  const handleStartTrial = () => {
+  const handleStartTrial = (name?: string, price?: number, billingPeriod?: "monthly" | "annual") => {
+    if (name && price !== undefined && billingPeriod) {
+      setSelectedPlan({ name, price, billingPeriod })
+    } else {
+      setSelectedPlan(undefined)
+    }
     setShowSignupModal(true)
   }
 
@@ -46,7 +52,12 @@ export default function PreciosPage() {
     <div className="flex min-h-screen flex-col">
       <SiteHeader variant="business" />
       <UrgencyBanner variant="business" />
-      <TrialSignupModal open={showSignupModal} onOpenChange={setShowSignupModal} onSubmit={handleSignupSubmit} />
+      <TrialSignupModal
+        open={showSignupModal}
+        onOpenChange={setShowSignupModal}
+        onSubmit={handleSignupSubmit}
+        selectedPlan={selectedPlan}
+      />
       <ExitIntentPopup page="business" />
 
       <main className="flex-1">
@@ -162,8 +173,8 @@ export default function PreciosPage() {
                       <span className="text-sm">Soporte por email</span>
                     </li>
                   </ul>
-                  <Button className="w-full" onClick={handleStartTrial}>
-                    Comenzar por solo {formatPrice(pricing.trialOffer?.price || 0)}
+                  <Button className="w-full" onClick={() => handleStartTrial("Básico", isAnnual ? pricing.regularPlans.basico.annual : pricing.regularPlans.basico.monthly, isAnnual ? "annual" : "monthly")}>
+                    Comenzar por solo {formatPrice(isAnnual ? pricing.regularPlans.basico.annual : pricing.regularPlans.basico.monthly)}
                   </Button>
                 </CardContent>
               </Card>
@@ -222,8 +233,8 @@ export default function PreciosPage() {
                       <span className="text-sm">Soporte prioritario</span>
                     </li>
                   </ul>
-                  <Button className="w-full shadow-lg" onClick={handleStartTrial}>
-                    Comenzar por solo {formatPrice(pricing.trialOffer?.price || 0)}
+                  <Button className="w-full shadow-lg" onClick={() => handleStartTrial("Pro", isAnnual ? pricing.regularPlans.pro.annual : pricing.regularPlans.pro.monthly, isAnnual ? "annual" : "monthly")}>
+                    Comenzar por solo {formatPrice(isAnnual ? pricing.regularPlans.pro.annual : pricing.regularPlans.pro.monthly)}
                   </Button>
                 </CardContent>
               </Card>
@@ -289,15 +300,9 @@ export default function PreciosPage() {
                       <span className="text-sm">Soporte personalizado por email o WhatsApp</span>
                     </li>
                   </ul>
-                  {pricing.id == 'post-launch' ? (
-                    <Button className="w-full bg-transparent" variant="outline" asChild>
-                      <Link href="/solicitar-demo">Contactar Ventas</Link>
-                    </Button>
-                  ) : (
-                    <Button className="w-full shadow-lg" onClick={handleStartTrial}>
-                      Comenzar por solo {formatPrice(pricing.trialOffer?.price || 0)}
-                    </Button>
-                  )}
+                  <Button className="w-full shadow-lg" onClick={() => handleStartTrial("Enterprise", isAnnual ? pricing.regularPlans.enterprise.annual : pricing.regularPlans.enterprise.monthly, isAnnual ? "annual" : "monthly")}>
+                    Comenzar por solo {formatPrice(isAnnual ? pricing.regularPlans.enterprise.annual : pricing.regularPlans.enterprise.monthly)}
+                  </Button>
                 </CardContent>
               </Card>
             </div>

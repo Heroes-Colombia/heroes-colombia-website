@@ -5,16 +5,23 @@ import { sendTrialAdminEmail } from "@/lib/email"
 const MERCADOPAGO_ACCESS_TOKEN = process.env.MERCADOPAGO_ACCESS_TOKEN!
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "https://heroescolombia.com"
 
+interface PlanDetails {
+  name: string
+  price: number
+  billingPeriod: "monthly" | "annual"
+}
+
 interface TrialRequestBody {
   email: string
   businessName: string
   phone?: string
+  planDetails?: PlanDetails
 }
 
 export async function POST(req: NextRequest) {
   try {
     const body: TrialRequestBody = await req.json()
-    const { email, businessName, phone } = body
+    const { email, businessName, phone, planDetails } = body
 
     // Validate input
     if (!email || !businessName) {
@@ -28,16 +35,27 @@ export async function POST(req: NextRequest) {
 
     // Get current pricing
     const pricing = getCurrentPricing()
-    const trialPrice = pricing.trialOffer?.price || 20000
+
+    let unitPrice = pricing.trialOffer?.price || 20000
+    let title = `Héroes Colombia - Plan Enterprise - (${businessName})`
+    let description = "Acceso Enterprise completo hasta el 1 de Febrero, 2026"
+    let planType = "enterprise"
+
+    if (planDetails) {
+      unitPrice = planDetails.price
+      title = `Héroes Colombia - Plan ${planDetails.name} - (${businessName})`
+      description = `Suscripción ${planDetails.name} (${planDetails.billingPeriod === "monthly" ? "Mensual" : "Anual"})`
+      planType = planDetails.name.toLowerCase()
+    }
 
     // Create MercadoPago Preference
     const preference = {
       items: [
         {
-          title: `Héroes Colombia - Plan Enterprise - (${businessName})`,
-          description: "Acceso Enterprise completo hasta el 1 de Febrero, 2026",
+          title: title,
+          description: description,
           quantity: 1,
-          unit_price: trialPrice,
+          unit_price: unitPrice,
           currency_id: "COP",
         },
       ],
@@ -59,12 +77,13 @@ export async function POST(req: NextRequest) {
       auto_return: "approved" as const,
       notification_url: `${BASE_URL}/api/mercadopago/webhook`,
       metadata: {
-        type: "trial",
+        type: planDetails ? "subscription" : "trial",
         email: email,
         business_name: businessName,
         phone: phone || "",
-        trial_end_date: "2026-02-01",
-        plan_type: "enterprise",
+        trial_end_date: planDetails ? undefined : "2026-02-01",
+        plan_type: planType,
+        billing_period: planDetails?.billingPeriod,
       },
       statement_descriptor: "HEROES COLOMBIA",
       external_reference: `trial_${email}_${Date.now()}`,
