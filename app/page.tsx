@@ -92,7 +92,7 @@ export default function HomePage() {
                 </div>
                 <div className="flex items-center gap-2">
                   <Users className="h-5 w-5 text-primary" />
-                  <span>1,300+ Héroes ahorrando</span>
+                  <span>1,600+ Héroes ahorrando</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <Sparkles className="h-5 w-5 text-primary" />
@@ -101,7 +101,7 @@ export default function HomePage() {
               </div>
 
               <p className="text-sm text-muted-foreground mt-2">
-                Más de 300 miembros de la fuerza pública ya descargaron la app. Únete a la comunidad exclusiva de Héroes 🇨🇴
+                Más de 1,600 miembros de las fuerzas armadas ya descargaron la app. Únete a la única comunidad exclusiva de Héroes 🇨🇴
               </p>
             </div>
           </div>
@@ -114,7 +114,7 @@ export default function HomePage() {
               <p className="text-muted-foreground">Datos verificados desde el 6 de diciembre de 2025</p>
             </div>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-              <AnimatedStat value="300" label="Héroes ya ahorrando" suffix="+" />
+              <AnimatedStat value="1600" label="Héroes ya inscritos" suffix="+" />
               <AnimatedStat value="50" label="Negocios verificados" suffix="+" />
               <AnimatedStat value="20" label="Ahorro promedio real" suffix="%" />
               <AnimatedStat value="100" label="Verificación garantizada" suffix="%" />
@@ -135,16 +135,16 @@ export default function HomePage() {
                 El Comienzo de Algo Grande
               </h2>
               <p className="text-muted-foreground max-w-2xl mx-auto">
-                Sé parte de miembros fundadores. Los primeros 500 usuarios obtienen acceso preferencial
-                a nuevas alianzas y beneficios exclusivos.
+                En Diciembre 2025 lanzamos Heroes Colombia. Hoy ya hemos impactado la vida de cientos de Heroes
+                gracias a las alianzas, descuentos y beneficios exclusivos que hemos logrado con marcas aliadas.
               </p>
             </div>
 
             <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
               <Card className="text-center">
                 <CardContent className="pt-6">
-                  <div className="text-4xl font-bold text-primary mb-2">1,300+</div>
-                  <div className="text-sm text-muted-foreground">Miembros de las fuerzas armadas ahorrando</div>
+                  <div className="text-4xl font-bold text-primary mb-2">1,600+</div>
+                  <div className="text-sm text-muted-foreground">Miembros de las fuerzas armadas inscritos</div>
                 </CardContent>
               </Card>
 
@@ -229,7 +229,7 @@ export default function HomePage() {
           <div className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-16">
               <h2 className="text-3xl md:text-5xl font-bold text-balance mb-4">
-                Se parte de los primeros 500 miembros fundadores
+                Se parte de los primeros Heroes Fundadores
               </h2>
               <p className="text-lg text-muted-foreground text-balance max-w-2xl mx-auto">
                 Beneficios diseñados específicamente para reconocer tu servicio
@@ -339,7 +339,7 @@ export default function HomePage() {
             <div className="text-center mb-16">
               <h2 className="text-3xl md:text-5xl font-bold text-balance mb-4">Esto dicen nuestros Héroes</h2>
               <p className="text-lg text-muted-foreground text-balance max-w-2xl mx-auto">
-                Testimonios de Miembros de las fuerzas armadas que ya se registraron en el lanzamiento
+                Testimonios reales de personas que ya descargaron nuestra app
               </p>
             </div>
 
@@ -401,7 +401,7 @@ export default function HomePage() {
                     </Link>
                   </div>
                   <p className="text-sm text-primary-foreground/80">
-                    Únete a los más de 1,300+ miembros de las fuerzas armadas que ya están ahorrando con la app.
+                    Únete a los más de 1,600+ miembros de las fuerzas armadas que ya están ahorrando con la app.
                   </p>
                 </>
               ) : (

@@ -68,7 +68,7 @@ export function TrialOfferHero({ onStartTrial }: TrialOfferHeroProps) {
               <span className="text-primary">Héroes Colombia</span>
             </h1>
             <p className="text-lg md:text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-              Conecta con 380,000 militares y sus familias con alto poder adquisitivo
+              Conecta con +680,000 militares y sus familias con alto poder adquisitivo
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Button size="lg">
@@ -141,7 +141,7 @@ export function TrialOfferHero({ onStartTrial }: TrialOfferHeroProps) {
               {/* What's Included - Enterprise Features */}
               <div className="bg-white dark:bg-slate-800 rounded-xl p-6 mb-8 shadow-inner">
                 <h3 className="font-bold text-lg mb-4 flex items-center gap-2 justify-center">
-                  Acceso Completo al plan Enterprise hasta Febrero 1, 2026
+                  Acceso Completo al plan Enterprise por 2 meses
                 </h3>
                 <div className="grid md:grid-cols-2 gap-3 text-sm">
                   <div className="flex items-start gap-2">
@@ -189,15 +189,15 @@ export function TrialOfferHero({ onStartTrial }: TrialOfferHeroProps) {
                 onClick={handleStartTrial}
                 disabled={isProcessing}
               >
-                {isProcessing ? "Procesando..." : "Comenzar Ahora por " + formatPrice(pricing.trialOffer?.price || 0)}
+                {isProcessing ? "Procesando..." : "Comenzar solo por " + formatPrice(pricing.trialOffer?.price || 0)}
               </Button>
 
               {/* Post-trial Info */}
               <Alert className="border-primary/50">
                 <AlertDescription>
-                  <strong>Sin cargos adicionales hasta Febrero 1, 2026.</strong>
+                  <strong>Sin cargos adicionales en los proximos 60 días.</strong>
                   <br />
-                  Después, elige el plan que deseas o continúa gratis.
+                  Después, elige el plan que deseas.
                   <Button
                     variant="link"
                     className="p-0 h-auto ml-1 text-primary"

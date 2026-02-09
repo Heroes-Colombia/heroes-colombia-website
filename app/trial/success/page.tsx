@@ -45,8 +45,7 @@ export default function TrialSuccessPage() {
           {/* Trial Details */}
           <div className="grid md:grid-cols-2 gap-4">
             <div className="border rounded-lg p-4">
-              <div className="text-sm text-muted-foreground mb-1">Acceso Completo Hasta</div>
-              <div className="text-xl font-bold">1 de Febrero, 2026</div>
+              <div className="text-sm text-muted-foreground mb-1">Acceso Completo por 2 meses</div>
             </div>
             <div className="border rounded-lg p-4">
               <div className="text-sm text-muted-foreground mb-1">Plan Incluido</div>

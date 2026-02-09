@@ -25,7 +25,7 @@ function getBusinessFAQs(): FAQItem[] {
     {
       question: "¿Cuánto cuesta registrar mi negocio?",
       answer: isTrialActive
-        ? `¡Oferta de lanzamiento! Los primeros 100 negocios pueden acceder por solo ${formatPrice(trialPrice)} (pago único) con acceso Enterprise completo hasta ${pricing.trialOffer?.nextBillingDate ? new Date(pricing.trialOffer.nextBillingDate).toLocaleDateString("es-CO", { year: "numeric", month: "long", day: "numeric" }) : "Febrero 1, 2026"}. Después, puedes elegir entre nuestros planes regulares: Básico desde ${formatPrice(pricing.regularPlans.basico.monthly)}/mes, Pro desde ${formatPrice(pricing.regularPlans.pro.monthly)}/mes, o Enterprise desde ${formatPrice(pricing.regularPlans.enterprise.monthly)}/mes. Todos los precios incluyen IVA.`
+        ? `¡Oferta de lanzamiento! Los primeros 100 negocios pueden acceder por solo ${formatPrice(trialPrice)} (pago único) con acceso Enterprise completo por 2 meses. Después, puedes elegir entre nuestros planes regulares: Básico desde ${formatPrice(pricing.regularPlans.basico.monthly)}/mes, Pro desde ${formatPrice(pricing.regularPlans.pro.monthly)}/mes, o Enterprise desde ${formatPrice(pricing.regularPlans.enterprise.monthly)}/mes. Todos los precios incluyen IVA.`
         : `Tenemos planes flexibles para todos los tamaños de negocio: Básico desde ${formatPrice(pricing.regularPlans.basico.monthly)}/mes, Pro desde ${formatPrice(pricing.regularPlans.pro.monthly)}/mes, y Enterprise desde ${formatPrice(pricing.regularPlans.enterprise.monthly)}/mes. Todos los precios incluyen IVA y puedes cancelar en cualquier momento.`,
     },
     {
@@ -63,7 +63,7 @@ const userFAQs: FAQItem[] = [
   {
     question: "¿Cómo redimo una de las promociones que se ven en la app?",
     answer:
-      "Solo tienes que mostrar la promoción en el establecimiento, mostrar tu carnet militar y listo, recibiras el descuento que se ve en la app.",
+      "En cada negocio/promoción encontrarás las instrucciones para contactar al negocio y redimir el beneficio.",
   },
   {
     question: "¿Tiene algún costo la app?",

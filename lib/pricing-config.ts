@@ -58,15 +58,15 @@ export const PRICING_PERIODS: PricingPeriod[] = [
     id: "pre-launch",
     name: "Pre-Lanzamiento",
     startDate: new Date("2025-10-06T00:00:00-05:00"), // Colombia timezone
-    endDate: new Date("2025-12-06T23:59:59-05:00"),
+    endDate: new Date("2026-03-31T23:59:59-05:00"),
 
     trialOffer: {
       enabled: true,
       price: 20000,
       duration: 119, // Days until Feb 1, 2026 (Oct 6 → Feb 1 = ~119 days)
-      badge: "🎉 Pre-Lanzamiento - Primeros 100 Negocios",
+      badge: "🎉 Ampliamos 50 cupos más para ser Socio Fundador",
       headline: "20,000 COP",
-      description: "Pago único por acceso completo al plan Enterprise",
+      description: "Pago único por 2 meses de acceso completo al plan Enterprise",
       nextBillingDate: new Date("2026-02-01T00:00:00-05:00"),
     },
 

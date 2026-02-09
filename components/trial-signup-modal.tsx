@@ -108,7 +108,7 @@ export function TrialSignupModal({ open, onOpenChange, onSubmit, selectedPlan }:
                 <span className="font-bold text-primary">
                   {formatPriceSimple(pricing.trialOffer?.price || 0)} COP
                 </span>{" "}
-                con acceso Enterprise completo hasta el 1 de febrero de 2026.
+                con acceso Enterprise completo por 2 meses.
               </>
             )}
           </DialogDescription>
@@ -194,8 +194,8 @@ export function TrialSignupModal({ open, onOpenChange, onSubmit, selectedPlan }:
                   <span className="text-lg font-bold">{formatPriceSimple(pricing.trialOffer?.price || 0)} COP</span>
                 </div>
                 <div className="flex justify-between items-center">
-                  <span className="text-sm text-muted-foreground">Acceso hasta:</span>
-                  <span className="text-sm font-medium">1 de Febrero, 2026</span>
+                  <span className="text-sm text-muted-foreground">Acceso por:</span>
+                  <span className="text-sm font-medium">2 meses</span>
                 </div>
                 <div className="flex justify-between items-center">
                   <span className="text-sm text-muted-foreground">Plan incluido:</span>

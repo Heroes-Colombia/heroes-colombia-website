@@ -7,7 +7,7 @@ import { FAQSection } from "@/components/faq-section"
 import { UrgencyBanner } from "@/components/urgency-banner"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { getCurrentPricing, formatPriceSimple, formatPrice } from "@/lib/pricing-config"
+import { getCurrentPricing, formatPriceSimple, formatPrice, isTrialOfferActive } from "@/lib/pricing-config"
 import { CheckCircle2, Play } from "lucide-react"
 import { ExitIntentPopup } from "@/components/exit-intent-popup"
 import Link from "next/link"
@@ -18,6 +18,7 @@ export default function PreciosPage() {
   const [showSignupModal, setShowSignupModal] = useState(false)
   const [selectedPlan, setSelectedPlan] = useState<PlanDetails | undefined>(undefined)
   const pricing = getCurrentPricing()
+  const showTrial = isTrialOfferActive()
 
   const handleStartTrial = (name?: string, price?: number, billingPeriod?: "monthly" | "annual") => {
     if (name && price !== undefined && billingPeriod) {
@@ -105,10 +106,10 @@ export default function PreciosPage() {
           <div className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-16">
               <h2 className="text-3xl md:text-5xl font-bold text-balance mb-4">
-                Elige el plan perfecto para tu negocio
+                {showTrial ? "Prueba el plan Enterprise por solo $20,000 COP" : "Elige el plan perfecto para tu negocio"}
               </h2>
               <p className="text-lg text-muted-foreground text-balance max-w-2xl mx-auto">
-                Resultados claros, precios transparentes y sin sorpresas.
+                {showTrial ? "Aprovecha esta oportunidad única y prueba el plan Enterprise por 2 meses." : "Resultados claros, precios transparentes y sin sorpresas."}
               </p>
               <div className="flex items-center justify-center gap-3 mt-6">
                 <span className={`text-sm ${!isAnnual ? "font-medium" : "text-muted-foreground"}`}>Mensual</span>
@@ -173,9 +174,15 @@ export default function PreciosPage() {
                       <span className="text-sm">Soporte por email</span>
                     </li>
                   </ul>
-                  <Button className="w-full" onClick={() => handleStartTrial("Básico", isAnnual ? pricing.regularPlans.basico.annual : pricing.regularPlans.basico.monthly, isAnnual ? "annual" : "monthly")}>
-                    Comenzar por solo {formatPrice(isAnnual ? pricing.regularPlans.basico.annual : pricing.regularPlans.basico.monthly)}
-                  </Button>
+                  {showTrial ? (
+                    <Button className="w-full" onClick={() => handleStartTrial("Básico", isAnnual ? pricing.regularPlans.basico.annual : pricing.regularPlans.basico.monthly, isAnnual ? "annual" : "monthly")}>
+                      Hoy solo {formatPriceSimple(pricing.trialOffer?.price || 20000)}
+                    </Button>
+                  ) : (
+                    <Button className="w-full" onClick={() => handleStartTrial("Básico", isAnnual ? pricing.regularPlans.basico.annual : pricing.regularPlans.basico.monthly, isAnnual ? "annual" : "monthly")}>
+                      Comenzar por solo {formatPrice(isAnnual ? pricing.regularPlans.basico.annual : pricing.regularPlans.basico.monthly)}
+                    </Button>
+                  )}
                 </CardContent>
               </Card>
 
@@ -233,9 +240,15 @@ export default function PreciosPage() {
                       <span className="text-sm">Soporte prioritario</span>
                     </li>
                   </ul>
-                  <Button className="w-full shadow-lg" onClick={() => handleStartTrial("Pro", isAnnual ? pricing.regularPlans.pro.annual : pricing.regularPlans.pro.monthly, isAnnual ? "annual" : "monthly")}>
-                    Comenzar por solo {formatPrice(isAnnual ? pricing.regularPlans.pro.annual : pricing.regularPlans.pro.monthly)}
-                  </Button>
+                  {showTrial ? (
+                    <Button className="w-full" onClick={() => handleStartTrial("Básico", isAnnual ? pricing.regularPlans.basico.annual : pricing.regularPlans.basico.monthly, isAnnual ? "annual" : "monthly")}>
+                      Hoy solo {formatPriceSimple(pricing.trialOffer?.price || 20000)}
+                    </Button>
+                  ) : (
+                    <Button className="w-full shadow-lg" onClick={() => handleStartTrial("Pro", isAnnual ? pricing.regularPlans.pro.annual : pricing.regularPlans.pro.monthly, isAnnual ? "annual" : "monthly")}>
+                      Comenzar por solo {formatPrice(isAnnual ? pricing.regularPlans.pro.annual : pricing.regularPlans.pro.monthly)}
+                    </Button>
+                  )}
                 </CardContent>
               </Card>
 
@@ -300,9 +313,15 @@ export default function PreciosPage() {
                       <span className="text-sm">Soporte personalizado por email o WhatsApp</span>
                     </li>
                   </ul>
-                  <Button className="w-full shadow-lg" onClick={() => handleStartTrial("Enterprise", isAnnual ? pricing.regularPlans.enterprise.annual : pricing.regularPlans.enterprise.monthly, isAnnual ? "annual" : "monthly")}>
-                    Comenzar por solo {formatPrice(isAnnual ? pricing.regularPlans.enterprise.annual : pricing.regularPlans.enterprise.monthly)}
-                  </Button>
+                  {showTrial ? (
+                    <Button className="w-full" onClick={() => handleStartTrial("Básico", isAnnual ? pricing.regularPlans.basico.annual : pricing.regularPlans.basico.monthly, isAnnual ? "annual" : "monthly")}>
+                      Hoy solo {formatPriceSimple(pricing.trialOffer?.price || 20000)}
+                    </Button>
+                  ) : (
+                    <Button className="w-full shadow-lg" onClick={() => handleStartTrial("Enterprise", isAnnual ? pricing.regularPlans.enterprise.annual : pricing.regularPlans.enterprise.monthly, isAnnual ? "annual" : "monthly")}>
+                      Comenzar por solo {formatPrice(isAnnual ? pricing.regularPlans.enterprise.annual : pricing.regularPlans.enterprise.monthly)}
+                    </Button>
+                  )}
                 </CardContent>
               </Card>
             </div>

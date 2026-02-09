@@ -78,7 +78,7 @@ export default function BusinessPage() {
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
               <AnimatedStat value="50" label="Negocios activos" suffix="+" />
               <AnimatedStat value="1000" label="Vistas de promociones" suffix="+" />
-              <AnimatedStat value="300" label="Usuarios verificados" suffix="+" />
+              <AnimatedStat value="1600" label="Usuarios verificados" suffix="+" />
               <AnimatedStat value="20" label="Ahorro promedio usuarios" suffix="%" />
             </div>
           </div>
@@ -207,7 +207,7 @@ export default function BusinessPage() {
             <div className="text-center mb-8">
               <div className="inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-2 rounded-full text-sm font-medium mb-4">
                 <Target className="h-4 w-4" />
-                Ventaja de Pioneros
+                Ventaja de ser Socio Fundador
               </div>
               <h2 className="text-2xl md:text-3xl font-bold mb-3">
                 Únete ahora y obtén ventajas exclusivas
@@ -225,7 +225,7 @@ export default function BusinessPage() {
                   </div>
                   <h3 className="font-semibold text-lg mb-2">Menor competencia</h3>
                   <p className="text-sm text-muted-foreground">
-                    Destaca entre pocos negocios por la atención de 1,300+ usuarios verificados y creciendo semanalmente
+                    Destaca entre pocos negocios por la atención de 1,600+ usuarios verificados y creciendo semanalmente
                   </p>
                 </CardContent>
               </Card>
@@ -398,7 +398,7 @@ export default function BusinessPage() {
                 </Button>
               </div>
               <p className="text-sm text-primary-foreground/80">
-                50+ negocios activos • 1,000+ vistas de promociones • 1,300+ usuarios verificados
+                50+ negocios activos • 1,000+ vistas de promociones • 1,600+ usuarios verificados
               </p>
             </div>
           </div>
