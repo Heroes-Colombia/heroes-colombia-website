@@ -142,7 +142,7 @@ export function ExitIntentPopup({ page = "user" }: ExitIntentPopupProps) {
           </div>
 
           <p className="text-xs text-center text-muted-foreground pt-2">
-            Únete a más de 300 personas que ya disfrutan de Heroes Colombia
+            Únete a más de 1,700 personas que ya disfrutan de Heroes Colombia
           </p>
         </div>
       </DialogContent>
