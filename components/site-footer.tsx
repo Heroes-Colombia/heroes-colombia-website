@@ -1,6 +1,6 @@
 import Link from "next/link"
 import Image from "next/image"
-import { Facebook, Instagram } from "lucide-react"
+import { Facebook, Instagram, Music2 } from "lucide-react"
 
 export function SiteFooter() {
   return (
@@ -40,6 +40,15 @@ export function SiteFooter() {
                 >
                   <Facebook className="h-5 w-5" />
                   <span className="sr-only">Facebook</span>
+                </Link>
+                <Link
+                  href="https://www.tiktok.com/@heroescolombia"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-muted-foreground hover:text-primary transition-colors"
+                >
+                  <Music2 className="h-5 w-5" />
+                  <span className="sr-only">TikTok</span>
                 </Link>
               </div>
             </div>
