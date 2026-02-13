@@ -32,7 +32,7 @@ export default function RootLayout({
             })(window,document,'script','dataLayer','GTM-KC456QG3');`,
           }}
         />
-        <script 
+        <script
           dangerouslySetInnerHTML={{
             __html: `(function(c,l,a,r,i,t,y){
                 c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
@@ -53,6 +53,19 @@ export default function RootLayout({
         </noscript>
         <Suspense fallback={null}>{children}</Suspense>
         <Analytics />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function() {
+            var script = document.createElement('script');
+            script.dataset.bot = "698eee354c9ee63bf5cf99ac";
+            script.dataset.zindex = "99999";
+            script.src = "https://panel.chatfuel.com/widgets/chat-widget/chat-widget.js";
+            script.async = true;
+            script.defer = true;
+            document.getElementsByTagName('head')[0].appendChild(script);
+          })()`,
+          }}
+        />
       </body>
     </html>
   )
