@@ -1,4 +1,4 @@
-import { CheckCircle2, Sparkles, Mail, ExternalLink } from "lucide-react"
+import { CheckCircle2, Sparkles, ArrowRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import Link from "next/link"
@@ -20,32 +20,16 @@ export default function TrialSuccessPage() {
           </div>
           <CardTitle className="text-3xl md:text-4xl font-bold mb-2">¡Pago Exitoso!</CardTitle>
           <p className="text-lg text-muted-foreground">
-            Tu prueba Enterprise ha sido activada. Revisa tu correo para continuar.
+            Tu prueba Enterprise ha sido activada. Ya puedes acceder a tu dashboard.
           </p>
         </CardHeader>
 
         <CardContent className="space-y-6">
-          {/* What's Next */}
-          <div className="bg-primary/5 rounded-lg p-6 space-y-4">
-            <div className="flex items-start gap-3">
-              <Mail className="h-6 w-6 text-primary shrink-0 mt-0.5" />
-              <div className="flex-1">
-                <h3 className="font-semibold mb-2">Revisa tu Correo Electrónico</h3>
-                <p className="text-sm text-muted-foreground">
-                  Te enviamos un correo con las instrucciones para crear tu cuenta en Heroes Colombia y comenzar a usar todas
-                  las funciones Enterprise.
-                </p>
-                <p className="mt-2 text-sm text-muted-foreground">
-                  O crea tu cuenta con el botón de abajo 👇
-                </p>
-              </div>
-            </div>
-          </div>
-
           {/* Trial Details */}
           <div className="grid md:grid-cols-2 gap-4">
             <div className="border rounded-lg p-4">
-              <div className="text-sm text-muted-foreground mb-1">Acceso Completo por 2 meses</div>
+              <div className="text-sm text-muted-foreground mb-1">Duracion</div>
+              <div className="text-xl font-bold text-primary">2 meses</div>
             </div>
             <div className="border rounded-lg p-4">
               <div className="text-sm text-muted-foreground mb-1">Plan Incluido</div>
@@ -74,7 +58,7 @@ export default function TrialSuccessPage() {
               </li>
               <li className="flex items-start gap-2 text-sm">
                 <CheckCircle2 className="h-4 w-4 text-primary shrink-0 mt-0.5" />
-                <span>Aparecer en sección destacada premium</span>
+                <span>Aparecer en seccion destacada premium</span>
               </li>
               <li className="flex items-start gap-2 text-sm">
                 <CheckCircle2 className="h-4 w-4 text-primary shrink-0 mt-0.5" />
@@ -86,9 +70,9 @@ export default function TrialSuccessPage() {
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-3 pt-4">
             <Button asChild className="flex-1 bg-gradient-to-r from-primary to-orange-500">
-              <Link href={dashboardUrl + '/register'} target="_blank">
-                <ExternalLink className="mr-2 h-4 w-4" />
-                Acceder al portal web
+              <Link href={dashboardUrl + '/business/dashboard'}>
+                <ArrowRight className="mr-2 h-4 w-4" />
+                Ir a mi Dashboard
               </Link>
             </Button>
             <Button asChild variant="outline" className="flex-1">
@@ -98,9 +82,9 @@ export default function TrialSuccessPage() {
 
           {/* Help Section */}
           <div className="text-center pt-4 border-t">
-            <p className="text-sm text-muted-foreground mb-2">¿No recibiste el correo?</p>
+            <p className="text-sm text-muted-foreground mb-2">¿Tienes preguntas?</p>
             <p className="text-xs text-muted-foreground">
-              Revisa tu carpeta de spam o escríbenos a{" "}
+              Escribenos a{" "}
               <a href="mailto:soporte@heroescolombia.com" className="text-primary hover:underline">
                 soporte@heroescolombia.com
               </a>

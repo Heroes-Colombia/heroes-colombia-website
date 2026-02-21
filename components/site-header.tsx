@@ -58,7 +58,7 @@ export function SiteHeader({ variant = "user" }: SiteHeaderProps) {
         {/* Desktop CTAs */}
         <div className="hidden md:flex items-center gap-3">
           {variant === "business" && (
-            <Button variant="ghost" asChild>
+            <Button className="bg-accent" asChild>
               <Link href="https://app.heroescolombia.com">Acceder al Portal web</Link>
             </Button>
           )}

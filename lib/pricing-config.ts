@@ -66,7 +66,7 @@ export const PRICING_PERIODS: PricingPeriod[] = [
       duration: 119, // Days until Feb 1, 2026 (Oct 6 → Feb 1 = ~119 days)
       badge: "🎉 Ampliamos 50 cupos más para ser Socio Fundador",
       headline: "20,000 COP",
-      description: "Pago único por 2 meses de acceso completo al plan Enterprise",
+      description: "Pago único por 2 meses de acceso completo al plan Fundador",
       nextBillingDate: new Date("2026-02-01T00:00:00-05:00"),
     },
 

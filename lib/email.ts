@@ -52,10 +52,10 @@ export async function sendTrialAdminEmail({
     <head>
       <meta charset="utf-8">
       <style>
-        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; color: #333; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; color: #1a1a1a; }
         .container { max-width: 600px; margin: 0 auto; padding: 20px; }
-        .header { background: #4a6838; color: white; padding: 20px; border-radius: 8px 8px 0 0; }
-        .content { background: #fff; padding: 30px; border: 1px solid #e5e7eb; border-top: none; border-radius: 0 0 8px 8px; }
+        .header { background: #5d7a3a; color: white; padding: 20px; border-radius: 8px 8px 0 0; }
+        .content { background: #fff; padding: 30px; border: 1px solid #e5e7e5; border-top: none; border-radius: 0 0 8px 8px; }
         .field { margin: 15px 0; }
         .label { font-weight: bold; color: #6b7280; }
       </style>
@@ -72,7 +72,7 @@ export async function sendTrialAdminEmail({
           </div>
           <div class="field">
             <div class="label">Email:</div>
-            <div><a href="mailto:${email}">${email}</a></div>
+            <div><a href="mailto:${email}" style="color: #032291;">${email}</a></div>
           </div>
           <div class="field">
             <div class="label">Phone:</div>
@@ -114,10 +114,10 @@ export async function sendFeedbackEmail({
 <head>
   <meta charset="utf-8">
   <style>
-    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; color: #333; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; color: #1a1a1a; }
     .container { max-width: 600px; margin: 0 auto; padding: 20px; }
-    .header { background: #4a6838; color: white; padding: 20px; border-radius: 8px 8px 0 0; }
-    .content { background: #fff; padding: 30px; border: 1px solid #e5e7eb; border-top: none; border-radius: 0 0 8px 8px; }
+    .header { background: #5d7a3a; color: white; padding: 20px; border-radius: 8px 8px 0 0; }
+    .content { background: #fff; padding: 30px; border: 1px solid #e5e7e5; border-top: none; border-radius: 0 0 8px 8px; }
     .field { margin: 15px 0; }
     .label { font-weight: bold; color: #6b7280; }
   </style>
@@ -138,7 +138,7 @@ export async function sendFeedbackEmail({
       </div>
       <div class="field">
         <div class="label">Email:</div>
-        <div><a href="mailto:${email}">${email}</a></div>
+        <div><a href="mailto:${email}" style="color: #032291;">${email}</a></div>
       </div>
       <div class="field">
         <div class="label">Phone:</div>
@@ -188,10 +188,10 @@ export async function sendDemoRequestEmail({
 <head>
   <meta charset="utf-8">
   <style>
-    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; color: #333; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; color: #1a1a1a; }
     .container { max-width: 600px; margin: 0 auto; padding: 20px; }
-    .header { background: #10b981; color: white; padding: 20px; border-radius: 8px 8px 0 0; }
-    .content { background: #fff; padding: 30px; border: 1px solid #e5e7eb; border-top: none; border-radius: 0 0 8px 8px; }
+    .header { background: #7fa64e; color: white; padding: 20px; border-radius: 8px 8px 0 0; }
+    .content { background: #fff; padding: 30px; border: 1px solid #e5e7e5; border-top: none; border-radius: 0 0 8px 8px; }
     .field { margin: 15px 0; }
     .label { font-weight: bold; color: #6b7280; }
   </style>
@@ -216,11 +216,11 @@ export async function sendDemoRequestEmail({
       </div>
       <div class="field">
         <div class="label">Email:</div>
-        <div><a href="mailto:${email}">${email}</a></div>
+        <div><a href="mailto:${email}" style="color: #032291;">${email}</a></div>
       </div>
       <div class="field">
         <div class="label">Teléfono:</div>
-        <div><a href="tel:${phone}">${phone}</a></div>
+        <div><a href="tel:${phone}" style="color: #032291;">${phone}</a></div>
       </div>
       <div class="field">
         <div class="label">Facturación Mensual:</div>

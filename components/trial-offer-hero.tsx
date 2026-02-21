@@ -12,6 +12,9 @@ import {
   Sparkles,
   Calendar,
   ArrowRight,
+  UserPlus,
+  CreditCard,
+  Rocket,
 } from "lucide-react"
 import Link from "next/link"
 import {
@@ -21,6 +24,9 @@ import {
   formatPrice,
   isEarlyBirdActive,
 } from "@/lib/pricing-config"
+
+// Dashboard URL for redirecting to registration
+const DASHBOARD_URL = process.env.NEXT_PUBLIC_DASHBOARD_URL || "https://app.heroescolombia.com"
 
 interface TrialOfferHeroProps {
   onStartTrial?: () => void
@@ -32,17 +38,18 @@ export function TrialOfferHero({ onStartTrial }: TrialOfferHeroProps) {
   const showEarlyBird = isEarlyBirdActive()
   const [isProcessing, setIsProcessing] = useState(false)
 
+  /**
+   * NEW FLOW: Redirect to dashboard registration page
+   * User registers FIRST, then pays trial after registration
+   */
   const handleStartTrial = async () => {
     setIsProcessing(true)
     try {
       if (onStartTrial) {
         await onStartTrial()
       } else {
-        // Default: scroll to signup form or redirect
-        const signupSection = document.getElementById("comenzar")
-        if (signupSection) {
-          signupSection.scrollIntoView({ behavior: "smooth" })
-        }
+        // Redirect to dashboard registration
+        window.location.href = `${DASHBOARD_URL}/register`
       }
     } finally {
       setIsProcessing(false)
@@ -59,30 +66,24 @@ export function TrialOfferHero({ onStartTrial }: TrialOfferHeroProps) {
   if (!showTrial) {
     // If trial is not active, show standard pricing CTA
     return (
-      <section className="relative overflow-hidden py-15 md:py-25">
+      <section className="relative overflow-hidden py-10 md:py-15">
         <div className="absolute inset-0 bg-gradient-to-br from-accent/5 via-background to-primary/5" />
         <div className="container relative max-w-7xl mx-auto px-4">
           <div className="mx-auto max-w-4xl text-center">
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-6">
-              Aumenta Tus Ventas hasta 3.5x con{" "}
+              Únete como marca aliada de{" "}
               <span className="text-primary">Héroes Colombia</span>
             </h1>
             <p className="text-lg md:text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-              Conecta con +680,000 militares y sus familias con alto poder adquisitivo
+              Y deja de pagar por publicidad costosa en redes sociales!
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Button size="lg">
                 <Link href="/negocios/precios">
                   <div className="flex items-center">
-                    Ver Planes
+                    UNIRME A HÉROES COLOMBIA
                     <ArrowRight className="ml-2 h-5 w-5" />
                   </div>
-                </Link>
-              </Button>
-              <Button size="lg" variant="outline" asChild>
-                <Link href="/solicitar-demo">
-                  <Calendar className="mr-2 h-5 w-5" />
-                  Solicitar Demo
                 </Link>
               </Button>
             </div>
@@ -93,7 +94,7 @@ export function TrialOfferHero({ onStartTrial }: TrialOfferHeroProps) {
   }
 
   return (
-    <section className="relative overflow-hidden py-15 md:py-20">
+    <section className="relative overflow-hidden py-10 md:py-15">
       <div className="absolute inset-0 bg-gradient-to-br from-accent/5 via-background to-primary/5" />
 
       <div className="container relative max-w-7xl mx-auto px-4">
@@ -107,16 +108,16 @@ export function TrialOfferHero({ onStartTrial }: TrialOfferHeroProps) {
 
           {/* Main Headline */}
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-6">
-            Aumenta tus ventas hasta 3.5x con{" "}
+            Únete como marca aliada de{" "}
             <span className="text-primary">Héroes Colombia</span>
           </h1>
 
-          <p className="text-lg md:text-xl text-muted-foreground mb-12 max-w-2xl mx-auto">
-            Accede a miembros de las fuerzas armadas con alto poder adquisitivo
+          <p className="text-lg md:text-xl text-muted-foreground mb-3 max-w-2xl mx-auto">
+            Y deja de pagar por publicidad costosa en redes sociales!
           </p>
 
           {/* Countdown Timer */}
-          <div className="mb-8 flex justify-center">
+          <div className="mb-2 flex justify-center">
             <TrialCountdown />
           </div>
 
@@ -131,7 +132,7 @@ export function TrialOfferHero({ onStartTrial }: TrialOfferHeroProps) {
                   <span className="text-3xl align-top"> COP</span>
                 </div>
                 <div className="text-xl md:text-2xl text-muted-foreground font-semibold">
-                  {pricing.trialOffer?.description || "Pago único por acceso completo al plan Enterprise"}
+                  {pricing.trialOffer?.description || "Pago único por acceso completo al plan Fundador"}
                 </div>
                 <div className="text-sm text-muted-foreground mt-2">
                   (IVA 19% incluido)
@@ -182,6 +183,42 @@ export function TrialOfferHero({ onStartTrial }: TrialOfferHeroProps) {
                 </Alert>
               )}
 
+              {/* How to Start - 3 Steps */}
+              <div className="bg-primary/5 rounded-xl p-6 mb-6">
+                <h4 className="font-bold text-base mb-4 text-center">¿Como empezar?</h4>
+                <div className="flex flex-col md:flex-row justify-center gap-4 md:gap-6">
+                  {/* Step 1 */}
+                  <div className="flex items-center gap-3">
+                    <div className="flex items-center justify-center w-10 h-10 rounded-full bg-primary text-primary-foreground font-bold text-lg shrink-0">
+                      1
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <span className="font-medium text-sm">Registra tu negocio</span>
+                    </div>
+                  </div>
+
+                  {/* Step 2 */}
+                  <div className="flex items-center gap-3">
+                    <div className="flex items-center justify-center w-10 h-10 rounded-full bg-primary text-primary-foreground font-bold text-lg shrink-0">
+                      2
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <span className="font-medium text-sm">Paga {formatPrice(pricing.trialOffer?.price || 20000)}</span>
+                    </div>
+                  </div>
+
+                  {/* Step 3 */}
+                  <div className="flex items-center gap-3">
+                    <div className="flex items-center justify-center w-10 h-10 rounded-full bg-primary text-primary-foreground font-bold text-lg shrink-0">
+                      3
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <span className="font-medium text-sm">Activa tu negocio!</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
               {/* CTA Button */}
               <Button
                 size="lg"
@@ -189,7 +226,7 @@ export function TrialOfferHero({ onStartTrial }: TrialOfferHeroProps) {
                 onClick={handleStartTrial}
                 disabled={isProcessing}
               >
-                {isProcessing ? "Procesando..." : "Comenzar solo por " + formatPrice(pricing.trialOffer?.price || 0)}
+                {isProcessing ? "Procesando..." : "Registrar mi negocio"}
               </Button>
 
               {/* Post-trial Info */}

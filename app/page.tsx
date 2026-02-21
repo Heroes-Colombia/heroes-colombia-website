@@ -114,7 +114,7 @@ export default function HomePage() {
               <p className="text-muted-foreground">Datos verificados desde el 6 de diciembre de 2025</p>
             </div>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-              <AnimatedStat value="1600" label="Héroes ya inscritos" suffix="+" />
+              <AnimatedStat value="1800" label="Héroes ya inscritos" suffix="+" />
               <AnimatedStat value="50" label="Negocios verificados" suffix="+" />
               <AnimatedStat value="20" label="Ahorro promedio real" suffix="%" />
               <AnimatedStat value="100" label="Verificación garantizada" suffix="%" />

@@ -3,7 +3,6 @@
 import { SiteHeader } from "@/components/site-header"
 import { SiteFooter } from "@/components/site-footer"
 import { TrialOfferHero } from "@/components/trial-offer-hero"
-import { TrialSignupModal, type TrialSignupData } from "@/components/trial-signup-modal"
 import { AnimatedStat } from "@/components/animated-stats"
 import { FeedbackForm } from "@/components/feedback-form"
 import { DashboardShowcase } from "@/components/dashboard-showcase"
@@ -12,7 +11,6 @@ import { Button } from "@/components/ui/button"
 import { FAQSection } from "@/components/faq-section"
 import { UrgencyBanner } from "@/components/urgency-banner"
 import { Card, CardContent } from "@/components/ui/card"
-import { getCurrentPricing, formatPrice } from "@/lib/pricing-config"
 import {
   TrendingUp,
   Users,
@@ -24,50 +22,113 @@ import {
   Shield,
   Smartphone,
   Calendar,
-  Play,
 } from "lucide-react"
 import Link from "next/link"
-import { useState } from "react"
+
+// Dashboard URL for redirecting to registration
+const DASHBOARD_URL = process.env.NEXT_PUBLIC_DASHBOARD_URL || "https://app.heroescolombia.com"
 
 export default function BusinessPage() {
-  const [showSignupModal, setShowSignupModal] = useState(false)
-  const pricing = getCurrentPricing()
 
+  /**
+   * NEW FLOW: Redirect to dashboard registration page
+   * User registers FIRST, then pays trial after registration
+   */
   const handleStartTrial = () => {
-    setShowSignupModal(true)
-  }
-
-  const handleSignupSubmit = async (data: TrialSignupData) => {
-    try {
-      const response = await fetch("/api/mercadopago/create-trial", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
-      })
-
-      if (!response.ok) {
-        throw new Error("Error al crear el checkout")
-      }
-
-      const result = await response.json()
-
-      // Redirect to MercadoPago checkout
-      window.location.href = result.checkoutUrl
-    } catch (error) {
-      console.error("[Trial] Error:", error)
-      throw error // Re-throw to let modal handle it
-    }
+    window.location.href = `${DASHBOARD_URL}/register`
   }
 
   return (
     <div className="flex min-h-screen flex-col">
       <SiteHeader variant="business" />
       <UrgencyBanner variant="business" />
-      <TrialSignupModal open={showSignupModal} onOpenChange={setShowSignupModal} onSubmit={handleSignupSubmit} />
 
       <main className="flex-1">
         {/* NEW: Trial Offer Hero Section */}
         <TrialOfferHero onStartTrial={handleStartTrial} />
+
+        {/* Pain Points Section - Make businesses aware of their problems */}
+        <section id="problemas" className="py-15 md:py-25">
+          <div className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-16">
+              <div className="inline-flex items-center gap-2 bg-destructive/10 text-destructive px-4 py-2 rounded-full text-sm font-medium mb-4">
+                <Target className="h-4 w-4" />
+                ¿Te identificas con alguno de estos problemas?
+              </div>
+              <h2 className="text-3xl md:text-5xl font-bold text-balance mb-4">
+                Conseguir clientes nuevos es cada vez más difícil y costoso
+              </h2>
+              <p className="text-lg text-muted-foreground text-balance max-w-3xl mx-auto">
+                Miles de negocios luchan diariamente con estos desafíos. Si alguno te suena familiar, no estás solo — y hay una solución.
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto">
+              <Card className="border-2 border-destructive/20 bg-destructive/5 hover:border-destructive/40 transition-colors">
+                <CardContent className="pt-3">
+                  <div className="rounded-full bg-destructive/10 w-12 h-12 flex items-center justify-center mb-4">
+                    <TrendingUp className="h-6 w-6 text-destructive" />
+                  </div>
+                  <h3 className="font-semibold text-lg mb-2 text-destructive">
+                    ¿Gastas dinero en publicidad sin ver resultados claros?
+                  </h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed">
+                    Inviertes en Facebook Ads, Google Ads o volantes, pero no sabes exactamente cuántos clientes nuevos llegaron por cada peso invertido. El dinero se va y los resultados no se ven.
+                  </p>
+                </CardContent>
+              </Card>
+
+              <Card className="border-2 border-destructive/20 bg-destructive/5 hover:border-destructive/40 transition-colors">
+                <CardContent className="pt-3">
+                  <div className="rounded-full bg-destructive/10 w-12 h-12 flex items-center justify-center mb-4">
+                    <BarChart3 className="h-6 w-6 text-destructive" />
+                  </div>
+                  <h3 className="font-semibold text-lg mb-2 text-destructive">
+                    ¿Pagas a alguien para manejar anuncios que no entiendes?
+                  </h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed">
+                    Contratas agencias o freelancers que te muestran métricas confusas. No sabes si realmente funciona o si estás tirando el dinero a la basura cada mes.
+                  </p>
+                </CardContent>
+              </Card>
+
+              <Card className="border-2 border-destructive/20 bg-destructive/5 hover:border-destructive/40 transition-colors">
+                <CardContent className="pt-3">
+                  <div className="rounded-full bg-destructive/10 w-12 h-12 flex items-center justify-center mb-4">
+                    <Users className="h-6 w-6 text-destructive" />
+                  </div>
+                  <h3 className="font-semibold text-lg mb-2 text-destructive">
+                    ¿Compites contra grandes marcas con presupuestos enormes?
+                  </h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed">
+                    Las grandes empresas dominan la publicidad digital. Tu negocio local queda invisible entre miles de anuncios de marcas con millones de pesos en presupuesto.
+                  </p>
+                </CardContent>
+              </Card>
+
+              <Card className="border-2 border-destructive/20 bg-destructive/5 hover:border-destructive/40 transition-colors">
+                <CardContent className="pt-3">
+                  <div className="rounded-full bg-destructive/10 w-12 h-12 flex items-center justify-center mb-4">
+                    <Smartphone className="h-6 w-6 text-destructive" />
+                  </div>
+                  <h3 className="font-semibold text-lg mb-2 text-destructive">
+                    ¿No tienes tiempo ni conocimiento para marketing digital?
+                  </h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed">
+                    Tu día está lleno manejando el negocio. Aprender marketing digital, crear contenido y analizar datos es otro trabajo completo que no puedes asumir.
+                  </p>
+                </CardContent>
+              </Card>
+            </div>
+
+            <div className="text-center mt-12">
+              <div className="inline-flex items-center gap-2 bg-primary/10 text-primary px-6 py-3 rounded-full font-medium">
+                <CheckCircle2 className="h-5 w-5" />
+                Heroes Colombia resuelve todos estos problemas con una solución simple
+              </div>
+            </div>
+          </div>
+        </section>
 
         <section className="py-15 md:py-25 bg-secondary border-y">
           <div className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -76,10 +137,10 @@ export default function BusinessPage() {
               <p className="text-muted-foreground">Datos verificados desde el lanzamiento del 6 de diciembre de 2025</p>
             </div>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-              <AnimatedStat value="50" label="Negocios activos" suffix="+" />
-              <AnimatedStat value="1000" label="Vistas de promociones" suffix="+" />
-              <AnimatedStat value="1600" label="Usuarios verificados" suffix="+" />
-              <AnimatedStat value="20" label="Ahorro promedio usuarios" suffix="%" />
+              <AnimatedStat value="50+" label="Negocios activos" suffix="+" />
+              <AnimatedStat value="1,000+" label="Vistas de promociones" suffix="+" />
+              <AnimatedStat value="1,800+" label="Usuarios verificados" suffix="+" />
+              <AnimatedStat value="20+" label="Ahorro promedio usuarios" suffix="%" />
             </div>
           </div>
         </section>
@@ -225,7 +286,7 @@ export default function BusinessPage() {
                   </div>
                   <h3 className="font-semibold text-lg mb-2">Menor competencia</h3>
                   <p className="text-sm text-muted-foreground">
-                    Destaca entre pocos negocios por la atención de 1,600+ usuarios verificados y creciendo semanalmente
+                    Destaca entre pocos negocios por la atención de 1,800+ usuarios verificados y creciendo semanalmente
                   </p>
                 </CardContent>
               </Card>

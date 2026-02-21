@@ -2,63 +2,35 @@
 
 import { SiteHeader } from "@/components/site-header"
 import { SiteFooter } from "@/components/site-footer"
-import { TrialSignupModal, type TrialSignupData, type PlanDetails } from "@/components/trial-signup-modal"
 import { FAQSection } from "@/components/faq-section"
 import { UrgencyBanner } from "@/components/urgency-banner"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { getCurrentPricing, formatPriceSimple, formatPrice, isTrialOfferActive } from "@/lib/pricing-config"
-import { CheckCircle2, Play } from "lucide-react"
+import { CheckCircle2, Play, UserPlus, CreditCard, Rocket } from "lucide-react"
 import { ExitIntentPopup } from "@/components/exit-intent-popup"
-import Link from "next/link"
 import { useState } from "react"
+
+// Dashboard URL for redirecting to registration
+const DASHBOARD_URL = process.env.NEXT_PUBLIC_DASHBOARD_URL || "https://app.heroescolombia.com"
 
 export default function PreciosPage() {
   const [isAnnual, setIsAnnual] = useState(true)
-  const [showSignupModal, setShowSignupModal] = useState(false)
-  const [selectedPlan, setSelectedPlan] = useState<PlanDetails | undefined>(undefined)
   const pricing = getCurrentPricing()
   const showTrial = isTrialOfferActive()
 
-  const handleStartTrial = (name?: string, price?: number, billingPeriod?: "monthly" | "annual") => {
-    if (name && price !== undefined && billingPeriod) {
-      setSelectedPlan({ name, price, billingPeriod })
-    } else {
-      setSelectedPlan(undefined)
-    }
-    setShowSignupModal(true)
-  }
-
-  const handleSignupSubmit = async (data: TrialSignupData) => {
-    try {
-      const response = await fetch("/api/mercadopago/create-trial", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
-      })
-
-      if (!response.ok) {
-        throw new Error("Error al crear el checkout")
-      }
-
-      const result = await response.json()
-      window.location.href = result.checkoutUrl
-    } catch (error) {
-      console.error("[Trial] Error:", error)
-      throw error
-    }
+  /**
+   * NEW FLOW: Redirect to dashboard registration page
+   * User registers FIRST, then pays trial after registration
+   */
+  const handleRegister = () => {
+    window.location.href = `${DASHBOARD_URL}/register`
   }
 
   return (
     <div className="flex min-h-screen flex-col">
       <SiteHeader variant="business" />
       <UrgencyBanner variant="business" />
-      <TrialSignupModal
-        open={showSignupModal}
-        onOpenChange={setShowSignupModal}
-        onSubmit={handleSignupSubmit}
-        selectedPlan={selectedPlan}
-      />
       <ExitIntentPopup page="business" />
 
       <main className="flex-1">
@@ -126,9 +98,56 @@ export default function PreciosPage() {
                   Anual <span className="text-primary">(Ahorra hasta 15%)</span>
                 </span>
               </div>
+
+              {/* How to Start - 3 Steps */}
+              <div className="bg-gradient-to-r from-primary/5 via-primary/10 to-primary/5 rounded-2xl p-6 md:p-8 mt-10 max-w-3xl mx-auto border border-primary/10">
+                <h3 className="font-bold text-lg md:text-xl mb-6 text-center">¿Cómo empezar?</h3>
+                <div className="flex flex-col md:flex-row justify-center items-start md:items-center gap-6 md:gap-8">
+                  {/* Step 1 */}
+                  <div className="flex items-center gap-4">
+                    <div className="flex items-center justify-center w-12 h-12 rounded-full bg-primary text-primary-foreground font-bold text-lg shrink-0 shadow-lg">
+                      <UserPlus className="h-5 w-5" />
+                    </div>
+                    <div className="flex flex-col">
+                      <span className="text-xs text-muted-foreground font-medium">Paso 1</span>
+                      <span className="font-semibold">Registra tu negocio</span>
+                    </div>
+                  </div>
+
+                  {/* Arrow/Connector (hidden on mobile) */}
+                  <div className="hidden md:block text-primary/30 text-2xl">→</div>
+
+                  {/* Step 2 */}
+                  <div className="flex items-center gap-4">
+                    <div className="flex items-center justify-center w-12 h-12 rounded-full bg-primary text-primary-foreground font-bold text-lg shrink-0 shadow-lg">
+                      <CreditCard className="h-5 w-5" />
+                    </div>
+                    <div className="flex flex-col">
+                      <span className="text-xs text-muted-foreground font-medium">Paso 2</span>
+                      <span className="font-semibold">
+                        {showTrial ? `Paga solo ${formatPriceSimple(pricing.trialOffer?.price || 20000)}` : "Selecciona tu plan"}
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Arrow/Connector (hidden on mobile) */}
+                  <div className="hidden md:block text-primary/30 text-2xl">→</div>
+
+                  {/* Step 3 */}
+                  <div className="flex items-center gap-4">
+                    <div className="flex items-center justify-center w-12 h-12 rounded-full bg-primary text-primary-foreground font-bold text-lg shrink-0 shadow-lg">
+                      <Rocket className="h-5 w-5" />
+                    </div>
+                    <div className="flex flex-col">
+                      <span className="text-xs text-muted-foreground font-medium">Paso 3</span>
+                      <span className="font-semibold">¡Activa tu negocio!</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto mt-12">
               {/* Básico Plan */}
               <Card className="hover:shadow-lg transition-shadow">
                 <CardHeader>
@@ -175,11 +194,11 @@ export default function PreciosPage() {
                     </li>
                   </ul>
                   {showTrial ? (
-                    <Button className="w-full" onClick={() => handleStartTrial("Básico", isAnnual ? pricing.regularPlans.basico.annual : pricing.regularPlans.basico.monthly, isAnnual ? "annual" : "monthly")}>
+                    <Button className="w-full" onClick={handleRegister}>
                       Hoy solo {formatPriceSimple(pricing.trialOffer?.price || 20000)}
                     </Button>
                   ) : (
-                    <Button className="w-full" onClick={() => handleStartTrial("Básico", isAnnual ? pricing.regularPlans.basico.annual : pricing.regularPlans.basico.monthly, isAnnual ? "annual" : "monthly")}>
+                    <Button className="w-full" onClick={handleRegister}>
                       Comenzar por solo {formatPrice(isAnnual ? pricing.regularPlans.basico.annual : pricing.regularPlans.basico.monthly)}
                     </Button>
                   )}
@@ -241,11 +260,11 @@ export default function PreciosPage() {
                     </li>
                   </ul>
                   {showTrial ? (
-                    <Button className="w-full" onClick={() => handleStartTrial("Básico", isAnnual ? pricing.regularPlans.basico.annual : pricing.regularPlans.basico.monthly, isAnnual ? "annual" : "monthly")}>
+                    <Button className="w-full" onClick={handleRegister}>
                       Hoy solo {formatPriceSimple(pricing.trialOffer?.price || 20000)}
                     </Button>
                   ) : (
-                    <Button className="w-full shadow-lg" onClick={() => handleStartTrial("Pro", isAnnual ? pricing.regularPlans.pro.annual : pricing.regularPlans.pro.monthly, isAnnual ? "annual" : "monthly")}>
+                    <Button className="w-full shadow-lg" onClick={handleRegister}>
                       Comenzar por solo {formatPrice(isAnnual ? pricing.regularPlans.pro.annual : pricing.regularPlans.pro.monthly)}
                     </Button>
                   )}
@@ -314,11 +333,11 @@ export default function PreciosPage() {
                     </li>
                   </ul>
                   {showTrial ? (
-                    <Button className="w-full" onClick={() => handleStartTrial("Básico", isAnnual ? pricing.regularPlans.basico.annual : pricing.regularPlans.basico.monthly, isAnnual ? "annual" : "monthly")}>
+                    <Button className="w-full" onClick={handleRegister}>
                       Hoy solo {formatPriceSimple(pricing.trialOffer?.price || 20000)}
                     </Button>
                   ) : (
-                    <Button className="w-full shadow-lg" onClick={() => handleStartTrial("Enterprise", isAnnual ? pricing.regularPlans.enterprise.annual : pricing.regularPlans.enterprise.monthly, isAnnual ? "annual" : "monthly")}>
+                    <Button className="w-full shadow-lg" onClick={handleRegister}>
                       Comenzar por solo {formatPrice(isAnnual ? pricing.regularPlans.enterprise.annual : pricing.regularPlans.enterprise.monthly)}
                     </Button>
                   )}
