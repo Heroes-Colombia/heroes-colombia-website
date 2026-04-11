@@ -6,8 +6,8 @@ import { FAQSection } from "@/components/faq-section"
 import { UrgencyBanner } from "@/components/urgency-banner"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { getCurrentPricing, formatPriceSimple, formatPrice, isTrialOfferActive } from "@/lib/pricing-config"
-import { CheckCircle2, Play, UserPlus, CreditCard, Rocket } from "lucide-react"
+import { getCurrentPricing, formatPriceSimple, formatPrice, isTrialOfferActive, getTrialSpotsInfo } from "@/lib/pricing-config"
+import { CheckCircle2, Play, UserPlus, CreditCard, Rocket, Users } from "lucide-react"
 import { ExitIntentPopup } from "@/components/exit-intent-popup"
 import { useState } from "react"
 
@@ -18,6 +18,7 @@ export default function PreciosPage() {
   const [isAnnual, setIsAnnual] = useState(true)
   const pricing = getCurrentPricing()
   const showTrial = isTrialOfferActive()
+  const spotsInfo = getTrialSpotsInfo()
 
   /**
    * NEW FLOW: Redirect to dashboard registration page
@@ -78,26 +79,28 @@ export default function PreciosPage() {
           <div className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-16">
               <h2 className="text-3xl md:text-5xl font-bold text-balance mb-4">
-                {showTrial ? "Prueba el plan Enterprise por solo $20,000 COP" : "Elige el plan perfecto para tu negocio"}
+                {showTrial ? "$20,000 COP para probar Heroes Colombia" : "Elige el plan perfecto para tu negocio"}
               </h2>
               <p className="text-lg text-muted-foreground text-balance max-w-2xl mx-auto">
-                {showTrial ? "Aprovecha esta oportunidad única y prueba el plan Enterprise por 2 meses." : "Resultados claros, precios transparentes y sin sorpresas."}
+                {showTrial ? "Acceso completo por 2 meses. Después, continúa por $480,000 COP al año si deseas." : "Resultados claros, precios transparentes y sin sorpresas."}
               </p>
-              <div className="flex items-center justify-center gap-3 mt-6">
-                <span className={`text-sm ${!isAnnual ? "font-medium" : "text-muted-foreground"}`}>Mensual</span>
-                <label className="relative inline-flex items-center cursor-pointer">
-                  <input
-                    type="checkbox"
-                    className="sr-only peer pricing-toggle"
-                    checked={isAnnual}
-                    onChange={(e) => setIsAnnual(e.target.checked)}
-                  />
-                  <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-primary/20 rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
-                </label>
-                <span className={`text-sm ${isAnnual ? "font-medium" : "text-muted-foreground"}`}>
-                  Anual <span className="text-primary">(Ahorra hasta 15%)</span>
-                </span>
-              </div>
+              {!showTrial && (
+                <div className="flex items-center justify-center gap-3 mt-6">
+                  <span className={`text-sm ${!isAnnual ? "font-medium" : "text-muted-foreground"}`}>Mensual</span>
+                  <label className="relative inline-flex items-center cursor-pointer">
+                    <input
+                      type="checkbox"
+                      className="sr-only peer pricing-toggle"
+                      checked={isAnnual}
+                      onChange={(e) => setIsAnnual(e.target.checked)}
+                    />
+                    <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-primary/20 rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+                  </label>
+                  <span className={`text-sm ${isAnnual ? "font-medium" : "text-muted-foreground"}`}>
+                    Anual <span className="text-primary">(Ahorra hasta 15%)</span>
+                  </span>
+                </div>
+              )}
 
               {/* How to Start - 3 Steps */}
               <div className="bg-gradient-to-r from-primary/5 via-primary/10 to-primary/5 rounded-2xl p-6 md:p-8 mt-10 max-w-3xl mx-auto border border-primary/10">
@@ -147,203 +150,272 @@ export default function PreciosPage() {
               </div>
             </div>
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto mt-12">
-              {/* Básico Plan */}
-              <Card className="hover:shadow-lg transition-shadow">
-                <CardHeader>
-                  <CardTitle className="text-2xl">Básico</CardTitle>
-                  <div className="mt-4">
-                    {!isAnnual ? (
-                      <>
-                        <span className="text-4xl font-bold">{formatPriceSimple(pricing.regularPlans.basico.monthly)}</span>
-                        <span className="text-muted-foreground">/mes</span>
-                      </>
-                    ) : (
-                      <>
-                        <span className="text-4xl font-bold">{formatPriceSimple(pricing.regularPlans.basico.annual)}</span>
-                        <span className="text-muted-foreground">/año</span>
-                        <div className="text-sm text-primary font-medium mt-1">
-                          Ahorras {formatPriceSimple(pricing.regularPlans.basico.savings)} COP
-                        </div>
-                      </>
-                    )}
+            {showTrial ? (
+              /* ── TRIAL MODE: single Enterprise card, centred ── */
+              <div className="flex justify-center mt-12">
+                <Card className="w-full max-w-xl border-2 border-primary shadow-2xl relative">
+                  {/* Badge */}
+                  <div className="absolute -top-3 left-1/2 -translate-x-1/2">
+                    <span className="bg-primary text-primary-foreground text-xs font-semibold px-4 py-1.5 rounded-full shadow-lg whitespace-nowrap">
+                      Acceso completo · 2 meses de prueba
+                    </span>
                   </div>
-                  <p className="text-sm text-muted-foreground mt-2">IVA incluido • Para negocios en crecimiento</p>
-                </CardHeader>
-                <CardContent>
-                  <ul className="space-y-3 mb-6">
-                    <li className="flex items-start gap-2">
-                      <CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
-                      <span className="text-sm">1 ubicación física u online</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
-                      <span className="text-sm">Hasta 2 promociones activas</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
-                      <span className="text-sm">Analítica básica</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
-                      <span className="text-sm">Acceso para 1 usuario</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
-                      <span className="text-sm">Soporte por email</span>
-                    </li>
-                  </ul>
-                  {showTrial ? (
-                    <Button className="w-full" onClick={handleRegister}>
-                      Hoy solo {formatPriceSimple(pricing.trialOffer?.price || 20000)}
+
+                  <CardHeader className="pt-8 pb-4">
+                    <div className="flex items-start justify-between gap-4">
+                      <div>
+                        <CardTitle className="text-2xl mb-1">Plan Enterprise</CardTitle>
+                        <p className="text-sm text-muted-foreground">Todo incluido · IVA incluido</p>
+                      </div>
+                      <div className="text-right shrink-0">
+                        <div className="text-sm text-muted-foreground line-through">
+                          {formatPriceSimple(pricing.regularPlans.enterprise.annual)} COP/año
+                        </div>
+                        <div className="text-4xl font-bold text-primary leading-none">
+                          {formatPriceSimple(pricing.trialOffer?.price || 20000)}
+                        </div>
+                        <div className="text-sm text-muted-foreground">por 2 meses</div>
+                      </div>
+                    </div>
+                    <div className="mt-3 inline-flex items-center gap-2 bg-primary/10 text-primary text-xs font-medium px-3 py-1.5 rounded-full">
+                      Después continúa por solo {formatPriceSimple(pricing.regularPlans.basico.annual)} COP/año
+                    </div>
+                  </CardHeader>
+
+                  <CardContent className="pt-0">
+                    <div className="grid grid-cols-2 gap-x-6 gap-y-2.5 mb-8">
+                      {[
+                        "Ubicaciones ilimitadas",
+                        "Promociones ilimitadas",
+                        "Negocio destacado en la App",
+                        "Promociones destacadas en la App",
+                        "Segmentación de audiencia",
+                        "Analítica avanzada",
+                        "Acceso para 10 usuarios",
+                        "Soporte por email y WhatsApp",
+                      ].map((feature) => (
+                        <div key={feature} className="flex items-start gap-2">
+                          <CheckCircle2 className="h-4 w-4 text-primary shrink-0 mt-0.5" />
+                          <span className="text-sm">{feature}</span>
+                        </div>
+                      ))}
+                    </div>
+
+                    {/* Spots urgency */}
+                    <div className="mb-5 rounded-xl bg-amber-50 border border-amber-200 px-4 py-3">
+                      <div className="flex items-center justify-between mb-2">
+                        <div className="flex items-center gap-1.5 text-amber-800">
+                          <Users className="h-4 w-4 shrink-0" />
+                          <span className="text-xs font-semibold">
+                            {spotsInfo.taken} de {spotsInfo.limit} cupos tomados
+                          </span>
+                        </div>
+                        <span className="text-xs font-bold text-amber-700">
+                          {spotsInfo.remaining} restantes
+                        </span>
+                      </div>
+                      <div className="w-full bg-amber-200 rounded-full h-2 overflow-hidden">
+                        <div
+                          className="bg-amber-500 h-2 rounded-full transition-all"
+                          style={{ width: `${Math.round((spotsInfo.taken / spotsInfo.limit) * 100)}%` }}
+                        />
+                      </div>
+                      <p className="text-xs text-amber-700 mt-2 text-center">
+                        Precio especial válido solo hasta completar los primeros {spotsInfo.limit} negocios
+                      </p>
+                    </div>
+
+                    <Button size="lg" className="w-full shadow-lg text-base" onClick={handleRegister}>
+                      Comenzar prueba por {formatPriceSimple(pricing.trialOffer?.price || 20000)} COP
                     </Button>
-                  ) : (
+                    <p className="text-xs text-muted-foreground text-center mt-3">
+                      Sin renovación automática. Al finalizar los 2 meses podrás elegir continuar.
+                    </p>
+                  </CardContent>
+                </Card>
+              </div>
+            ) : (
+              /* ── REGULAR MODE: three-plan grid ── */
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto mt-12">
+                {/* Básico Plan */}
+                <Card className="hover:shadow-lg transition-shadow">
+                  <CardHeader>
+                    <CardTitle className="text-2xl">Básico</CardTitle>
+                    <div className="mt-4">
+                      {!isAnnual ? (
+                        <>
+                          <span className="text-4xl font-bold">{formatPriceSimple(pricing.regularPlans.basico.monthly)}</span>
+                          <span className="text-muted-foreground">/mes</span>
+                        </>
+                      ) : (
+                        <>
+                          <span className="text-4xl font-bold">{formatPriceSimple(pricing.regularPlans.basico.annual)}</span>
+                          <span className="text-muted-foreground">/año</span>
+                          <div className="text-sm text-primary font-medium mt-1">
+                            Ahorras {formatPriceSimple(pricing.regularPlans.basico.savings)} COP
+                          </div>
+                        </>
+                      )}
+                    </div>
+                    <p className="text-sm text-muted-foreground mt-2">IVA incluido • Para negocios en crecimiento</p>
+                  </CardHeader>
+                  <CardContent>
+                    <ul className="space-y-3 mb-6">
+                      <li className="flex items-start gap-2">
+                        <CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
+                        <span className="text-sm">1 ubicación física u online</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
+                        <span className="text-sm">Hasta 2 promociones activas</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
+                        <span className="text-sm">Analítica básica</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
+                        <span className="text-sm">Acceso para 1 usuario</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
+                        <span className="text-sm">Soporte por email</span>
+                      </li>
+                    </ul>
                     <Button className="w-full" onClick={handleRegister}>
                       Comenzar por solo {formatPrice(isAnnual ? pricing.regularPlans.basico.annual : pricing.regularPlans.basico.monthly)}
                     </Button>
-                  )}
-                </CardContent>
-              </Card>
+                  </CardContent>
+                </Card>
 
-              {/* Pro Plan */}
-              <Card className="border-2 border-primary relative hover:shadow-xl transition-shadow">
-                <div className="absolute -top-3 left-1/2 -translate-x-1/2">
-                  <span className="bg-primary text-primary-foreground text-xs font-semibold px-3 py-1 rounded-full shadow-lg">
-                    Más Popular
-                  </span>
-                </div>
-                <CardHeader>
-                  <CardTitle className="text-2xl">Pro</CardTitle>
-                  <div className="mt-4">
-                    {!isAnnual ? (
-                      <>
-                        <span className="text-4xl font-bold">{formatPriceSimple(pricing.regularPlans.pro.monthly)}</span>
-                        <span className="text-muted-foreground">/mes</span>
-                      </>
-                    ) : (
-                      <>
-                        <span className="text-4xl font-bold">{formatPriceSimple(pricing.regularPlans.pro.annual)}</span>
-                        <span className="text-muted-foreground">/año</span>
-                        <div className="text-sm text-primary font-medium mt-1">
-                          Ahorras {formatPriceSimple(pricing.regularPlans.pro.savings)} COP
-                        </div>
-                      </>
-                    )}
+                {/* Pro Plan */}
+                <Card className="border-2 border-primary relative hover:shadow-xl transition-shadow">
+                  <div className="absolute -top-3 left-1/2 -translate-x-1/2">
+                    <span className="bg-primary text-primary-foreground text-xs font-semibold px-3 py-1 rounded-full shadow-lg">
+                      Más Popular
+                    </span>
                   </div>
-                  <p className="text-sm text-muted-foreground mt-2">IVA incluido • Máximo crecimiento</p>
-                </CardHeader>
-                <CardContent>
-                  <ul className="space-y-3 mb-6">
-                    <li className="flex items-start gap-2">
-                      <CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
-                      <span className="text-sm">Hasta 5 ubicaciones</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
-                      <span className="text-sm">Hasta 5 promociones activas</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
-                      <span className="text-sm">Segmentación de audiencia</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
-                      <span className="text-sm">Analítica avanzada</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
-                      <span className="text-sm">Acceso para 3 usuarios</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
-                      <span className="text-sm">Soporte prioritario</span>
-                    </li>
-                  </ul>
-                  {showTrial ? (
-                    <Button className="w-full" onClick={handleRegister}>
-                      Hoy solo {formatPriceSimple(pricing.trialOffer?.price || 20000)}
-                    </Button>
-                  ) : (
+                  <CardHeader>
+                    <CardTitle className="text-2xl">Pro</CardTitle>
+                    <div className="mt-4">
+                      {!isAnnual ? (
+                        <>
+                          <span className="text-4xl font-bold">{formatPriceSimple(pricing.regularPlans.pro.monthly)}</span>
+                          <span className="text-muted-foreground">/mes</span>
+                        </>
+                      ) : (
+                        <>
+                          <span className="text-4xl font-bold">{formatPriceSimple(pricing.regularPlans.pro.annual)}</span>
+                          <span className="text-muted-foreground">/año</span>
+                          <div className="text-sm text-primary font-medium mt-1">
+                            Ahorras {formatPriceSimple(pricing.regularPlans.pro.savings)} COP
+                          </div>
+                        </>
+                      )}
+                    </div>
+                    <p className="text-sm text-muted-foreground mt-2">IVA incluido • Máximo crecimiento</p>
+                  </CardHeader>
+                  <CardContent>
+                    <ul className="space-y-3 mb-6">
+                      <li className="flex items-start gap-2">
+                        <CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
+                        <span className="text-sm">Hasta 5 ubicaciones</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
+                        <span className="text-sm">Hasta 5 promociones activas</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
+                        <span className="text-sm">Segmentación de audiencia</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
+                        <span className="text-sm">Analítica avanzada</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
+                        <span className="text-sm">Acceso para 3 usuarios</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
+                        <span className="text-sm">Soporte prioritario</span>
+                      </li>
+                    </ul>
                     <Button className="w-full shadow-lg" onClick={handleRegister}>
                       Comenzar por solo {formatPrice(isAnnual ? pricing.regularPlans.pro.annual : pricing.regularPlans.pro.monthly)}
                     </Button>
-                  )}
-                </CardContent>
-              </Card>
+                  </CardContent>
+                </Card>
 
-              {/* Enterprise Plan */}
-              <Card className="hover:shadow-lg transition-shadow">
-                <CardHeader>
-                  <CardTitle className="text-2xl">Enterprise</CardTitle>
-                  <div className="mt-4">
-                    {!isAnnual ? (
-                      <>
-                        <span className="text-3xl font-bold">Desde</span>
-                        <br />
-                        <span className="text-4xl font-bold">{formatPriceSimple(pricing.regularPlans.enterprise.monthly)}</span>
-                        <span className="text-muted-foreground">/mes</span>
-                      </>
-                    ) : (
-                      <>
-                        <span className="text-3xl font-bold">Desde</span>
-                        <br />
-                        <span className="text-4xl font-bold">{formatPriceSimple(pricing.regularPlans.enterprise.annual)}</span>
-                        <span className="text-muted-foreground">/año</span>
-                        <div className="text-sm text-primary font-medium mt-1">
-                          Ahorras {formatPriceSimple(pricing.regularPlans.enterprise.savings)} COP
-                        </div>
-                      </>
-                    )}
-                  </div>
-                  <p className="text-sm text-muted-foreground mt-2">IVA incluido • Precio personalizado para cadenas y franquicias</p>
-                </CardHeader>
-                <CardContent>
-                  <ul className="space-y-3 mb-6">
-                    <li className="flex items-start gap-2">
-                      <CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
-                      <span className="text-sm">Ubicaciones ilimitadas</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
-                      <span className="text-sm">Promociones ilimitadas</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
-                      <span className="text-sm">Negocio destacado en la App</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
-                      <span className="text-sm">Promociones destacadas en la App</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
-                      <span className="text-sm">Segmentación de audiencia</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
-                      <span className="text-sm">Analítica avanzada</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
-                      <span className="text-sm">Acceso para 10 usuarios</span>
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
-                      <span className="text-sm">Soporte personalizado por email o WhatsApp</span>
-                    </li>
-                  </ul>
-                  {showTrial ? (
-                    <Button className="w-full" onClick={handleRegister}>
-                      Hoy solo {formatPriceSimple(pricing.trialOffer?.price || 20000)}
-                    </Button>
-                  ) : (
+                {/* Enterprise Plan */}
+                <Card className="hover:shadow-lg transition-shadow">
+                  <CardHeader>
+                    <CardTitle className="text-2xl">Enterprise</CardTitle>
+                    <div className="mt-4">
+                      {!isAnnual ? (
+                        <>
+                          <span className="text-3xl font-bold">Desde</span>
+                          <br />
+                          <span className="text-4xl font-bold">{formatPriceSimple(pricing.regularPlans.enterprise.monthly)}</span>
+                          <span className="text-muted-foreground">/mes</span>
+                        </>
+                      ) : (
+                        <>
+                          <span className="text-3xl font-bold">Desde</span>
+                          <br />
+                          <span className="text-4xl font-bold">{formatPriceSimple(pricing.regularPlans.enterprise.annual)}</span>
+                          <span className="text-muted-foreground">/año</span>
+                          <div className="text-sm text-primary font-medium mt-1">
+                            Ahorras {formatPriceSimple(pricing.regularPlans.enterprise.savings)} COP
+                          </div>
+                        </>
+                      )}
+                    </div>
+                    <p className="text-sm text-muted-foreground mt-2">IVA incluido • Precio personalizado para cadenas y franquicias</p>
+                  </CardHeader>
+                  <CardContent>
+                    <ul className="space-y-3 mb-6">
+                      <li className="flex items-start gap-2">
+                        <CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
+                        <span className="text-sm">Ubicaciones ilimitadas</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
+                        <span className="text-sm">Promociones ilimitadas</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
+                        <span className="text-sm">Negocio destacado en la App</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
+                        <span className="text-sm">Promociones destacadas en la App</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
+                        <span className="text-sm">Segmentación de audiencia</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
+                        <span className="text-sm">Analítica avanzada</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
+                        <span className="text-sm">Acceso para 10 usuarios</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <CheckCircle2 className="h-5 w-5 text-primary shrink-0 mt-0.5" />
+                        <span className="text-sm">Soporte personalizado por email o WhatsApp</span>
+                      </li>
+                    </ul>
                     <Button className="w-full shadow-lg" onClick={handleRegister}>
                       Comenzar por solo {formatPrice(isAnnual ? pricing.regularPlans.enterprise.annual : pricing.regularPlans.enterprise.monthly)}
                     </Button>
-                  )}
-                </CardContent>
-              </Card>
-            </div>
+                  </CardContent>
+                </Card>
+              </div>
+            )}
           </div>
         </section>
 

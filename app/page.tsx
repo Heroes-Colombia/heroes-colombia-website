@@ -3,6 +3,7 @@
 import { SiteHeader } from "@/components/site-header"
 import { SiteFooter } from "@/components/site-footer"
 import { CategoriesCarousel } from "@/components/categories-carousel"
+import { TrustedCompaniesCarousel } from "@/components/trusted-companies-carousel"
 import { TestimonialsCarousel } from "@/components/testimonials-carousel"
 import { AnimatedStat } from "@/components/animated-stats"
 import { FeedbackForm } from "@/components/feedback-form"
@@ -14,12 +15,19 @@ import { TrustBadges } from "@/components/trust-badges"
 import { ScarcityBanner } from "@/components/scarcity-banner"
 import { FAQSection } from "@/components/faq-section"
 import { Card, CardContent } from "@/components/ui/card"
-import { Shield, Smartphone, MapPin, Gift, BadgeCheck, Calendar, Sparkles, Users } from "lucide-react"
+import { Shield, Smartphone, MapPin, Gift, BadgeCheck, Calendar, Sparkles, Users, TrendingUp } from "lucide-react"
 import Link from "next/link"
 import { isAppLaunched } from "@/lib/pricing-config"
 
+function getMonthsSinceLaunch(): number {
+  const launch = new Date("2025-12-06")
+  const now = new Date()
+  return Math.max(1, (now.getFullYear() - launch.getFullYear()) * 12 + (now.getMonth() - launch.getMonth()))
+}
+
 export default function HomePage() {
   const appLaunched = isAppLaunched()
+  const monthsSinceLaunch = getMonthsSinceLaunch()
 
   return (
     <div className="flex min-h-screen flex-col">
@@ -35,9 +43,9 @@ export default function HomePage() {
           <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-background to-accent/5" />
           <div className="container relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="mx-auto max-w-4xl text-center">
-              <div className="mb-6 inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-2 text-sm font-medium text-primary animate-pulse">
-                <Shield className="h-4 w-4" />
-                Lanzamiento Diciembre 2025
+              <div className="mb-6 inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-2 text-sm font-medium text-primary">
+                <TrendingUp className="h-4 w-4" />
+                2,300+ Héroes ya activos · Creciendo cada semana
               </div>
               <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight text-balance mb-6">
                 Beneficios exclusivos para nuestros <span className="text-primary">Héroes</span>
@@ -82,40 +90,41 @@ export default function HomePage() {
 
               <div className="inline-flex items-center gap-2 bg-accent/10 text-accent px-4 py-2 rounded-full text-sm font-medium mb-4">
                 <Sparkles className="h-4 w-4" />
-                Descarga la app y obtén beneficios exclusivos
+                Descarga gratis · Sin compromisos · Solo beneficios
               </div>
 
               <div className="flex flex-wrap items-center justify-center gap-4 md:gap-6 text-sm text-muted-foreground">
                 <div className="flex items-center gap-2">
                   <BadgeCheck className="h-5 w-5 text-primary" />
-                  <span>50+ negocios verificados</span>
+                  <span>50+ marcas aliadas</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <Users className="h-5 w-5 text-primary" />
-                  <span>1,600+ Héroes ahorrando</span>
+                  <span>2,300+ Héroes ahorrando</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <Sparkles className="h-5 w-5 text-primary" />
-                  <span>Acceso exclusivo de fundadores</span>
+                  <Shield className="h-5 w-5 text-primary" />
+                  <span>100% verificado y seguro</span>
                 </div>
               </div>
 
               <p className="text-sm text-muted-foreground mt-2">
-                Más de 1,600 miembros de las fuerzas armadas ya descargaron la app. Únete a la única comunidad exclusiva de Héroes 🇨🇴
+                Más de 2,300 miembros de las fuerzas armadas ya descargaron la app. Únete a la comunidad exclusiva de Héroes 🇨🇴
               </p>
             </div>
           </div>
         </section>
 
+        {/* Growth Stats */}
         <section className="py-15 md:py-15 bg-secondary border-y">
           <div className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-12">
-              <h2 className="text-2xl md:text-3xl font-bold mb-2">Resultados Reales del Lanzamiento</h2>
-              <p className="text-muted-foreground">Datos verificados desde el 6 de diciembre de 2025</p>
+              <h2 className="text-2xl md:text-3xl font-bold mb-2">Una comunidad que crece semana a semana</h2>
+              <p className="text-muted-foreground">Datos verificados · Activos desde diciembre 2025</p>
             </div>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-              <AnimatedStat value="1800" label="Héroes ya inscritos" suffix="+" />
-              <AnimatedStat value="50" label="Negocios verificados" suffix="+" />
+              <AnimatedStat value="2300" label="Héroes activos" suffix="+" />
+              <AnimatedStat value="50" label="Negocios aliados" suffix="+" />
               <AnimatedStat value="20" label="Ahorro promedio real" suffix="%" />
               <AnimatedStat value="100" label="Verificación garantizada" suffix="%" />
             </div>
@@ -124,56 +133,60 @@ export default function HomePage() {
 
         <TrustBadges />
 
+        {/* Growth Story Section — replaces the redundant "El Comienzo" section */}
         <section className="py-10 md:py-15 bg-accent/5 border-y">
           <div className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-8">
               <div className="inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-2 rounded-full text-sm font-medium mb-4">
-                <Sparkles className="h-4 w-4" />
-                Lanzamiento Oficial - Diciembre 2025
+                <TrendingUp className="h-4 w-4" />
+                {monthsSinceLaunch} meses de crecimiento real
               </div>
               <h2 className="text-2xl md:text-3xl font-bold mb-3">
-                El Comienzo de Algo Grande
+                De 0 a 2,300 Héroes en {monthsSinceLaunch} meses
               </h2>
               <p className="text-muted-foreground max-w-2xl mx-auto">
-                En Diciembre 2025 lanzamos Heroes Colombia. Hoy ya hemos impactado la vida de cientos de Heroes
-                gracias a las alianzas, descuentos y beneficios exclusivos que hemos logrado con marcas aliadas.
+                Lanzamos en diciembre 2025 y hoy somos la plataforma de beneficios exclusivos más grande
+                para las fuerzas armadas de Colombia. Esto es lo que hemos construido juntos.
               </p>
             </div>
 
-            <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
-              <Card className="text-center">
-                <CardContent className="pt-6">
-                  <div className="text-4xl font-bold text-primary mb-2">1,600+</div>
-                  <div className="text-sm text-muted-foreground">Miembros de las fuerzas armadas inscritos</div>
-                </CardContent>
-              </Card>
-
-              <Card className="text-center">
-                <CardContent className="pt-6">
-                  <div className="text-4xl font-bold text-primary mb-2">50+</div>
-                  <div className="text-sm text-muted-foreground">Negocios verificados</div>
-                </CardContent>
-              </Card>
-
-              <Card className="text-center">
-                <CardContent className="pt-6">
-                  <div className="text-4xl font-bold text-primary mb-2">20%</div>
-                  <div className="text-sm text-muted-foreground">Ahorro promedio comprobado</div>
-                </CardContent>
-              </Card>
+            <div className="grid md:grid-cols-4 gap-6 max-w-5xl mx-auto">
+              <div className="text-center bg-card rounded-2xl p-6 border border-border">
+                <div className="text-4xl font-bold text-primary mb-1">Dic</div>
+                <div className="text-sm font-medium mb-1">2025</div>
+                <div className="text-xs text-muted-foreground">Lanzamiento oficial</div>
+              </div>
+              <div className="text-center bg-card rounded-2xl p-6 border border-border">
+                <div className="text-4xl font-bold text-primary mb-1">500+</div>
+                <div className="text-sm font-medium mb-1">Héroes</div>
+                <div className="text-xs text-muted-foreground">Primer mes</div>
+              </div>
+              <div className="text-center bg-card rounded-2xl p-6 border border-border">
+                <div className="text-4xl font-bold text-primary mb-1">1,500+</div>
+                <div className="text-sm font-medium mb-1">Héroes</div>
+                <div className="text-xs text-muted-foreground">A los 2 meses</div>
+              </div>
+              <div className="text-center bg-card rounded-2xl p-6 border border-primary/30 bg-primary/5">
+                <div className="text-4xl font-bold text-primary mb-1">2,300+</div>
+                <div className="text-sm font-medium mb-1">Héroes</div>
+                <div className="text-xs text-muted-foreground">Hoy · Creciendo</div>
+              </div>
             </div>
           </div>
         </section>
 
+        {/* Trusted Companies */}
         <section className="py-15 md:py-25 bg-background">
           <div className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-5xl font-bold text-balance mb-4">Explora categorías</h2>
+              <h2 className="text-3xl md:text-5xl font-bold text-balance mb-4">
+                Empresas que ya confían en nosotros
+              </h2>
               <p className="text-lg text-muted-foreground text-balance max-w-2xl mx-auto">
-                Descuentos verificados en Salud y Bienestar, Tecnología, Educación y Belleza. Encuentra descuentos en todo lo que necesitas.
+                Negocios ya te están esperando con descuentos reales
               </p>
             </div>
-            <CategoriesCarousel />
+            <TrustedCompaniesCarousel />
           </div>
         </section>
 
@@ -225,14 +238,15 @@ export default function HomePage() {
           </div>
         </section>
 
+        {/* Why Heroes Colombia — replaces the stale "Founders" section */}
         <section id="beneficios" className="py-15 md:py-25 bg-background">
           <div className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-16">
               <h2 className="text-3xl md:text-5xl font-bold text-balance mb-4">
-                Se parte de los primeros Heroes Fundadores
+                Por qué los Héroes confían en nosotros
               </h2>
               <p className="text-lg text-muted-foreground text-balance max-w-2xl mx-auto">
-                Beneficios diseñados específicamente para reconocer tu servicio
+                Una plataforma construida desde el respeto, verificada desde la confianza
               </p>
             </div>
 
@@ -334,7 +348,19 @@ export default function HomePage() {
           </div>
         </section>
 
-        <section id="testimonios" className="py-15 md:py-25 bg-background">
+        <section className="py-15 md:py-25 bg-background border-y">
+          <div className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl md:text-5xl font-bold text-balance mb-4">Explora categorías</h2>
+              <p className="text-lg text-muted-foreground text-balance max-w-2xl mx-auto">
+                Descuentos verificados en Salud y Bienestar, Tecnología, Educación y Belleza. Encuentra descuentos en todo lo que necesitas.
+              </p>
+            </div>
+            <CategoriesCarousel />
+          </div>
+        </section>
+
+        <section id="testimonios" className="py-15 md:py-25 bg-secondary">
           <div className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-16">
               <h2 className="text-3xl md:text-5xl font-bold text-balance mb-4">Esto dicen nuestros Héroes</h2>
@@ -348,7 +374,7 @@ export default function HomePage() {
         </section>
 
         {appLaunched && (
-          <section className="py-15 md:py-25 bg-secondary">
+          <section className="py-15 md:py-25 bg-background">
             <div className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <FeedbackForm variant="user" />
             </div>
@@ -365,8 +391,8 @@ export default function HomePage() {
                     Descarga la App y comienza a ahorrar hoy
                   </h2>
                   <p className="text-lg text-primary-foreground/90 text-balance mb-8 leading-relaxed">
-                    Totalmente GRATIS. Solo beneficios exclusivos diseñados
-                    para reconocer tu servicio. Únete ahora y sé de los primeros en acceder a las mejores promociones.
+                    Totalmente GRATIS. Únete a los 2,300+ miembros de las fuerzas armadas que ya disfrutan de
+                    descuentos exclusivos en marcas aliadas en todo Colombia.
                   </p>
                   <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-6">
                     <Link
@@ -401,7 +427,7 @@ export default function HomePage() {
                     </Link>
                   </div>
                   <p className="text-sm text-primary-foreground/80">
-                    Únete a los más de 1,600+ miembros de las fuerzas armadas que ya están ahorrando con la app.
+                    2,300+ miembros de las fuerzas armadas ya están ahorrando · Descarga 100% gratuita
                   </p>
                 </>
               ) : (

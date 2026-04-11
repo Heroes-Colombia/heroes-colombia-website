@@ -9,6 +9,7 @@ import { DashboardShowcase } from "@/components/dashboard-showcase"
 import { TrustBadges } from "@/components/trust-badges"
 import { Button } from "@/components/ui/button"
 import { FAQSection } from "@/components/faq-section"
+import { TrustedCompaniesCarousel } from "@/components/trusted-companies-carousel"
 import { UrgencyBanner } from "@/components/urgency-banner"
 import { Card, CardContent } from "@/components/ui/card"
 import {
@@ -22,18 +23,21 @@ import {
   Shield,
   Smartphone,
   Calendar,
+  Lightbulb,
 } from "lucide-react"
 import Link from "next/link"
 
-// Dashboard URL for redirecting to registration
 const DASHBOARD_URL = process.env.NEXT_PUBLIC_DASHBOARD_URL || "https://app.heroescolombia.com"
 
-export default function BusinessPage() {
+function getMonthsSinceLaunch(): number {
+  const launch = new Date("2025-12-06")
+  const now = new Date()
+  return Math.max(1, (now.getFullYear() - launch.getFullYear()) * 12 + (now.getMonth() - launch.getMonth()))
+}
 
-  /**
-   * NEW FLOW: Redirect to dashboard registration page
-   * User registers FIRST, then pays trial after registration
-   */
+export default function BusinessPage() {
+  const monthsSinceLaunch = getMonthsSinceLaunch()
+
   const handleStartTrial = () => {
     window.location.href = `${DASHBOARD_URL}/register`
   }
@@ -44,104 +48,111 @@ export default function BusinessPage() {
       <UrgencyBanner variant="business" />
 
       <main className="flex-1">
-        {/* NEW: Trial Offer Hero Section */}
         <TrialOfferHero onStartTrial={handleStartTrial} />
 
-        {/* Pain Points Section - Make businesses aware of their problems */}
-        <section id="problemas" className="py-15 md:py-25">
+        {/* Market Context Section — replaces aggressive red pain-points */}
+        <section id="problemas" className="py-15 md:py-25 bg-secondary">
           <div className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-16">
-              <div className="inline-flex items-center gap-2 bg-destructive/10 text-destructive px-4 py-2 rounded-full text-sm font-medium mb-4">
-                <Target className="h-4 w-4" />
-                ¿Te identificas con alguno de estos problemas?
+              <div className="inline-flex items-center gap-2 bg-accent/10 text-accent px-4 py-2 rounded-full text-sm font-medium mb-4">
+                <Lightbulb className="h-4 w-4" />
+                ¿Te suena familiar?
               </div>
               <h2 className="text-3xl md:text-5xl font-bold text-balance mb-4">
-                Conseguir clientes nuevos es cada vez más difícil y costoso
+                ¿Tu negocio enfrenta alguno de estos retos?
               </h2>
               <p className="text-lg text-muted-foreground text-balance max-w-3xl mx-auto">
-                Miles de negocios luchan diariamente con estos desafíos. Si alguno te suena familiar, no estás solo — y hay una solución.
+                Las reglas del marketing digital cambiaron. Aquí está la realidad que enfrentan miles de negocios en Colombia.
               </p>
             </div>
 
             <div className="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto">
-              <Card className="border-2 border-destructive/20 bg-destructive/5 hover:border-destructive/40 transition-colors">
-                <CardContent className="pt-3">
-                  <div className="rounded-full bg-destructive/10 w-12 h-12 flex items-center justify-center mb-4">
-                    <TrendingUp className="h-6 w-6 text-destructive" />
-                  </div>
-                  <h3 className="font-semibold text-lg mb-2 text-destructive">
-                    ¿Gastas dinero en publicidad sin ver resultados claros?
-                  </h3>
+              <div className="flex gap-4 p-6 rounded-2xl bg-card border border-border hover:border-primary/30 hover:shadow-md transition-all duration-300">
+                <div className="flex-shrink-0 rounded-full bg-primary/10 w-12 h-12 flex items-center justify-center">
+                  <TrendingUp className="h-6 w-6 text-primary" />
+                </div>
+                <div>
+                  <h3 className="font-semibold text-lg mb-2">La publicidad digital cuesta cada vez más</h3>
                   <p className="text-sm text-muted-foreground leading-relaxed">
-                    Inviertes en Facebook Ads, Google Ads o volantes, pero no sabes exactamente cuántos clientes nuevos llegaron por cada peso invertido. El dinero se va y los resultados no se ven.
+                    El costo por clic en Facebook e Google Ads aumentó un 61% en los últimos 3 años. Más inversión, menos retorno garantizado.
                   </p>
-                </CardContent>
-              </Card>
+                </div>
+              </div>
 
-              <Card className="border-2 border-destructive/20 bg-destructive/5 hover:border-destructive/40 transition-colors">
-                <CardContent className="pt-3">
-                  <div className="rounded-full bg-destructive/10 w-12 h-12 flex items-center justify-center mb-4">
-                    <BarChart3 className="h-6 w-6 text-destructive" />
-                  </div>
-                  <h3 className="font-semibold text-lg mb-2 text-destructive">
-                    ¿Pagas a alguien para manejar anuncios que no entiendes?
-                  </h3>
+              <div className="flex gap-4 p-6 rounded-2xl bg-card border border-border hover:border-primary/30 hover:shadow-md transition-all duration-300">
+                <div className="flex-shrink-0 rounded-full bg-primary/10 w-12 h-12 flex items-center justify-center">
+                  <BarChart3 className="h-6 w-6 text-primary" />
+                </div>
+                <div>
+                  <h3 className="font-semibold text-lg mb-2">Las métricas son confusas, los resultados poco claros</h3>
                   <p className="text-sm text-muted-foreground leading-relaxed">
-                    Contratas agencias o freelancers que te muestran métricas confusas. No sabes si realmente funciona o si estás tirando el dinero a la basura cada mes.
+                    Impresiones, alcance, CTR... pero ¿cuántos clientes reales llegaron? La brecha entre métricas y ventas es el problema central del marketing actual.
                   </p>
-                </CardContent>
-              </Card>
+                </div>
+              </div>
 
-              <Card className="border-2 border-destructive/20 bg-destructive/5 hover:border-destructive/40 transition-colors">
-                <CardContent className="pt-3">
-                  <div className="rounded-full bg-destructive/10 w-12 h-12 flex items-center justify-center mb-4">
-                    <Users className="h-6 w-6 text-destructive" />
-                  </div>
-                  <h3 className="font-semibold text-lg mb-2 text-destructive">
-                    ¿Compites contra grandes marcas con presupuestos enormes?
-                  </h3>
+              <div className="flex gap-4 p-6 rounded-2xl bg-card border border-border hover:border-primary/30 hover:shadow-md transition-all duration-300">
+                <div className="flex-shrink-0 rounded-full bg-primary/10 w-12 h-12 flex items-center justify-center">
+                  <Users className="h-6 w-6 text-primary" />
+                </div>
+                <div>
+                  <h3 className="font-semibold text-lg mb-2">Los grandes presupuestos dominan los canales masivos</h3>
                   <p className="text-sm text-muted-foreground leading-relaxed">
-                    Las grandes empresas dominan la publicidad digital. Tu negocio local queda invisible entre miles de anuncios de marcas con millones de pesos en presupuesto.
+                    En publicidad digital, el tamaño importa. Los negocios locales compiten con presupuestos de grandes cadenas que saturan los mismos canales.
                   </p>
-                </CardContent>
-              </Card>
+                </div>
+              </div>
 
-              <Card className="border-2 border-destructive/20 bg-destructive/5 hover:border-destructive/40 transition-colors">
-                <CardContent className="pt-3">
-                  <div className="rounded-full bg-destructive/10 w-12 h-12 flex items-center justify-center mb-4">
-                    <Smartphone className="h-6 w-6 text-destructive" />
-                  </div>
-                  <h3 className="font-semibold text-lg mb-2 text-destructive">
-                    ¿No tienes tiempo ni conocimiento para marketing digital?
-                  </h3>
+              <div className="flex gap-4 p-6 rounded-2xl bg-card border border-border hover:border-primary/30 hover:shadow-md transition-all duration-300">
+                <div className="flex-shrink-0 rounded-full bg-primary/10 w-12 h-12 flex items-center justify-center">
+                  <Smartphone className="h-6 w-6 text-primary" />
+                </div>
+                <div>
+                  <h3 className="font-semibold text-lg mb-2">El marketing digital exige tiempo y conocimiento especializados</h3>
                   <p className="text-sm text-muted-foreground leading-relaxed">
-                    Tu día está lleno manejando el negocio. Aprender marketing digital, crear contenido y analizar datos es otro trabajo completo que no puedes asumir.
+                    Crear campañas efectivas, analizar datos y optimizar continuamente requiere un equipo dedicado que la mayoría de negocios no puede costear.
                   </p>
-                </CardContent>
-              </Card>
+                </div>
+              </div>
             </div>
 
             <div className="text-center mt-12">
               <div className="inline-flex items-center gap-2 bg-primary/10 text-primary px-6 py-3 rounded-full font-medium">
                 <CheckCircle2 className="h-5 w-5" />
-                Heroes Colombia resuelve todos estos problemas con una solución simple
+                Heroes Colombia resuelve todo esto con un canal diferente: audiencia verificada, métricas claras, cero desperdicio
               </div>
             </div>
           </div>
         </section>
 
-        <section className="py-15 md:py-25 bg-secondary border-y">
+        {/* Platform Stats */}
+        <section className="py-15 md:py-25 bg-background border-y">
           <div className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-12">
-              <h2 className="text-2xl md:text-3xl font-bold mb-2">Resultados Reales de la Plataforma</h2>
-              <p className="text-muted-foreground">Datos verificados desde el lanzamiento del 6 de diciembre de 2025</p>
+              <h2 className="text-2xl md:text-3xl font-bold mb-2">Una plataforma con tracción real</h2>
+              <p className="text-muted-foreground">Datos verificados · Activos desde diciembre 2025</p>
             </div>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-              <AnimatedStat value="50+" label="Negocios activos" suffix="+" />
-              <AnimatedStat value="1,000+" label="Vistas de promociones" suffix="+" />
-              <AnimatedStat value="1,800+" label="Usuarios verificados" suffix="+" />
-              <AnimatedStat value="20+" label="Ahorro promedio usuarios" suffix="%" />
+              <AnimatedStat value="50" label="Negocios aliados" suffix="+" />
+              <AnimatedStat value="2300" label="Usuarios verificados" suffix="+" />
+              <AnimatedStat value="20" label="Ahorro promedio usuarios" suffix="%" />
+              <AnimatedStat value={monthsSinceLaunch.toString()} label="Meses de crecimiento sostenido" suffix="" />
             </div>
+          </div>
+        </section>
+
+        {/* Trusted Companies */}
+        <section className="py-15 md:py-25 bg-secondary">
+          <div className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl md:text-5xl font-bold text-balance mb-4">
+                Empresas que ya confían en nosotros
+              </h2>
+              <p className="text-lg text-muted-foreground text-balance max-w-2xl mx-auto">
+                Negocios de distintas industrias que ya están apoyando a nuestros héroes de Colombia
+              </p>
+            </div>
+            <TrustedCompaniesCarousel />
           </div>
         </section>
 
@@ -151,14 +162,15 @@ export default function BusinessPage() {
           </div>
         </section>
 
+        {/* Platform Benefits */}
         <section id="beneficios" className="py-15 md:py-25 bg-secondary">
           <div className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-16">
               <h2 className="text-3xl md:text-5xl font-bold text-balance mb-4">
-                50+ negocios activos confían en nuestra plataforma
+                Un canal de adquisición diferente
               </h2>
               <p className="text-lg text-muted-foreground text-balance max-w-2xl mx-auto">
-                Una plataforma completa para atraer clientes leales y aumentar tus ventas
+                Accede a una audiencia verificada con ingresos estables y alta lealtad de marca
               </p>
             </div>
 
@@ -241,7 +253,7 @@ export default function BusinessPage() {
           </div>
         </section>
 
-        {/* Pricing CTA Section */}
+        {/* Pricing CTA */}
         <section id="planes" className="py-15 md:py-25 bg-background">
           <div className="container max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center">
@@ -263,18 +275,19 @@ export default function BusinessPage() {
 
         <TrustBadges />
 
+        {/* Why Heroes Colombia — replaces the stale "Founders" section */}
         <section className="py-10 md:py-15 bg-accent/5 border-y">
           <div className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-8">
               <div className="inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-2 rounded-full text-sm font-medium mb-4">
-                <Target className="h-4 w-4" />
-                Ventaja de ser Socio Fundador
+                <TrendingUp className="h-4 w-4" />
+                Por qué Heroes Colombia
               </div>
               <h2 className="text-2xl md:text-3xl font-bold mb-3">
-                Únete ahora y obtén ventajas exclusivas
+                Una plataforma probada con resultados reales
               </h2>
               <p className="text-muted-foreground max-w-2xl mx-auto">
-                Los primeros 100 negocios en unirse obtienen beneficios únicos mientras la plataforma crece
+                En {monthsSinceLaunch} meses pasamos de cero a 2,300+ usuarios activos y 50+ negocios aliados. Aquí está lo que diferencia a Heroes Colombia de cualquier otro canal.
               </p>
             </div>
 
@@ -282,11 +295,11 @@ export default function BusinessPage() {
               <Card className="text-left">
                 <CardContent className="pt-6">
                   <div className="rounded-full bg-primary/10 w-12 h-12 flex items-center justify-center mb-4">
-                    <Target className="h-6 w-6 text-primary" />
+                    <TrendingUp className="h-6 w-6 text-primary" />
                   </div>
-                  <h3 className="font-semibold text-lg mb-2">Menor competencia</h3>
+                  <h3 className="font-semibold text-lg mb-2">Crecimiento sostenido</h3>
                   <p className="text-sm text-muted-foreground">
-                    Destaca entre pocos negocios por la atención de 1,800+ usuarios verificados y creciendo semanalmente
+                    De 0 a 2,300+ usuarios verificados en {monthsSinceLaunch} meses. Una comunidad que crece semana a semana y que busca activamente los negocios de la plataforma.
                   </p>
                 </CardContent>
               </Card>
@@ -296,9 +309,9 @@ export default function BusinessPage() {
                   <div className="rounded-full bg-primary/10 w-12 h-12 flex items-center justify-center mb-4">
                     <Star className="h-6 w-6 text-primary" />
                   </div>
-                  <h3 className="font-semibold text-lg mb-2">Reconocimiento temprano</h3>
+                  <h3 className="font-semibold text-lg mb-2">Audiencia de nicho verificada</h3>
                   <p className="text-sm text-muted-foreground">
-                    Construye reconocimiento de marca desde el día 1 con la comunidad militar
+                    No es tráfico genérico. Son militares y sus familias con ingresos estables, verificados uno a uno. La calidad de la audiencia es la mayor ventaja competitiva.
                   </p>
                 </CardContent>
               </Card>
@@ -306,11 +319,11 @@ export default function BusinessPage() {
               <Card className="text-left">
                 <CardContent className="pt-6">
                   <div className="rounded-full bg-primary/10 w-12 h-12 flex items-center justify-center mb-4">
-                    <TrendingUp className="h-6 w-6 text-primary" />
+                    <Target className="h-6 w-6 text-primary" />
                   </div>
-                  <h3 className="font-semibold text-lg mb-2">Crece con la plataforma</h3>
+                  <h3 className="font-semibold text-lg mb-2">ROI medible desde el día uno</h3>
                   <p className="text-sm text-muted-foreground">
-                    Posiciónate ahora para cuando la plataforma escale a miles de usuarios militares
+                    Cada canje registrado es un cliente real. Tu panel te muestra exactamente cuántas personas vieron tu oferta y cuántas actuaron, sin intermediarios.
                   </p>
                 </CardContent>
               </Card>
@@ -320,9 +333,9 @@ export default function BusinessPage() {
                   <div className="rounded-full bg-primary/10 w-12 h-12 flex items-center justify-center mb-4">
                     <Users className="h-6 w-6 text-primary" />
                   </div>
-                  <h3 className="font-semibold text-lg mb-2">Feedback directo</h3>
+                  <h3 className="font-semibold text-lg mb-2">Clientes con alta lealtad de marca</h3>
                   <p className="text-sm text-muted-foreground">
-                    Influye en el desarrollo del producto con feedback directo al equipo
+                    Los militares son conocidos por su lealtad. Un cliente que llega a través de Heroes Colombia tiende a volver y a recomendar.
                   </p>
                 </CardContent>
               </Card>
@@ -332,9 +345,9 @@ export default function BusinessPage() {
                   <div className="rounded-full bg-primary/10 w-12 h-12 flex items-center justify-center mb-4">
                     <CheckCircle2 className="h-6 w-6 text-primary" />
                   </div>
-                  <h3 className="font-semibold text-lg mb-2">Visibilidad preferencial</h3>
+                  <h3 className="font-semibold text-lg mb-2">Configuración en minutos</h3>
                   <p className="text-sm text-muted-foreground">
-                    Primeros 100 socios obtienen destacados especiales en la app conforme crece
+                    Sin agencias, sin curvas de aprendizaje. Registra tu negocio, crea tu oferta y empieza a recibir clientes. Nuestro equipo te acompaña en todo momento.
                   </p>
                 </CardContent>
               </Card>
@@ -344,26 +357,21 @@ export default function BusinessPage() {
                   <div className="rounded-full bg-primary/10 w-12 h-12 flex items-center justify-center mb-4">
                     <Shield className="h-6 w-6 text-primary" />
                   </div>
-                  <h3 className="font-semibold text-lg mb-2">Audiencia de calidad</h3>
+                  <h3 className="font-semibold text-lg mb-2">Plataforma de confianza</h3>
                   <p className="text-sm text-muted-foreground">
-                    Militares con ingresos estables y alta lealtad de marca desde el inicio
+                    Las fuerzas armadas confían en Heroes Colombia para proteger a su comunidad. Esa confianza se extiende a cada negocio que forma parte de la plataforma.
                   </p>
                 </CardContent>
               </Card>
             </div>
-
-            <div className="text-center mt-8">
-              <p className="text-sm text-muted-foreground">
-                <span className="font-semibold text-primary">50+ negocios</span> ya están posicionados. Quedan <span className="font-semibold text-primary">50 cupos</span> para beneficios de fundadores.
-              </p>
-            </div>
           </div>
         </section>
 
-        <section className="py-15 md:py-25 bg-secondary">
+        {/* Testimonials */}
+        <section className="py-15 md:py-25 bg-background">
           <div className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-16">
-              <h2 className="text-3xl md:text-5xl font-bold text-balance mb-4">Negocios reales que ya están usando Heroes</h2>
+              <h2 className="text-3xl md:text-5xl font-bold text-balance mb-4">Negocios reales, resultados reales</h2>
               <p className="text-lg text-muted-foreground text-balance max-w-2xl mx-auto">
                 Socios activos compartiendo su experiencia con nuestra plataforma
               </p>
@@ -398,7 +406,7 @@ export default function BusinessPage() {
                     "Nosotros ofrecemos créditos y productos especializados para policías, y no habíamos encontrado una empresa que solo se enfocara en ellos. Estamos felices de ser parte de Héroes y apoyar en todo el proceso desde el inicio."
                   </p>
                   <div>
-                    <div className="font-semibold text-sm">Hogar</div>
+                    <div className="font-semibold text-sm">Home Kids</div>
                     <div className="text-xs text-muted-foreground">Bogotá</div>
                   </div>
                 </CardContent>
@@ -415,7 +423,7 @@ export default function BusinessPage() {
                     "El mercado de los militares es muy interesante y ya habíamos intentado llegar a ellos pero era muy difícil. Con Heroes podemos crear descuentos y promociones de nicho lo cual nos ayuda a incrementar nuestras ventas como empresa. Nos gusta mucho de Heroes el portal web, es fácil de usar y tienen tecnología bastante avanzada para las métricas."
                   </p>
                   <div>
-                    <div className="font-semibold text-sm">Hogar</div>
+                    <div className="font-semibold text-sm">KLAX S.A.S</div>
                     <div className="text-xs text-muted-foreground">Medellín</div>
                   </div>
                 </CardContent>
@@ -424,7 +432,7 @@ export default function BusinessPage() {
           </div>
         </section>
 
-        <section className="py-15 md:py-25 bg-background">
+        <section className="py-15 md:py-25 bg-secondary">
           <div className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <FeedbackForm variant="business" />
           </div>
@@ -435,10 +443,10 @@ export default function BusinessPage() {
             <div className="max-w-3xl mx-auto text-center">
               <TrendingUp className="h-16 w-16 mx-auto mb-6 animate-float" />
               <h2 className="text-3xl md:text-5xl font-bold text-balance mb-6">
-                Comienza a atraer clientes leales Hhoy
+                Comienza a atraer clientes leales hoy
               </h2>
               <p className="text-lg text-primary-foreground/90 text-balance mb-8 leading-relaxed">
-                Únete a los 50+ negocios activos generando 1,000+ vistas de promociones. Primeros 100 nuevos socios obtienen visibilidad preferencial en la plataforma.
+                Únete a los 50+ negocios que ya están llegando a una comunidad de 2,300+ militares verificados. Una audiencia que crece cada semana y que busca activamente negocios como el tuyo.
               </p>
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-6">
                 <Button size="lg" variant="secondary" asChild className="w-full sm:w-auto shadow-lg">
@@ -459,11 +467,12 @@ export default function BusinessPage() {
                 </Button>
               </div>
               <p className="text-sm text-primary-foreground/80">
-                50+ negocios activos • 1,000+ vistas de promociones • 1,600+ usuarios verificados
+                50+ negocios aliados · 2,300+ usuarios verificados · Creciendo semana a semana
               </p>
             </div>
           </div>
         </section>
+
         <section id="faq" className="py-10 md:py-22 bg-background">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-10">
             <FAQSection variant="business" />

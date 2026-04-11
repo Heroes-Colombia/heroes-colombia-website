@@ -1,36 +1,47 @@
 "use client"
 
-import { useState, useEffect } from "react"
-import { AlertCircle } from "lucide-react"
+import { TrendingUp, BadgeCheck, Users } from "lucide-react"
 
 export function ScarcityBanner({ variant = "user" }: { variant?: "user" | "business" }) {
-  const [spotsLeft, setSpotsLeft] = useState(variant === "user" ? 200 : 50)
-
-  useEffect(() => {
-    // Simulate spots decreasing
-    const interval = setInterval(() => {
-      setSpotsLeft((prev) => Math.max(prev - Math.floor(Math.random() * 3), variant === "user" ? 650 : 75))
-    }, 30000) // Every 30 seconds
-
-    return () => clearInterval(interval)
-  }, [variant])
-
   return (
-    <div className="bg-accent/10 border-y border-accent/20 py-3">
+    <div className="bg-primary/8 border-y border-primary/15 py-3">
       <div className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-center gap-3 text-center">
-          <AlertCircle className="h-5 w-5 text-accent shrink-0" />
-          <p className="text-sm font-medium text-accent">
-            {variant === "user" ? (
-              <>
-                <span className="font-bold">{spotsLeft} cupos restantes</span> para ser miembro fundador de Héroes Colombia
-              </>
-            ) : (
-              <>
-                <span className="font-bold">Solo {spotsLeft} espacios disponibles</span> para negocios en el lanzamiento
-              </>
-            )}
-          </p>
+        <div className="flex items-center justify-center gap-4 text-center flex-wrap">
+          {variant === "user" ? (
+            <>
+              <div className="flex items-center gap-2 text-sm font-medium text-primary">
+                <Users className="h-4 w-4 shrink-0" />
+                <span><span className="font-bold">2,300+</span> miembros de las fuerzas armadas ya ahorrando</span>
+              </div>
+              <span className="hidden sm:block text-primary/30">·</span>
+              <div className="flex items-center gap-2 text-sm font-medium text-primary">
+                <BadgeCheck className="h-4 w-4 shrink-0" />
+                <span><span className="font-bold">50+</span> marcas aliadas esperándote</span>
+              </div>
+              <span className="hidden sm:block text-primary/30">·</span>
+              <div className="flex items-center gap-2 text-sm font-medium text-primary">
+                <TrendingUp className="h-4 w-4 shrink-0" />
+                <span>Descarga <span className="font-bold">100% gratis</span></span>
+              </div>
+            </>
+          ) : (
+            <>
+              <div className="flex items-center gap-2 text-sm font-medium text-primary">
+                <TrendingUp className="h-4 w-4 shrink-0" />
+                <span>Plataforma en crecimiento activo</span>
+              </div>
+              <span className="hidden sm:block text-primary/30">·</span>
+              <div className="flex items-center gap-2 text-sm font-medium text-primary">
+                <Users className="h-4 w-4 shrink-0" />
+                <span><span className="font-bold">2,300+</span> usuarios militares verificados</span>
+              </div>
+              <span className="hidden sm:block text-primary/30">·</span>
+              <div className="flex items-center gap-2 text-sm font-medium text-primary">
+                <BadgeCheck className="h-4 w-4 shrink-0" />
+                <span><span className="font-bold">50+</span> negocios aliados activos</span>
+              </div>
+            </>
+          )}
         </div>
       </div>
     </div>

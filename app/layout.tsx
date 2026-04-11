@@ -9,7 +9,7 @@ import "./globals.css"
 export const metadata: Metadata = {
   title: "Héroes Colombia - Beneficios Exclusivos para Militares",
   description:
-    "Plataforma que conecta a miembros de la fuerza pública colombiana y sus familias con promociones exclusivas en miles de negocios verificados.",
+    "Plataforma que conecta a miembros de la fuerza pública colombiana y sus familias con promociones exclusivas en miles de marcas aliadas.",
   icons: {
     icon: "/images/favicon.ico",
   },

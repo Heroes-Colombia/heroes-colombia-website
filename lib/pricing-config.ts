@@ -13,6 +13,8 @@ export interface TrialOffer {
   headline: string
   description: string
   nextBillingDate: Date // When trial ends and plan selection is due
+  spotsLimit: number  // total spots available at this price — update when limit changes
+  spotsTaken: number  // current businesses signed up — update as new ones join
 }
 
 export interface EarlyBirdIncentive {
@@ -63,11 +65,13 @@ export const PRICING_PERIODS: PricingPeriod[] = [
     trialOffer: {
       enabled: true,
       price: 20000,
-      duration: 119, // Days until Feb 1, 2026 (Oct 6 → Feb 1 = ~119 days)
+      duration: 119,
       badge: "🎉 Ampliamos 50 cupos más para ser Socio Fundador",
       headline: "20,000 COP",
       description: "Pago único por 2 meses de acceso completo al plan Fundador",
       nextBillingDate: new Date("2026-02-01T00:00:00-05:00"),
+      spotsLimit: 100,
+      spotsTaken: 50,
     },
 
     earlyBirdIncentive: {
@@ -112,11 +116,13 @@ export const PRICING_PERIODS: PricingPeriod[] = [
     trialOffer: {
       enabled: true,
       price: 20000,
-      duration: 61, // Days until Feb 1, 2026 (varies by signup date)
+      duration: 61,
       badge: "🚀 Lanzamiento - Únete a los Primeros 100",
       headline: "20,000 COP",
       description: "Pago único por acceso completo hasta Febrero 1, 2026",
       nextBillingDate: new Date("2026-02-01T00:00:00-05:00"),
+      spotsLimit: 100,
+      spotsTaken: 50,
     },
 
     earlyBirdIncentive: {
@@ -150,26 +156,35 @@ export const PRICING_PERIODS: PricingPeriod[] = [
   },
 
   // -------------------------------------------------------------------------
-  // POST-LAUNCH PHASE (Feb 1, 2026+)
+  // GROWTH PHASE (Feb 1, 2026+)
+  // Trial: 20,000 COP for 2 months → then 480,000 COP/year
   // -------------------------------------------------------------------------
   {
     id: "post-launch",
-    name: "Post-Lanzamiento",
+    name: "Crecimiento",
     startDate: new Date("2026-02-01T00:00:00-05:00"),
     endDate: null, // Ongoing
 
-    // Trial offer disabled - can be re-enabled with different pricing
-    trialOffer: undefined,
+    trialOffer: {
+      enabled: true,
+      price: 20000,
+      duration: 60, // 2 months
+      badge: "🚀 Prueba 2 meses por solo $20,000 COP",
+      headline: "20,000 COP",
+      description: "Pago único por 2 meses de acceso completo a la plataforma",
+      nextBillingDate: new Date("2026-06-11T00:00:00-05:00"),
+      spotsLimit: 100,   // offer closes when 100 businesses join — update if limit changes
+      spotsTaken: 50,    // ← update this number as new businesses sign up
+    },
 
-    // No early bird incentive after launch period
     earlyBirdIncentive: undefined,
 
     regularPlans: {
       basico: {
-        monthly: 100000,
-        annual: 1020000,
-        savings: 180000,
-        savingsPercent: 15,
+        monthly: 50000,   // 480,000 / 12 = ~40,000; rounded to 50,000 for display
+        annual: 480000,   // As specified: 480,000 COP/year after trial
+        savings: 120000,  // 50,000 × 12 − 480,000 = 120,000
+        savingsPercent: 20,
       },
       pro: {
         monthly: 270000,
@@ -324,6 +339,16 @@ export function formatPriceSimple(price: number): string {
     minimumFractionDigits: 0,
     maximumFractionDigits: 0,
   }).format(price)
+}
+
+/**
+ * Get trial spots info for urgency display
+ */
+export function getTrialSpotsInfo(): { limit: number; taken: number; remaining: number } {
+  const pricing = getCurrentPricing()
+  const limit = pricing.trialOffer?.spotsLimit ?? 100
+  const taken = pricing.trialOffer?.spotsTaken ?? 0
+  return { limit, taken, remaining: Math.max(0, limit - taken) }
 }
 
 /**
