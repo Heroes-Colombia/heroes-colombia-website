@@ -25,29 +25,29 @@ function getBusinessFAQs(): FAQItem[] {
 
   const trialFAQs: FAQItem[] = isTrialActive
     ? [
-        {
-          question: "¿Cuánto cuesta registrar mi negocio?",
-          answer: `Por ahora, los primeros ${spotsInfo.limit} negocios acceden por solo ${formatPrice(trialPrice)} (pago único) — eso cubre 2 meses de acceso Enterprise completo. Una vez completemos los ${spotsInfo.limit} negocios, este precio especial cierra. Hoy llevamos ${spotsInfo.taken} negocios registrados. Todos los precios incluyen IVA.`,
-        },
-        {
-          question: "¿Por qué el precio es tan bajo?",
-          answer: `Estamos en fase de crecimiento y queremos validar la plataforma con negocios reales antes de escalar el precio. A cambio de entrar primero, obtienes acceso completo al plan Enterprise por 2 meses por solo ${formatPrice(trialPrice)}. Cuando superemos los ${spotsInfo.limit} negocios activos, el precio pasará a ${formatPrice(pricing.regularPlans.basico.annual)}/año para el plan anual.`,
-        },
-        {
-          question: "¿Qué pasa cuando terminen los 2 meses de prueba?",
-          answer: `Al finalizar los 2 meses recibirás un aviso para elegir si continúas o no. No hay renovación automática — tú decides. Si decides continuar, el plan anual queda en ${formatPrice(pricing.regularPlans.basico.annual)}/año (menos de ${formatPrice(Math.round(pricing.regularPlans.basico.annual / 12))}/mes). Si no continúas, tu perfil queda pausado sin costo adicional.`,
-        },
-      ]
+      {
+        question: "¿Cuánto cuesta registrar mi negocio?",
+        answer: `Por ahora, los primeros ${spotsInfo.limit} negocios acceden por solo ${formatPrice(trialPrice)} (pago único) — eso cubre 2 meses de acceso Enterprise completo. Una vez completemos los ${spotsInfo.limit} negocios, este precio especial cierra. Hoy llevamos ${spotsInfo.taken} negocios registrados. Todos los precios incluyen IVA.`,
+      },
+      {
+        question: "¿Por qué el precio es tan bajo?",
+        answer: `Estamos en fase de crecimiento y queremos validar la plataforma con negocios reales antes de escalar el precio. A cambio de entrar primero, obtienes acceso completo al plan Enterprise por 2 meses por solo ${formatPrice(trialPrice)}. Cuando superemos los ${spotsInfo.limit} negocios activos, el precio pasará a ${formatPrice(pricing.regularPlans.basico.annual)}/año para el plan anual.`,
+      },
+      {
+        question: "¿Qué pasa cuando terminen los 2 meses de prueba?",
+        answer: `Al finalizar los 2 meses recibirás un aviso para elegir si continúas o no. No hay renovación automática — tú decides. Si decides continuar, el plan anual queda en ${formatPrice(pricing.regularPlans.basico.annual)}/año (menos de ${formatPrice(Math.round(pricing.regularPlans.basico.annual / 12))}/mes). Si no continúas, tu perfil queda pausado sin costo adicional.`,
+      },
+    ]
     : [
-        {
-          question: "¿Cuánto cuesta registrar mi negocio?",
-          answer: `Tenemos planes flexibles para todos los tamaños de negocio: Básico desde ${formatPrice(pricing.regularPlans.basico.monthly)}/mes (o ${formatPrice(pricing.regularPlans.basico.annual)}/año), Pro desde ${formatPrice(pricing.regularPlans.pro.monthly)}/mes, y Enterprise desde ${formatPrice(pricing.regularPlans.enterprise.monthly)}/mes. Todos los precios incluyen IVA y puedes cancelar en cualquier momento.`,
-        },
-        {
-          question: "¿Los planes anuales tienen descuento?",
-          answer: `Sí, el plan anual incluye descuento frente al mensual. Por ejemplo: Básico anual ${formatPrice(pricing.regularPlans.basico.annual)} (ahorras ${formatPrice(pricing.regularPlans.basico.savings)}), Pro anual ${formatPrice(pricing.regularPlans.pro.annual)} (ahorras ${formatPrice(pricing.regularPlans.pro.savings)}). Es la opción más popular entre negocios que ya probaron la plataforma.`,
-        },
-      ]
+      {
+        question: "¿Cuánto cuesta registrar mi negocio?",
+        answer: `Tenemos planes flexibles para todos los tamaños de negocio: Básico desde ${formatPrice(pricing.regularPlans.basico.monthly)}/mes (o ${formatPrice(pricing.regularPlans.basico.annual)}/año), Pro desde ${formatPrice(pricing.regularPlans.pro.monthly)}/mes, y Enterprise desde ${formatPrice(pricing.regularPlans.enterprise.monthly)}/mes. Todos los precios incluyen IVA y puedes cancelar en cualquier momento.`,
+      },
+      {
+        question: "¿Los planes anuales tienen descuento?",
+        answer: `Sí, el plan anual incluye descuento frente al mensual. Por ejemplo: Básico anual ${formatPrice(pricing.regularPlans.basico.annual)} (ahorras ${formatPrice(pricing.regularPlans.basico.savings)}), Pro anual ${formatPrice(pricing.regularPlans.pro.annual)} (ahorras ${formatPrice(pricing.regularPlans.pro.savings)}). Es la opción más popular entre negocios que ya probaron la plataforma.`,
+      },
+    ]
 
   return [
     ...trialFAQs,
