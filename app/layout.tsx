@@ -32,6 +32,15 @@ export default function RootLayout({
             })(window,document,'script','dataLayer','GTM-KC456QG3');`,
           }}
         />
+        <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18093910426" />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'AW-18093910426');`,
+          }}
+        />
         <script
           dangerouslySetInnerHTML={{
             __html: `(function(c,l,a,r,i,t,y){
