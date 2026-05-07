@@ -3,6 +3,10 @@
 import type React from "react"
 
 import { useState } from "react"
+
+declare global {
+  function gtag(...args: unknown[]): void
+}
 import { SiteHeader } from "@/components/site-header"
 import { SiteFooter } from "@/components/site-footer"
 import { FAQSection } from "@/components/faq-section"
@@ -64,7 +68,14 @@ export default function SolicitarDemoPage() {
         throw new Error("Failed to submit demo request")
       }
 
-      console.log("[v0] Demo request submitted successfully:", formData)
+      if (typeof gtag === "function") {
+        gtag("event", "conversion", {
+          send_to: "AW-18093910426/OR_sCKb5taccEJrT7LND",
+          value: 1.0,
+          currency: "COP",
+        })
+      }
+
       setSubmitted(true)
     } catch (error) {
       console.error("[v0] Error submitting demo request:", error)
