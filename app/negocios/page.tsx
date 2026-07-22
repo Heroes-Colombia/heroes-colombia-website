@@ -134,7 +134,7 @@ export default function BusinessPage() {
             </div>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
               <AnimatedStat value="50" label="Negocios aliados" suffix="+" />
-              <AnimatedStat value="2300" label="Usuarios verificados" suffix="+" />
+              <AnimatedStat value="4100" label="Usuarios verificados" suffix="+" />
               <AnimatedStat value="20" label="Ahorro promedio usuarios" suffix="%" />
               <AnimatedStat value={monthsSinceLaunch.toString()} label="Meses de crecimiento sostenido" suffix="" />
             </div>
