@@ -11,7 +11,7 @@ export function ScarcityBanner({ variant = "user" }: { variant?: "user" | "busin
             <>
               <div className="flex items-center gap-2 text-sm font-medium text-primary">
                 <Users className="h-4 w-4 shrink-0" />
-                <span><span className="font-bold">2,300+</span> miembros de las fuerzas armadas ya ahorrando</span>
+                <span><span className="font-bold">4,100+</span> miembros de las fuerzas armadas ya ahorrando</span>
               </div>
               <span className="hidden sm:block text-primary/30">·</span>
               <div className="flex items-center gap-2 text-sm font-medium text-primary">
@@ -33,7 +33,7 @@ export function ScarcityBanner({ variant = "user" }: { variant?: "user" | "busin
               <span className="hidden sm:block text-primary/30">·</span>
               <div className="flex items-center gap-2 text-sm font-medium text-primary">
                 <Users className="h-4 w-4 shrink-0" />
-                <span><span className="font-bold">2,300+</span> usuarios militares verificados</span>
+                <span><span className="font-bold">4,100+</span> usuarios militares verificados</span>
               </div>
               <span className="hidden sm:block text-primary/30">·</span>
               <div className="flex items-center gap-2 text-sm font-medium text-primary">

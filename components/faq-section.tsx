@@ -63,7 +63,7 @@ function getBusinessFAQs(): FAQItem[] {
     {
       question: "¿Cuántos usuarios militares pueden ver mi negocio?",
       answer:
-        "Hoy tenemos más de 2,300 miembros activos de las fuerzas armadas y sus familias. Tu negocio aparece en búsquedas por categoría y ubicación, y en el feed principal de la app. La base crece cada semana.",
+        "Hoy tenemos más de 4,100 miembros activos de las fuerzas armadas y sus familias. Tu negocio aparece en búsquedas por categoría y ubicación, y en el feed principal de la app. La base crece cada semana.",
     },
     {
       question: "¿Qué tipo de negocios tienen más éxito en la plataforma?",

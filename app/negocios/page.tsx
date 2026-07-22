@@ -287,7 +287,7 @@ export default function BusinessPage() {
                 Una plataforma probada con resultados reales
               </h2>
               <p className="text-muted-foreground max-w-2xl mx-auto">
-                En {monthsSinceLaunch} meses pasamos de cero a 2,300+ usuarios activos y 50+ negocios aliados. Aquí está lo que diferencia a Heroes Colombia de cualquier otro canal.
+                En {monthsSinceLaunch} meses pasamos de cero a 4,100+ usuarios activos y 50+ negocios aliados. Aquí está lo que diferencia a Heroes Colombia de cualquier otro canal.
               </p>
             </div>
 
@@ -299,7 +299,7 @@ export default function BusinessPage() {
                   </div>
                   <h3 className="font-semibold text-lg mb-2">Crecimiento sostenido</h3>
                   <p className="text-sm text-muted-foreground">
-                    De 0 a 2,300+ usuarios verificados en {monthsSinceLaunch} meses. Una comunidad que crece semana a semana y que busca activamente los negocios de la plataforma.
+                    De 0 a 4,100+ usuarios verificados en {monthsSinceLaunch} meses. Una comunidad que crece semana a semana y que busca activamente los negocios de la plataforma.
                   </p>
                 </CardContent>
               </Card>
@@ -446,7 +446,7 @@ export default function BusinessPage() {
                 Comienza a atraer clientes leales hoy
               </h2>
               <p className="text-lg text-primary-foreground/90 text-balance mb-8 leading-relaxed">
-                Únete a los 50+ negocios que ya están llegando a una comunidad de 2,300+ militares verificados. Una audiencia que crece cada semana y que busca activamente negocios como el tuyo.
+                Únete a los 50+ negocios que ya están llegando a una comunidad de 4,100+ militares verificados. Una audiencia que crece cada semana y que busca activamente negocios como el tuyo.
               </p>
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-6">
                 <Button size="lg" variant="secondary" asChild className="w-full sm:w-auto shadow-lg">
@@ -467,7 +467,7 @@ export default function BusinessPage() {
                 </Button>
               </div>
               <p className="text-sm text-primary-foreground/80">
-                50+ negocios aliados · 2,300+ usuarios verificados · Creciendo semana a semana
+                50+ negocios aliados · 4,100+ usuarios verificados · Creciendo semana a semana
               </p>
             </div>
           </div>
