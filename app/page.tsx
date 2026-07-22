@@ -45,7 +45,7 @@ export default function HomePage() {
             <div className="mx-auto max-w-4xl text-center">
               <div className="mb-6 inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-2 text-sm font-medium text-primary">
                 <TrendingUp className="h-4 w-4" />
-                2,300+ Héroes ya activos · Creciendo cada semana
+                4,100+ Héroes ya activos · Creciendo cada semana
               </div>
               <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight text-balance mb-6">
                 Beneficios exclusivos para nuestros <span className="text-primary">Héroes</span>
@@ -100,7 +100,7 @@ export default function HomePage() {
                 </div>
                 <div className="flex items-center gap-2">
                   <Users className="h-5 w-5 text-primary" />
-                  <span>2,300+ Héroes ahorrando</span>
+                  <span>4,100+ Héroes ahorrando</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <Shield className="h-5 w-5 text-primary" />
@@ -109,7 +109,7 @@ export default function HomePage() {
               </div>
 
               <p className="text-sm text-muted-foreground mt-2">
-                Más de 2,300 miembros de las fuerzas armadas ya descargaron la app. Únete a la comunidad exclusiva de Héroes 🇨🇴
+                Más de 4,100 miembros de las fuerzas armadas ya descargaron la app. Únete a la comunidad exclusiva de Héroes 🇨🇴
               </p>
             </div>
           </div>
@@ -123,7 +123,7 @@ export default function HomePage() {
               <p className="text-muted-foreground">Datos verificados · Activos desde diciembre 2025</p>
             </div>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-              <AnimatedStat value="2300" label="Héroes activos" suffix="+" />
+              <AnimatedStat value="4100" label="Héroes activos" suffix="+" />
               <AnimatedStat value="50" label="Negocios aliados" suffix="+" />
               <AnimatedStat value="20" label="Ahorro promedio real" suffix="%" />
               <AnimatedStat value="100" label="Verificación garantizada" suffix="%" />
@@ -142,7 +142,7 @@ export default function HomePage() {
                 {monthsSinceLaunch} meses de crecimiento real
               </div>
               <h2 className="text-2xl md:text-3xl font-bold mb-3">
-                De 0 a 2,300 Héroes en {monthsSinceLaunch} meses
+                De 0 a 4,100 Héroes en {monthsSinceLaunch} meses
               </h2>
               <p className="text-muted-foreground max-w-2xl mx-auto">
                 Lanzamos en diciembre 2025 y hoy somos la plataforma de beneficios exclusivos más grande
@@ -167,7 +167,7 @@ export default function HomePage() {
                 <div className="text-xs text-muted-foreground">A los 2 meses</div>
               </div>
               <div className="text-center bg-card rounded-2xl p-6 border border-primary/30 bg-primary/5">
-                <div className="text-4xl font-bold text-primary mb-1">2,300+</div>
+                <div className="text-4xl font-bold text-primary mb-1">4,100+</div>
                 <div className="text-sm font-medium mb-1">Héroes</div>
                 <div className="text-xs text-muted-foreground">Hoy · Creciendo</div>
               </div>
@@ -391,7 +391,7 @@ export default function HomePage() {
                     Descarga la App y comienza a ahorrar hoy
                   </h2>
                   <p className="text-lg text-primary-foreground/90 text-balance mb-8 leading-relaxed">
-                    Totalmente GRATIS. Únete a los 2,300+ miembros de las fuerzas armadas que ya disfrutan de
+                    Totalmente GRATIS. Únete a los 4,100+ miembros de las fuerzas armadas que ya disfrutan de
                     descuentos exclusivos en marcas aliadas en todo Colombia.
                   </p>
                   <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-6">
@@ -427,7 +427,7 @@ export default function HomePage() {
                     </Link>
                   </div>
                   <p className="text-sm text-primary-foreground/80">
-                    2,300+ miembros de las fuerzas armadas ya están ahorrando · Descarga 100% gratuita
+                    4,100+ miembros de las fuerzas armadas ya están ahorrando · Descarga 100% gratuita
                   </p>
                 </>
               ) : (
